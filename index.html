@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,6 +25,11 @@
             --card-bg: #1f2833;
         }
         
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             font-family: 'VT323', monospace;
@@ -55,12 +61,21 @@
             text-align: center;
         }
 
+        .section-title {
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            text-shadow: 2px 2px var(--neon-pink);
+            margin: 4rem 0 2rem 0;
+            text-transform: uppercase;
+        }
+
         header {
             text-align: center;
             padding: 3rem 1rem;
             background: radial-gradient(circle, #1f2833 0%, var(--bg-color) 100%);
             border-bottom: 2px solid var(--neon-cyan);
             box-shadow: 0 0 20px rgba(102, 252, 241, 0.2);
+            position: relative;
         }
 
         header h1 {
@@ -69,6 +84,12 @@
             text-shadow: 3px 3px var(--neon-pink);
             margin-bottom: 1rem;
             letter-spacing: 2px;
+            animation: flicker 4s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 3px 3px var(--neon-pink), 0 0 10px var(--neon-cyan); }
+            20%, 24%, 55% { text-shadow: none; }
         }
 
         .subtitle {
@@ -80,7 +101,7 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 2rem 1.5rem;
         }
 
         .hero-text {
@@ -112,18 +133,25 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            cursor: crosshair;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4), inset 0 0 10px rgba(102, 252, 241, 0.1);
         }
 
         .card i {
             font-size: 3.5rem;
             color: var(--neon-pink);
             margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover i {
+            transform: rotate(15deg) scale(1.1);
+            text-shadow: 0 0 10px var(--neon-pink);
         }
 
         .card h3 {
@@ -138,17 +166,230 @@
             color: #eeeeee;
         }
 
-        /* Sección de Contacto */
-        .cta-section {
-            text-align: center;
-            margin-top: 5rem;
-            padding: 3rem 2rem;
-            background: #111;
-            border-radius: 15px;
-            border: 2px dashed var(--neon-pink);
+        /* Carrusel / Galería */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.3);
+            background: #000;
         }
 
-        .cta-section h3 {
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            display: block;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .carousel-slide img:hover {
+            opacity: 1;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--neon-pink);
+            padding: 5px 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            border: 1px solid var(--neon-pink);
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(31, 40, 51, 0.8);
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px 15px;
+            z-index: 10;
+            font-family: 'Press Start 2P', cursive;
+            transition: all 0.2s ease;
+        }
+
+        .carousel-btn:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+
+        /* Preguntas Frecuentes (Acordeón) */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: transparent;
+            color: var(--neon-cyan);
+            font-family: 'VT323', monospace;
+            font-size: 1.6rem;
+            text-align: left;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(102, 252, 241, 0.1);
+        }
+
+        .faq-question::after {
+            content: '\002B'; /* Símbolo Más */
+            font-size: 2rem;
+            color: var(--neon-pink);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active::after {
+            content: '\2212'; /* Símbolo Menos */
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #111;
+        }
+
+        .faq-answer p {
+            margin: 0;
+            padding: 15px 20px;
+            color: #ccc;
+        }
+
+        /* Formulario de Contacto & CTA */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .terminal-form {
+            background: #000;
+            padding: 2rem;
+            border: 2px solid #333;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .terminal-form::before {
+            content: "C:\\RETROREVIVE\\MSG.EXE";
+            position: absolute;
+            top: -12px;
+            left: 15px;
+            background: var(--bg-color);
+            padding: 0 10px;
+            color: var(--neon-teal);
+            font-size: 1.2rem;
+            font-family: 'VT323', monospace;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--neon-pink);
+            margin-bottom: 5px;
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--neon-teal);
+            color: var(--neon-cyan);
+            font-family: 'VT323', monospace;
+            font-size: 1.4rem;
+            padding: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-bottom-color: var(--neon-cyan);
+            box-shadow: 0 5px 10px -5px rgba(102, 252, 241, 0.5);
+        }
+
+        .btn-retro {
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-retro:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        .cta-box {
+            text-align: center;
+            padding: 2rem;
+            background: #111;
+            border-radius: 8px;
+            border: 2px dashed var(--neon-pink);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cta-box h3 {
             color: #ffffff;
             font-size: 1.2rem;
             margin-bottom: 1rem;
@@ -174,29 +415,32 @@
             box-shadow: 0 5px 20px rgba(37, 211, 102, 0.6);
         }
 
-        .btn-whatsapp i {
-            margin-right: 10px;
-            font-size: 1.5rem;
-            vertical-align: middle;
+        /* Mensaje de Sistema (Formulario) */
+        #systemMessage {
+            display: none;
+            border: 1px solid var(--neon-cyan);
+            background: rgba(102, 252, 241, 0.1);
+            padding: 20px;
+            text-align: center;
+            color: var(--neon-cyan);
+            margin-top: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(102, 252, 241, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0); }
         }
 
         footer {
             text-align: center;
             padding: 3rem 1rem 2rem 1rem;
-            margin-top: 2rem;
+            margin-top: 4rem;
             background-color: #07080a;
             border-top: 1px solid #222;
             color: #777;
             font-size: 1.2rem;
-        }
-
-        footer p {
-            margin: 0.5rem 0;
-        }
-
-        footer i {
-            color: var(--neon-teal);
-            margin-right: 8px;
         }
     </style>
 </head>
@@ -216,29 +460,23 @@
             <span style="color: var(--neon-cyan);">Nosotros le devolvemos la vida.</span>
         </p>
 
+        <!-- SECCIÓN 1: SERVICIOS -->
         <div class="grid-servicios">
-            <!-- Servicio 1 -->
             <div class="card">
                 <i class="fa-solid fa-microchip"></i>
                 <h3>MANTENIMIENTO PROFUNDO</h3>
                 <p>Limpieza exhaustiva de placa, cambio de pasta térmica, revisión de soldaduras y eliminación de polvo internamente.</p>
             </div>
-            
-            <!-- Servicio 2 -->
             <div class="card">
                 <i class="fa-solid fa-spray-can-sparkles"></i>
                 <h3>RESTAURACIÓN ESTÉTICA</h3>
                 <p>Proceso Retrobright para plásticos amarillentos, pulido minucioso de carcasas y detallado general.</p>
             </div>
-            
-            <!-- Servicio 3 -->
             <div class="card">
                 <i class="fa-solid fa-screwdriver-wrench"></i>
                 <h3>MODS Y UPGRADES</h3>
                 <p>Instalación de pantallas IPS, modificaciones de región, chips, y optimización de salidas de audio y video.</p>
             </div>
-            
-            <!-- Servicio 4 -->
             <div class="card">
                 <i class="fa-solid fa-compact-disc"></i>
                 <h3>LÁSER Y MECANISMOS</h3>
@@ -246,14 +484,82 @@
             </div>
         </div>
 
-        <div class="cta-section">
-            <h3>¿LISTO PARA REPARAR TU CONSOLA?</h3>
-            <p style="font-size: 1.4rem;">Haz tu consulta sin compromiso.</p>
+        <!-- SECCIÓN 2: GALERÍA DE TRABAJOS -->
+        <h2 class="section-title">> LOGS_DE_RESTAURACION</h2>
+        <div class="carousel-container">
+            <button class="carousel-btn prev-btn" onclick="moveSlide(-1)">&#9664;</button>
+            <div class="carousel-track" id="track">
+                <div class="carousel-slide">
+                    <!-- Usando imágenes placeholder temáticas. Puedes cambiar las URLs por tus fotos reales -->
+                    <img src="https://placehold.co/700x400/1f2833/66fcf1?text=GameBoy+Restaurado" alt="Trabajo 1">
+                    <div class="carousel-caption">Limpieza y Pantalla IPS</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://placehold.co/700x400/1f2833/ff007f?text=SNES+Retrobright" alt="Trabajo 2">
+                    <div class="carousel-caption">Blanqueamiento de SNES</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://placehold.co/700x400/1f2833/45a29e?text=PS1+Lente+Nuevo" alt="Trabajo 3">
+                    <div class="carousel-caption">Calibración de Láser PS1</div>
+                </div>
+            </div>
+            <button class="carousel-btn next-btn" onclick="moveSlide(1)">&#9654;</button>
+        </div>
+
+        <!-- SECCIÓN 3: PREGUNTAS FRECUENTES -->
+        <h2 class="section-title">> INFO_DEL_SISTEMA (FAQ)</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">¿Cuánto tarda una reparación?</button>
+                <div class="faq-answer">
+                    <p>Los mantenimientos preventivos toman de 1 a 2 días hábiles. Las restauraciones estéticas (Retrobright) pueden tomar hasta 4 días dependiendo del clima, y las reparaciones complejas dependen de la disponibilidad de la pieza.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Qué consolas arreglan?</button>
+                <div class="faq-answer">
+                    <p>Nos especializamos en consolas desde la era de los 8-bits (NES, Master System) hasta la 6ta generación (PS2, GameCube, Xbox Original). También vemos consolas portátiles como toda la familia GameBoy y PSP.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Ofrecen garantía?</button>
+                <div class="faq-answer">
+                    <p>Sí, todas nuestras reparaciones de hardware incluyen una garantía de 30 días sobre el trabajo realizado. ¡Queremos que juegues con total tranquilidad!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: CONTACTO -->
+        <h2 class="section-title">> ESTABLECER_CONEXION</h2>
+        <div class="contact-grid">
             
-            <!-- Enlace preconfigurado a tu número -->
-            <a href="https://wa.me/526675912648?text=Hola,%20vengo%20de%20la%20página%20web.%20Me%20interesa%20restaurar%20una%20consola%20con%20RetroRevive." class="btn-whatsapp" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i> COTIZAR AHORA
-            </a>
+            <!-- Formulario Terminal -->
+            <div class="terminal-form">
+                <form id="retroForm">
+                    <div class="input-group">
+                        <label for="playerName">> PLAYER_NAME:</label>
+                        <input type="text" id="playerName" required autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label for="consoleType">> CONSOLA/PROBLEMA:</label>
+                        <textarea id="consoleType" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-retro">ENVIAR DATOS</button>
+                </form>
+                <div id="systemMessage">
+                    > TRANSMISIÓN RECIBIDA <br> Nos pondremos en contacto pronto.
+                </div>
+            </div>
+
+            <!-- Caja WhatsApp -->
+            <div class="cta-box">
+                <h3>¿PREFIERES CHAT DIRECTO?</h3>
+                <p style="font-size: 1.2rem; color:#aaa;">Inicia un enlace cifrado a través de la red de WhatsApp.</p>
+                <a href="https://wa.me/526675912648?text=Hola,%20vengo%20de%20la%20página%20web.%20Me%20interesa%20restaurar%20una%20consola%20con%20RetroRevive." class="btn-whatsapp" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> CONECTAR AHORA
+                </a>
+            </div>
+
         </div>
     </div>
 
@@ -263,5 +569,72 @@
         <p><i class="fa-solid fa-phone"></i> 667 591 2648</p>
     </footer>
 
+    <!-- Lógica de Interactividad (JavaScript) -->
+    <script>
+        // 1. Lógica del Carrusel
+        let slideIndex = 0;
+        const track = document.getElementById('track');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+
+        function moveSlide(direction) {
+            slideIndex += direction;
+            
+            // Ciclo infinito
+            if (slideIndex < 0) {
+                slideIndex = totalSlides - 1;
+            } else if (slideIndex >= totalSlides) {
+                slideIndex = 0;
+            }
+            
+            // Mover el track
+            const movePercentage = -(slideIndex * 100);
+            track.style.transform = `translateX(${movePercentage}%)`;
+        }
+
+        // 2. Lógica de Preguntas Frecuentes (Acordeón)
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                // Cerrar las otras abiertas (Opcional, para mantenerlo limpio)
+                faqQuestions.forEach(q => {
+                    if(q !== question) {
+                        q.classList.remove('active');
+                        q.nextElementSibling.style.maxHeight = null;
+                    }
+                });
+
+                // Abrir/Cerrar la clickeada
+                question.classList.toggle('active');
+                const answer = question.nextElementSibling;
+                
+                if (question.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                } else {
+                    answer.style.maxHeight = null;
+                }
+            });
+        });
+
+        // 3. Lógica del Formulario de Contacto Terminal
+        const retroForm = document.getElementById('retroForm');
+        const systemMessage = document.getElementById('systemMessage');
+
+        retroForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que la página recargue
+            
+            // Oculta el formulario y muestra el mensaje con estilo retro
+            retroForm.style.display = 'none';
+            systemMessage.style.display = 'block';
+            
+            // En un caso real, aquí iría el código para enviar los datos a un correo o base de datos.
+            // Por ahora, simulamos una carga de sistema:
+            setTimeout(() => {
+                systemMessage.innerHTML = "> TRANSMISIÓN RECIBIDA <br> Evaluando daños... <br><span style='color:var(--neon-pink)'>Te contactaremos a la brevedad.</span>";
+            }, 1500);
+        });
+    </script>
 </body>
 </html>
+```
