@@ -3,85 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RetroRevive - Restauración, mantenimiento y mods de consolas de videojuegos retro.">
     <title>RetroRevive | Restauración de Consolas</title>
+    
+    <!-- Fuentes de Google: Tipografía Arcade y Terminal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    
+    <!-- Librería de Íconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { 
-            font-family: 'Courier New', Courier, monospace; 
-            background-color: #121212; 
-            color: #00ffcc; 
-            margin: 0; 
-            padding: 0; 
-            text-align: center; 
+        :root {
+            --bg-color: #0b0c10;
+            --neon-cyan: #66fcf1;
+            --neon-teal: #45a29e;
+            --neon-pink: #ff007f;
+            --text-main: #c5c6c7;
+            --card-bg: #1f2833;
         }
-        header { 
-            background-color: #1f1f1f; 
-            padding: 25px 15px; 
-            border-bottom: 3px solid #00ffcc; 
+        
+        body {
+            margin: 0;
+            font-family: 'VT323', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 1.4rem;
+            line-height: 1.4;
+            overflow-x: hidden;
         }
-        h1 { margin: 0; font-size: 2.2em; text-transform: uppercase; letter-spacing: 2px; color: #ffffff; }
-        .subtitle { font-size: 1.1em; color: #00ffcc; margin-top: 10px; }
-        .container { max-width: 600px; margin: 20px auto; padding: 15px; }
-        .intro { font-size: 1.1em; color: #cccccc; text-align: justify; margin-bottom: 25px; }
-        .service { 
-            background-color: #1f1f1f; 
-            margin: 15px 0; 
-            padding: 20px; 
-            border-radius: 8px; 
-            border: 1px solid #333; 
-            text-align: left; 
+
+        /* Efecto de Televisión Antigua (Scanline) */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 9999;
+            position: fixed;
+            pointer-events: none;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(102, 252, 241, 0.05) 50%, rgba(0,0,0,0) 100%);
+            animation: scanline 8s linear infinite;
         }
-        .service h2 { color: #ff0055; margin-top: 0; font-size: 1.4em; }
-        .service p { color: #eeeeee; margin-bottom: 0; line-height: 1.5; }
-        .btn-whatsapp { 
-            display: block; 
-            background-color: #25D366; 
-            color: #ffffff; 
-            padding: 15px 25px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            border-radius: 5px; 
-            margin-top: 30px; 
-            font-size: 1.2em; 
-            text-transform: uppercase; 
+
+        @keyframes scanline {
+            0% { top: -100px; }
+            100% { top: 100vh; }
         }
-        .btn-whatsapp:hover { background-color: #1ebe57; }
-        footer { margin-top: 40px; color: #555; font-size: 0.9em; padding-bottom: 20px; }
+
+        h1, h2, h3 {
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: radial-gradient(circle, #1f2833 0%, var(--bg-color) 100%);
+            border-bottom: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.2);
+        }
+
+        header h1 {
+            color: var(--neon-cyan);
+            font-size: 2.2rem;
+            text-shadow: 3px 3px var(--neon-pink);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: var(--neon-pink);
+            font-size: 1.2rem;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .hero-text {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 3rem;
+            color: #ffffff;
+        }
+
+        /* Cuadrícula de Servicios */
+        .grid-servicios {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-servicios {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #333;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+        }
+
+        .card i {
+            font-size: 3.5rem;
+            color: var(--neon-pink);
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .card p {
+            margin: 0;
+            color: #eeeeee;
+        }
+
+        /* Sección de Contacto */
+        .cta-section {
+            text-align: center;
+            margin-top: 5rem;
+            padding: 3rem 2rem;
+            background: #111;
+            border-radius: 15px;
+            border: 2px dashed var(--neon-pink);
+        }
+
+        .cta-section h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25D366;
+            color: #ffffff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
+            padding: 1.2rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebe57;
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .btn-whatsapp i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+            vertical-align: middle;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1rem 2rem 1rem;
+            margin-top: 2rem;
+            background-color: #07080a;
+            border-top: 1px solid #222;
+            color: #777;
+            font-size: 1.2rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer i {
+            color: var(--neon-teal);
+            margin-right: 8px;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Animación sutil de pantalla antigua -->
+    <div class="scanline"></div>
+    
     <header>
-        <h1>RetroRevive</h1>
-        <div class="subtitle">Devolviendo la vida a tus clásicos</div>
+        <h1>RETRO REVIVE</h1>
+        <div class="subtitle">> INSERT COIN_</div>
     </header>
 
     <div class="container">
-        <p class="intro">Especialistas en mantenimiento, reparación y restauración estética de consolas de videojuegos retro. Utilizamos las mejores herramientas y técnicas para que tus equipos funcionen y luzcan como el primer día.</p>
-        
-        <div class="service">
-            <h2>Mantenimiento Profundo</h2>
-            <p>Limpieza exhaustiva de placas, cambio de pasta térmica, revisión de componentes y resoldado para alargar la vida útil de tu consola.</p>
+        <p class="hero-text">
+            ¿Tu consola clásica no da video o necesita una manita de gato? <br> 
+            <span style="color: var(--neon-cyan);">Nosotros le devolvemos la vida.</span>
+        </p>
+
+        <div class="grid-servicios">
+            <!-- Servicio 1 -->
+            <div class="card">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>MANTENIMIENTO PROFUNDO</h3>
+                <p>Limpieza exhaustiva de placa, cambio de pasta térmica, revisión de soldaduras y eliminación de polvo internamente.</p>
+            </div>
+            
+            <!-- Servicio 2 -->
+            <div class="card">
+                <i class="fa-solid fa-spray-can-sparkles"></i>
+                <h3>RESTAURACIÓN ESTÉTICA</h3>
+                <p>Proceso Retrobright para plásticos amarillentos, pulido minucioso de carcasas y detallado general.</p>
+            </div>
+            
+            <!-- Servicio 3 -->
+            <div class="card">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <h3>MODS Y UPGRADES</h3>
+                <p>Instalación de pantallas IPS, modificaciones de región, chips, y optimización de salidas de audio y video.</p>
+            </div>
+            
+            <!-- Servicio 4 -->
+            <div class="card">
+                <i class="fa-solid fa-compact-disc"></i>
+                <h3>LÁSER Y MECANISMOS</h3>
+                <p>Calibración, reemplazo de lentes láser, y limpieza de engranajes para que vuelva a leer tus juegos a la primera.</p>
+            </div>
         </div>
 
-        <div class="service">
-            <h2>Restauración Estética</h2>
-            <p>Blanqueamiento de plásticos amarillentos (proceso Retrobright), pulido minucioso de carcasas y reemplazo de piezas dañadas.</p>
+        <div class="cta-section">
+            <h3>¿LISTO PARA REPARAR TU CONSOLA?</h3>
+            <p style="font-size: 1.4rem;">Haz tu consulta sin compromiso.</p>
+            
+            <!-- Enlace preconfigurado a tu número -->
+            <a href="https://wa.me/526675912648?text=Hola,%20vengo%20de%20la%20página%20web.%20Me%20interesa%20restaurar%20una%20consola%20con%20RetroRevive." class="btn-whatsapp" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> COTIZAR AHORA
+            </a>
         </div>
-
-        <div class="service">
-            <h2>Mods y Actualizaciones</h2>
-            <p>Instalación de pantallas IPS, modificaciones de región, chips, y optimización de salidas de audio/video.</p>
-        </div>
-
-        <!-- Enlace directo a tu WhatsApp -->
-        <a href="https://wa.me/526675912648?text=Hola,%20me%20interesa%20restaurar%20una%20consola%20con%20RetroRevive" class="btn-whatsapp" target="_blank">
-            Contactar por WhatsApp
-        </a>
-
-        <footer>
-            Atención en Sector Loma de Rodriguera y alrededores.
-        </footer>
     </div>
+
+    <footer>
+        <p>&copy; 2026 RetroRevive. Todos los derechos reservados.</p>
+        <p><i class="fa-solid fa-location-dot"></i> Sector Loma de Rodriguera, Culiacán, Sinaloa.</p>
+        <p><i class="fa-solid fa-phone"></i> 667 591 2648</p>
+    </footer>
 
 </body>
 </html>
