@@ -48,13 +48,12 @@ header h1 {
     letter-spacing: 2px;
 }
 
-.subtitle { color: var(--neon-pink); font-size: 1.2rem; font-family: 'Press Start 2P', cursive; }
+.subtitle { color: var(--neon-pink); font-size: 1.2rem; font-family: 'Press Start 2P', cursive; line-height: 1.5; }
 
 .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
 
 .hero-text { text-align: center; font-size: 1.6rem; margin-bottom: 3rem; color: #ffffff; }
 
-/* DISEÑO PARA LAS SECCIONES Y PRODUCTOS NUEVOS */
 .section-title {
     color: var(--neon-cyan);
     text-align: center;
@@ -96,12 +95,13 @@ header h1 {
 .card h3 { font-size: 1.1rem; color: var(--neon-cyan); margin-bottom: 1rem; line-height: 1.5; }
 .card p { margin: 0 0 15px; color: #eeeeee; }
 
-/* EFECTO DE ÍTEM ANIMADO PARA LAS CONSOLAS */
+/* ANIMACIÓN PARA TODAS LAS IMÁGENES DE LAS 106 CONSOLAS */
 .animated-console {
     width: 100%;
     height: 190px;
     object-fit: contain;
     margin-bottom: 1rem;
+    border-radius: 8px;
     filter: drop-shadow(0 10px 8px rgba(102, 252, 241, 0.2));
     animation: floatItem 3.5s ease-in-out infinite;
 }
@@ -123,7 +123,6 @@ header h1 {
     margin-bottom: 1rem;
 }
 
-/* LISTA DESPLEGABLE "¿QUÉ INCLUYE?" */
 details {
     text-align: left;
     margin: 1rem 0;
@@ -180,7 +179,6 @@ details li { margin-bottom: 5px; }
 
 .add-btn:active { transform: scale(0.95); }
 
-/* CONTROLES DE CANTIDAD + Y - */
 .qty-controls {
     display: flex;
     justify-content: space-between;
@@ -207,7 +205,6 @@ details li { margin-bottom: 5px; }
 .qty-btn:active { transform: scale(0.8); }
 .qty-number { color: #fff; font-family: 'Press Start 2P', cursive; font-size: 1rem; }
 
-/* BARRA DE CARRITO */
 .cart-bar {
     position: fixed;
     bottom: 0;
@@ -227,7 +224,6 @@ details li { margin-bottom: 5px; }
 }
 
 .cart-bar.active { transform: translateY(0); }
-
 .cart-info { font-size: 0.8rem; color: #fff; line-height: 1.6; }
 .cart-info span { color: var(--neon-cyan); }
 .cart-info small { color: var(--neon-pink); font-size: 0.6rem; }
@@ -236,4 +232,102 @@ details li { margin-bottom: 5px; }
     background-color: #25D366;
     color: white;
     border: none;
-    padding: 12px 15
+    padding: 12px 15px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s;
+}
+.checkout-btn:hover { background-color: #1ebe57; transform: scale(1.05); }
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--neon-cyan);
+    color: #000;
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 2000;
+}
+.toast.show { opacity: 1; visibility: visible; }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-content {
+    background: var(--card-bg);
+    border: 2px solid var(--neon-pink);
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
+    transform: translateY(-50px);
+    transition: all 0.3s ease;
+}
+.modal-overlay.active .modal-content { transform: translateY(0); }
+
+.input-group { margin-bottom: 20px; text-align: left; }
+.input-group label {
+    display: block;
+    color: var(--neon-cyan);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-family: 'Press Start 2P', cursive;
+}
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: #07080a;
+    border: 1px solid #444;
+    color: #fff;
+    font-family: 'VT323', monospace;
+    font-size: 1.4rem;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.input-group input:focus {
+    outline: none;
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(102, 252, 241, 0.2);
+}
+
+.modal-buttons { display: flex; justify-content: space-between; gap: 15px; margin-top: 30px; }
+.btn-cancel, .btn-confirm {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-cancel { background: transparent; color: #888; border: 2px solid #555; }
+.btn-cancel:hover { background: #333; color: #fff; }
+.btn-confirm { background: var(--neon-pink); color: #000; }
+.btn-confirm:hover { background: #ff3399; box-shadow: 0 0 15px var(--neon-pink); }
+
+footer { text-align: center; padding: 2rem 1rem; color: #555; font-size: 1.2rem; }
