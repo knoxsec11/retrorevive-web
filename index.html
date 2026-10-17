@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RetroRevive - Restauración, mantenimiento y mods de consolas retro.">
-    <title>RetroRevive | Restauración de Consolas</title>
+    <meta name="description" content="RetroRevive - Venta de consolas reacondicionadas y servicio técnico.">
+    <title>RetroRevive | Consolas y Servicio</title>
     
     <!-- Fuentes de Google e Íconos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,107 +18,170 @@
 <body>
 
     <div class="scanline"></div>
-    
-    <!-- Notificación flotante -->
     <div id="toast" class="toast"></div>
     
     <header>
         <h1>RETRO REVIVE</h1>
-        <div class="subtitle">> SELECCIONA TUS SERVICIOS_</div>
+        <div class="subtitle">> IT'S DANGEROUS TO GO ALONE! TAKE THIS_</div>
     </header>
 
     <div class="container">
-        <p class="hero-text">
-            Arma tu cotización base y envíala directamente por WhatsApp para agendar tu reparación.
-        </p>
 
-        <div class="grid-servicios">
-            <!-- Servicio 1 -->
-            <div class="card">
-                <i class="fa-solid fa-microchip"></i>
-                <h3>MANTENIMIENTO PROFUNDO</h3>
-                <p>Limpieza de placa, cambio de pasta térmica, y revisión de soldaduras.</p>
-                <span class="price">$450.00</span>
-                <div id="btn-mantenimiento">
-                    <button class="add-btn" onclick="changeQty('btn-mantenimiento', 'Mantenimiento Profundo', 450, 1)">+ COTIZAR</button>
+        <!-- SECCIÓN 1: TIENDA DE CONSOLAS -->
+        <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> CONSOLAS EN VENTA</h2>
+        <p class="hero-text" style="font-size: 1.2rem; color: #aaa;">Equipos 100% reacondicionados. Contáctanos para enviarte fotos detalladas del equipo exacto.</p>
+
+        <div class="grid-productos">
+            
+            <!-- Consola 1: NES -->
+            <div class="card product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/NES-Console-Set.png" alt="Nintendo NES" class="animated-console">
+                <span class="badge-estado">Restaurada 8/10</span>
+                <h3>NINTENDO (NES)</h3>
+                <details>
+                    <summary>¿Qué incluye?</summary>
+                    <ul>
+                        <li>Consola Original</li>
+                        <li>1 Control Original</li>
+                        <li>Cables AV y Corriente</li>
+                        <li>Cartucho Super Mario Bros</li>
+                    </ul>
+                </details>
+                <span class="price">$1,800.00</span>
+                <div id="btn-nes">
+                    <button class="add-btn" onclick="changeQty('btn-nes', 'Nintendo NES', 1800, 1)">+ AGREGAR</button>
                 </div>
             </div>
-            
-            <!-- Servicio 2 -->
-            <div class="card">
-                <i class="fa-solid fa-spray-can-sparkles"></i>
-                <h3>RESTAURACIÓN ESTÉTICA</h3>
-                <p>Blanqueamiento Retrobright, pulido minucioso y detallado de carcasas.</p>
-                <span class="price">$350.00</span>
-                <div id="btn-restauracion">
-                    <button class="add-btn" onclick="changeQty('btn-restauracion', 'Restauración Estética', 350, 1)">+ COTIZAR</button>
+
+            <!-- Consola 2: SNES -->
+            <div class="card product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/SNES-Mod1-Console-Set.png" alt="Super Nintendo" class="animated-console">
+                <span class="badge-estado">Sin Amarillamiento 9/10</span>
+                <h3>SUPER NINTENDO</h3>
+                <details>
+                    <summary>¿Qué incluye?</summary>
+                    <ul>
+                        <li>Consola SNES Original</li>
+                        <li>2 Controles</li>
+                        <li>Cables de conexión</li>
+                        <li>Juego Super Mario World</li>
+                    </ul>
+                </details>
+                <span class="price">$2,200.00</span>
+                <div id="btn-snes">
+                    <button class="add-btn" onclick="changeQty('btn-snes', 'Super Nintendo', 2200, 1)">+ AGREGAR</button>
                 </div>
             </div>
-            
-            <!-- Servicio 3 -->
-            <div class="card">
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-                <h3>MODS Y UPGRADES</h3>
-                <p>Instalación de pantallas IPS o chips (Precio base mano de obra).</p>
-                <span class="price">$600.00</span>
-                <div id="btn-mods">
-                    <button class="add-btn" onclick="changeQty('btn-mods', 'Mods / Upgrades', 600, 1)">+ COTIZAR</button>
+
+            <!-- Consola 3: N64 -->
+            <div class="card product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/N64-Console-Set.png" alt="Nintendo 64" class="animated-console">
+                <span class="badge-estado">Excelente 9.5/10</span>
+                <h3>NINTENDO 64</h3>
+                <details>
+                    <summary>¿Qué incluye?</summary>
+                    <ul>
+                        <li>Consola N64 (Gris)</li>
+                        <li>1 Control Rígido</li>
+                        <li>Jumper Pak instalado</li>
+                        <li>Cables Originales</li>
+                    </ul>
+                </details>
+                <span class="price">$2,500.00</span>
+                <div id="btn-n64">
+                    <button class="add-btn" onclick="changeQty('btn-n64', 'Nintendo 64', 2500, 1)">+ AGREGAR</button>
                 </div>
             </div>
-            
-            <!-- Servicio 4 -->
-            <div class="card">
-                <i class="fa-solid fa-compact-disc"></i>
-                <h3>LÁSER Y MECANISMOS</h3>
-                <p>Calibración, reemplazo de lentes y engranajes para lectoras de disco.</p>
-                <span class="price">$500.00</span>
-                <div id="btn-laser">
-                    <button class="add-btn" onclick="changeQty('btn-laser', 'Reparación de Láser', 500, 1)">+ COTIZAR</button>
+
+            <!-- Consola 4: GameCube -->
+            <div class="card product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/GameCube-Console-Set.png" alt="Nintendo GameCube" class="animated-console">
+                <span class="badge-estado">Lente Nuevo 10/10</span>
+                <h3>NINTENDO GAMECUBE</h3>
+                <details>
+                    <summary>¿Qué incluye?</summary>
+                    <ul>
+                        <li>Consola GameCube</li>
+                        <li>1 Control Original</li>
+                        <li>Cables y Fuente</li>
+                        <li>Memory Card 59 bloques</li>
+                    </ul>
+                </details>
+                <span class="price">$2,800.00</span>
+                <div id="btn-gamecube">
+                    <button class="add-btn" onclick="changeQty('btn-gamecube', 'Nintendo GameCube', 2800, 1)">+ AGREGAR</button>
                 </div>
             </div>
-        </div>
-    </div>
 
-  <!-- MODAL DE CHECKOUT (Formulario personalizado) -->
-    <div id="checkout-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h2 style="color: var(--neon-cyan); margin-top: 0; font-size: 1.2rem;">DATOS DE CONTACTO</h2>
-            
-            <div class="input-group">
-                <label for="client-name">> TU NOMBRE COMPLETO:</label>
-                <input type="text" id="client-name" placeholder="Ej. Juan Pérez García" required>
+            <!-- Consola 5: PS1 -->
+            <div class="card product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/PSX-Console-wController.png" alt="PlayStation 1" class="animated-console">
+                <span class="badge-estado">Chip Instalado 9/10</span>
+                <h3>PLAYSTATION 1</h3>
+                <details>
+                    <summary>¿Qué incluye?</summary>
+                    <ul>
+                        <li>Consola PS1 (Fat)</li>
+                        <li>1 Control DualShock</li>
+                        <li>Memory Card</li>
+                        <li>Lee juegos genéricos</li>
+                    </ul>
+                </details>
+                <span class="price">$1,200.00</span>
+                <div id="btn-ps1">
+                    <button class="add-btn" onclick="changeQty('btn-ps1', 'PlayStation 1', 1200, 1)">+ AGREGAR</button>
+                </div>
             </div>
-            
-            <div class="input-group">
-                <label for="client-phone">> TELÉFONO (10 DÍGITOS):</label>
-                <!-- maxlength limita a 10, oninput borra letras automáticamente -->
-                <input type="tel" id="client-phone" placeholder="Ej. 6671234567" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+
+            <!-- Consola 6: PS2 -->
+            <div class="card product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/PlayStation_2_Slim_console.png" alt="PlayStation 2" class="animated-console">
+                <span class="badge-estado">Mantenimiento 9/10</span>
+                <h3>PLAYSTATION 2 SLIM</h3>
+                <details>
+                    <summary>¿Qué incluye?</summary>
+                    <ul>
+                        <li>Consola PS2 Slim</li>
+                        <li>1 Control DualShock 2</li>
+                        <li>Memory Card (Free McBoot)</li>
+                        <li>Cables Originales</li>
+                    </ul>
+                </details>
+                <span class="price">$1,500.00</span>
+                <div id="btn-ps2">
+                    <button class="add-btn" onclick="changeQty('btn-ps2', 'PlayStation 2 Slim', 1500, 1)">+ AGREGAR</button>
+                </div>
             </div>
 
-            <div class="modal-buttons">
-                <button class="btn-cancel" onclick="closeModal()">CANCELAR</button>
-                <button class="btn-confirm" onclick="processOrder()">ENVIAR PEDIDO</button>
+            <!-- Consola 7: Xbox Original -->
+            <div class="card product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Xbox-Console-Set.png" alt="Xbox Clásico" class="animated-console">
+                <span class="badge-estado">Modificada 8.5/10</span>
+                <h3>XBOX CLÁSICO</h3>
+                <details>
+                    <summary>¿Qué incluye?</summary>
+                    <ul>
+                        <li>Consola Xbox</li>
+                        <li>Disco Duro de 500GB</li>
+                        <li>1 Control Original "Duke"</li>
+                        <li>+100 Juegos instalados</li>
+                    </ul>
+                </details>
+                <span class="price">$2,000.00</span>
+                <div id="btn-xbox">
+                    <button class="add-btn" onclick="changeQty('btn-xbox', 'Xbox Clásico', 2000, 1)">+ AGREGAR</button>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <footer>
-        <p>&copy; 2026 RetroRevive. , Culiacán.</p>
-    </footer>
-
-    <!-- Barra inferior del carrito -->
-    <div class="cart-bar" id="cart-bar">
-        <div class="cart-info">
-            TOTAL: $<span id="total-price">0.00</span><br>
-            <small id="items-count">0 SERVICIOS</small>
-        </div>
-        <button class="checkout-btn" onclick="openModal()">
-            <i class="fa-brands fa-whatsapp"></i> ENVIAR
-        </button>
-    </div>
-
-    <!-- CONEXIÓN A LA LÓGICA JS -->
-    <script src="script.js"></script>
-
-</body>
-</html>
+            <!-- Consola 8: Xbox 360 -->
+            <div class="card product-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Xbox-360-S-Console-Set.png" alt="Xbox 360" class="animated-console">
+                <span class="badge-estado">RGH Instalado 9/10</span>
+                <h3>XBOX 360 SLIM</h3>
+                <details>
+                    <summary>¿Qué incluye?</summary>
+                    <ul>
+                        <li>Consola Xbox 360 Slim</li>
+                        <li>Disco Duro 250GB</li>
+                        <li>1 Control Inalámbrico</li>
+                        <li>Cables y Fuente</li>
