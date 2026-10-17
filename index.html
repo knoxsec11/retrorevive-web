@@ -18,7 +18,8 @@
 <body>
 
     <div class="scanline"></div>
-    <div id="toast" class="toast">¡Servicio Agregado!</div>
+    <!-- La notificación flotante -->
+    <div id="toast" class="toast"></div>
     
     <header>
         <h1>RETRO REVIVE</h1>
@@ -37,7 +38,7 @@
                 <h3>MANTENIMIENTO PROFUNDO</h3>
                 <p>Limpieza de placa, cambio de pasta térmica, y revisión de soldaduras.</p>
                 <span class="price">$450.00</span>
-                <button class="add-btn" onclick="addToCart('Mantenimiento Profundo', 450)">+ COTIZAR</button>
+                <button class="add-btn" onclick="toggleService(this, 'Mantenimiento Profundo', 450)">+ COTIZAR</button>
             </div>
             
             <!-- Servicio 2 -->
@@ -46,7 +47,7 @@
                 <h3>RESTAURACIÓN ESTÉTICA</h3>
                 <p>Blanqueamiento Retrobright, pulido minucioso y detallado de carcasas.</p>
                 <span class="price">$350.00</span>
-                <button class="add-btn" onclick="addToCart('Restauración Estética', 350)">+ COTIZAR</button>
+                <button class="add-btn" onclick="toggleService(this, 'Restauración Estética', 350)">+ COTIZAR</button>
             </div>
             
             <!-- Servicio 3 -->
@@ -55,7 +56,7 @@
                 <h3>MODS Y UPGRADES</h3>
                 <p>Instalación de pantallas IPS o chips (Precio base mano de obra).</p>
                 <span class="price">$600.00</span>
-                <button class="add-btn" onclick="addToCart('Mods / Upgrades (Mano de obra)', 600)">+ COTIZAR</button>
+                <button class="add-btn" onclick="toggleService(this, 'Mods / Upgrades (Mano de obra)', 600)">+ COTIZAR</button>
             </div>
             
             <!-- Servicio 4 -->
@@ -64,7 +65,7 @@
                 <h3>LÁSER Y MECANISMOS</h3>
                 <p>Calibración, reemplazo de lentes y engranajes para lectoras de disco.</p>
                 <span class="price">$500.00</span>
-                <button class="add-btn" onclick="addToCart('Reparación de Láser', 500)">+ COTIZAR</button>
+                <button class="add-btn" onclick="toggleService(this, 'Reparación de Láser', 500)">+ COTIZAR</button>
             </div>
         </div>
     </div>
