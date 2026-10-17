@@ -2,44 +2,53 @@ let cart = [];
 let total = 0;
 const BUSINESS_PHONE = "526675912648"; 
 
-function toggleService(btnElement, productName, productPrice) {
-    // Buscamos si el servicio ya está en el carrito
-    let existingItemIndex = cart.findIndex(item => item.name === productName);
+function changeQty(containerId, productName, productPrice, delta) {
+    // Buscamos si el artículo ya está en el carrito
+    let item = cart.find(i => i.name === productName);
     
-    if (existingItemIndex !== -1) {
-        // SI YA ESTÁ: Lo eliminamos del carrito (Deseleccionar)
-        cart.splice(existingItemIndex, 1);
+    if (!item && delta > 0) {
+        // Si no está, lo creamos con cantidad 1
+        item = { name: productName, price: productPrice, quantity: 1 };
+        cart.push(item);
+        showToast("✅ ¡Agregado!", "var(--neon-cyan)");
+    } else if (item) {
+        // Si ya está, le sumamos o restamos
+        item.quantity += delta;
         
-        // Regresamos el botón a su estado original
-        btnElement.innerHTML = "+ COTIZAR";
-        btnElement.style.cssText = ""; // Limpia los colores forzados
-        
-        showToast("❌ Servicio removido", "var(--neon-pink)");
+        if (item.quantity <= 0) {
+            // Si llega a 0, lo eliminamos del carrito (deseleccionar)
+            cart = cart.filter(i => i.name !== productName);
+            showToast("❌ Removido", "var(--neon-pink)");
+            item = null;
+        }
+    }
+    
+    // Cambiamos el diseño del botón según la cantidad
+    let container = document.getElementById(containerId);
+    if (!item || item.quantity === 0) {
+        // Si no hay, mostramos el botón normal
+        container.innerHTML = `<button class="add-btn" onclick="changeQty('${containerId}', '${productName}', ${productPrice}, 1)">+ COTIZAR</button>`;
     } else {
-        // SI NO ESTÁ: Lo agregamos al carrito
-        cart.push({ name: productName, price: productPrice, quantity: 1 });
-        
-        // Cambiamos el diseño del botón para mostrar que ya está seleccionado
-        btnElement.innerHTML = "✔️ SELECCIONADO";
-        btnElement.style.background = "var(--neon-pink)";
-        btnElement.style.color = "#111";
-        btnElement.style.boxShadow = "0 0 15px var(--neon-pink)";
-        
-        showToast("✅ ¡Servicio agregado!", "var(--neon-cyan)");
+        // Si hay 1 o más, mostramos los controles [-] [1] [+]
+        container.innerHTML = `
+            <div class="qty-controls">
+                <button class="qty-btn" onclick="changeQty('${containerId}', '${productName}', ${productPrice}, -1)">-</button>
+                <span class="qty-number">${item.quantity}</span>
+                <button class="qty-btn" onclick="changeQty('${containerId}', '${productName}', ${productPrice}, 1)">+</button>
+            </div>
+        `;
     }
     
     updateCartUI();
 }
 
 function updateCartUI() {
-    // Sumamos el total
-    total = cart.reduce((sum, item) => sum + item.price, 0);
-    let totalItems = cart.length;
+    total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // Suma todas las cantidades
     
     document.getElementById('total-price').innerText = total.toFixed(2);
     document.getElementById('items-count').innerText = totalItems + (totalItems === 1 ? " SERVICIO" : " SERVICIOS");
     
-    // Mostrar la barra si hay items, ocultarla si el carrito llega a 0
     const cartBar = document.getElementById('cart-bar');
     if (cart.length > 0) {
         cartBar.classList.add('active');
@@ -50,35 +59,31 @@ function updateCartUI() {
 
 function showToast(message, bgColor) {
     const toast = document.getElementById('toast');
-    toast.innerText = message; // Actualiza el texto
-    toast.style.background = bgColor; // Cambia el color dependiendo si agrega o quita
+    toast.innerText = message;
+    toast.style.background = bgColor;
     toast.classList.add('show');
-    
-    // Ocultar la notificación después de 2 segundos
     setTimeout(() => { toast.classList.remove('show'); }, 2000);
 }
 
 function sendOrder() {
     if (cart.length === 0) return;
 
-    // Pedir datos al cliente
     let customerInfo = prompt("Por favor, ingresa tu Nombre y el Modelo de tu Consola (Ej. Juan - Nintendo 64):");
     if (!customerInfo) customerInfo = "Cotización General";
 
-    // Construir el "Ticket"
     let message = "🕹️ *SOLICITUD DE COTIZACIÓN RETROREVIVE*\n";
     message += "👤 Cliente/Consola: " + customerInfo + "\n";
     message += "---------------------------\n";
     
+    // Ahora multiplica el precio por la cantidad solicitada
     cart.forEach(item => {
-        message += `▪ 1x ${item.name} ($${item.price})\n`;
+        message += `▪ ${item.quantity}x ${item.name} ($${item.price * item.quantity})\n`;
     });
     
     message += "---------------------------\n";
     message += `*TOTAL ESTIMADO: $${total.toFixed(2)}*\n\n`;
     message += "_Nota: Los precios finales pueden variar tras una revisión física del equipo._";
 
-    // Enviar a WhatsApp
     let encodedMessage = encodeURIComponent(message);
     let whatsappUrl = `https://wa.me/${BUSINESS_PHONE}?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
