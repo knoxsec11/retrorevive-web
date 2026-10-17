@@ -33,6 +33,17 @@
             </button>
         </nav>
 
+        <!-- BUSCADOR CENTRAL Y ORDENAMIENTO DE 8-BITS -->
+        <div class="toolbar-container">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="catalog-search" placeholder="BUSCAR CONSOLA O JUEGO..." oninput="handleSearchInput()">
+            </div>
+            <button class="sort-btn" id="sort-year-btn" onclick="toggleSortOrder()" title="Cambiar orden de año">
+                AÑO <span id="sort-arrow">▲</span>
+            </button>
+        </div>
+
         <div class="back-bar" id="back-bar" style="display: none;">
             <button class="btn-back" onclick="goBack()">
                 <i class="fa-solid fa-arrow-left"></i> VOLVER ATRÁS
@@ -53,7 +64,7 @@
         <section id="view-juegos" class="hidden-view">
             <div id="juegos-consolas-list">
                 <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> CATÁLOGO DE VIDEOJUEGOS</h2>
-                <p class="hero-text-sub">Ordenadas desde la más reciente a la más antigua.</p>
+                <p class="hero-text-sub">Selecciona una consola para explorar sus 15 títulos estandarte.</p>
                 <div class="grid-productos grid-6-cols" id="catalogo-juegos-consolas"></div>
             </div>
 
