@@ -17,6 +17,23 @@
 
     <div id="toast" class="toast"></div>
     
+    <!-- MODO ARCADE: INSERT COIN (Oculto por defecto) -->
+    <div id="insert-coin-overlay" class="arcade-overlay">
+        <div class="arcade-content">
+            <h1 class="blink-text">INSERT COIN TO CONTINUE</h1>
+            <div class="coin-container">
+               <div class="coin" onclick="insertCoinAction()" title="¡Inserta la moneda!"></div>
+               <div class="slot-hole"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÓN FLOTANTE TRADE-IN -->
+    <button class="floating-trade-in" onclick="sendTradeInMessage()">
+        <i class="fa-solid fa-recycle fa-spin-pulse" style="font-size:1.5rem;"></i> 
+        <span class="trade-in-text">¿Tienes consolas descompuestas?<br>¡Te las compramos a cuenta!</span>
+    </button>
+    
     <header>
         <h1 id="brand-title" onclick="goHome()" title="Regresar al Inicio">RETRO REVIVE</h1>
         <div class="subtitle" id="dynamic-slogan">> CARGANDO..._</div>
@@ -33,7 +50,7 @@
             </button>
         </nav>
 
-        <!-- BUSCADOR CENTRAL Y ORDENAMIENTO DE 8-BITS -->
+        <!-- BUSCADOR CENTRAL Y ORDENAMIENTO -->
         <div class="toolbar-container">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -42,6 +59,15 @@
             <button class="sort-btn" id="sort-year-btn" onclick="toggleSortOrder()" title="Cambiar orden de año">
                 AÑO <span id="sort-arrow">▲</span>
             </button>
+        </div>
+
+        <!-- FILTROS RÁPIDOS POR MARCA (NUEVO) -->
+        <div class="brand-filters" id="brand-filters-container">
+            <button class="brand-badge active" onclick="setBrandFilter('todas', this)">TODAS</button>
+            <button class="brand-badge" onclick="setBrandFilter('nintendo', this)">NINTENDO</button>
+            <button class="brand-badge" onclick="setBrandFilter('playstation', this)">PLAYSTATION</button>
+            <button class="brand-badge" onclick="setBrandFilter('sega', this)">SEGA</button>
+            <button class="brand-badge" onclick="setBrandFilter('xbox', this)">XBOX</button>
         </div>
 
         <div class="back-bar" id="back-bar" style="display: none;">
@@ -56,7 +82,7 @@
         <!-- VISTA 1: CONSOLAS -->
         <section id="view-consolas" class="active-view">
             <h2 class="section-title"><i class="fa-solid fa-tv"></i> MUSEO Y VENTA DE CONSOLAS</h2>
-            <p class="hero-text-sub">Catálogo histórico completo. Equipos reacondicionados y listos para jugar.</p>
+            <p class="hero-text-sub">Catálogo histórico completo. Adquiere el paquete completo o solo la consola de reemplazo.</p>
             <div class="grid-productos grid-6-cols" id="catalogo-consolas"></div>
         </section>
 
@@ -147,7 +173,7 @@
                 <input type="tel" id="client-phone" placeholder="Ej. 6671234567" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
             </div>
             <div class="modal-info-note">
-                <i class="fa-solid fa-circle-info"></i> Nota: Todos los equipos incluyen limpieza técnica profunda y fotos a detalle del estado estético por WhatsApp antes de su envío.
+                <i class="fa-solid fa-circle-info"></i> Nota: Todos los equipos incluyen limpieza técnica profunda y fotos a detalle del estado estético por WhatsApp.
             </div>
             <div class="modal-buttons">
                 <button class="btn-cancel" onclick="backToCartModal()">VOLVER</button>
