@@ -8,26 +8,22 @@ function changeQty(containerId, productName, productPrice, delta) {
     let item = cart.find(i => i.name === productName);
     
     if (!item && delta > 0) {
-        // Agrega el primer elemento
         item = { name: productName, price: productPrice, quantity: 1 };
         cart.push(item);
         showToast("✅ ¡Agregado!", "var(--neon-cyan)");
     } else if (item) {
-        // Suma o resta
         item.quantity += delta;
         
         if (item.quantity <= 0) {
-            // Si baja a 0, elimina el servicio
             cart = cart.filter(i => i.name !== productName);
             showToast("❌ Removido", "var(--neon-pink)");
             item = null;
         }
     }
     
-    // Cambia el diseño del botón
     let container = document.getElementById(containerId);
     if (!item || item.quantity === 0) {
-        container.innerHTML = `<button class="add-btn" onclick="changeQty('${containerId}', '${productName}', ${productPrice}, 1)">+ COTIZAR</button>`;
+        container.innerHTML = `<button class="add-btn" onclick="changeQty('${containerId}', '${productName}', ${productPrice}, 1)">+ AGREGAR</button>`;
     } else {
         container.innerHTML = `
             <div class="qty-controls">
@@ -47,7 +43,7 @@ function updateCartUI() {
     let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     
     document.getElementById('total-price').innerText = total.toFixed(2);
-    document.getElementById('items-count').innerText = totalItems + (totalItems === 1 ? " SERVICIO" : " SERVICIOS");
+    document.getElementById('items-count').innerText = totalItems + (totalItems === 1 ? " ARTÍCULO" : " ARTÍCULOS");
     
     const cartBar = document.getElementById('cart-bar');
     if (cart.length > 0) {
@@ -81,19 +77,17 @@ function processOrder() {
     const name = document.getElementById('client-name').value.trim();
     const phone = document.getElementById('client-phone').value.trim();
 
-    // Revisa que no estén vacíos
     if (!name || !phone) {
         showToast("⚠️ Llena todos los campos", "orange");
         return;
     }
 
-    // Revisa que el teléfono tenga exactamente 10 dígitos
     if (phone.length < 10) {
         showToast("⚠️ El teléfono debe tener 10 dígitos", "orange");
         return;
     }
 
-    // Calcular Folio usando Memoria Local
+    // Calcular Folio
     let currentFolio = localStorage.getItem('retrorevive_folio');
     
     if (!currentFolio) {
