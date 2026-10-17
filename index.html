@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RetroRevive - Venta de consolas reacondicionadas y servicio técnico.">
-    <title>RetroRevive | Catálogo Histórico</title>
+    <meta name="description" content="RetroRevive - Venta de consolas reacondicionadas, videojuegos clásicos y servicio técnico.">
+    <title>RetroRevive | Consolas, Juegos y Servicio</title>
     
+    <!-- Fuentes de Google e Íconos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -19,80 +20,128 @@
     <div id="toast" class="toast"></div>
     
     <header>
-        <h1>RETRO REVIVE</h1>
-        <!-- Frase icónica de The Legend of Zelda -->
+        <!-- Al hacer clic en RETRO REVIVE regresa al inicio -->
+        <h1 id="brand-title" onclick="goHome()" title="Regresar al Inicio">RETRO REVIVE</h1>
         <div class="subtitle">> IT'S DANGEROUS TO GO ALONE! TAKE THIS_</div>
+
+        <!-- BARRA DE NAVEGACIÓN -->
+        <nav class="main-nav">
+            <button class="nav-btn active" id="tab-consolas" onclick="showSection('consolas')">
+                <i class="fa-solid fa-tv"></i> CONSOLAS
+            </button>
+            <button class="nav-btn" id="tab-juegos" onclick="showSection('juegos')">
+                <i class="fa-solid fa-gamepad"></i> VIDEOJUEGOS
+            </button>
+            <button class="nav-btn" id="tab-servicios" onclick="showSection('servicios')">
+                <i class="fa-solid fa-screwdriver-wrench"></i> SERVICIOS
+            </button>
+        </nav>
+
+        <!-- BOTÓN VOLVER ATRÁS -->
+        <div class="back-bar" id="back-bar" style="display: none;">
+            <button class="btn-back" onclick="goBack()">
+                <i class="fa-solid fa-arrow-left"></i> VOLVER ATRÁS
+            </button>
+        </div>
     </header>
 
     <div class="container">
 
-        <!-- SECCIÓN 1: TIENDA DE CONSOLAS HISTÓRICAS -->
-        <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> MUSEO Y VENTA DE CONSOLAS</h2>
-        <p class="hero-text" style="font-size: 1.2rem; color: #aaa;">Catálogo histórico completo. Equipos 100% reacondicionados. Contáctanos para enviarte fotos detalladas del equipo exacto.</p>
+        <!-- VISTA 1: CONSOLAS -->
+        <section id="view-consolas" class="active-view">
+            <h2 class="section-title"><i class="fa-solid fa-tv"></i> MUSEO Y VENTA DE CONSOLAS</h2>
+            <p class="hero-text-sub">Catálogo histórico completo. Selecciona los equipos que desees cotizar.</p>
+            <div class="grid-productos grid-6-cols" id="catalogo-consolas">
+                <!-- Inyección JS -->
+            </div>
+        </section>
 
-        <!-- AQUÍ SE INYECTARÁN LAS 106 CONSOLAS AUTOMÁTICAMENTE -->
-        <div class="grid-productos" id="catalogo-consolas">
-            <!-- Cargando catálogo... -->
-        </div>
+        <!-- VISTA 2: VIDEOJUEGOS (De más nueva a más vieja) -->
+        <section id="view-juegos" class="hidden-view">
+            <div id="juegos-consolas-list">
+                <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> CATÁLOGOS DE VIDEOJUEGOS</h2>
+                <p class="hero-text-sub">Ordenadas desde la más reciente a la más antigua. Selecciona una consola para explorar sus 15 títulos más famosos.</p>
+                <div class="grid-productos grid-6-cols" id="catalogo-juegos-consolas">
+                    <!-- Inyección JS -->
+                </div>
+            </div>
 
-        <!-- SECCIÓN 2: OTROS SERVICIOS (Reparaciones originales) -->
-        <h2 class="section-title" style="margin-top: 4rem;"><i class="fa-solid fa-screwdriver-wrench"></i> OTROS SERVICIOS</h2>
+            <div id="juegos-detalles-view" style="display: none;">
+                <h2 class="section-title" id="juegos-consola-titulo">JUEGOS DE CONSOLA</h2>
+                <div class="grid-productos grid-6-cols" id="lista-top-juegos">
+                    <!-- Inyección JS -->
+                </div>
+            </div>
+        </section>
 
-        <div class="grid-servicios">
-            <div class="card">
-                <i class="fa-solid fa-microchip"></i>
-                <h3>MANTENIMIENTO PROFUNDO</h3>
-                <p>Limpieza de placa, cambio de pasta térmica, y revisión de soldaduras.</p>
-                <span class="price">$450.00</span>
-                <div id="btn-mantenimiento">
-                    <button class="add-btn" onclick="changeQty('btn-mantenimiento', 'Mantenimiento Profundo', 450, 1)">+ COTIZAR</button>
+        <!-- VISTA 3: OTROS SERVICIOS -->
+        <section id="view-servicios" class="hidden-view">
+            <h2 class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> SERVICIOS TÉCNICOS Y REPARACIÓN</h2>
+            <div class="grid-servicios">
+                <div class="card">
+                    <i class="fa-solid fa-microchip"></i>
+                    <h3>MANTENIMIENTO PROFUNDO</h3>
+                    <p>Limpieza de placa, cambio de pasta térmica, y revisión de soldaduras.</p>
+                    <span class="price">$450.00</span>
+                    <div id="btn-mantenimiento">
+                        <button class="add-btn" onclick="changeQty('btn-mantenimiento', 'Mantenimiento Profundo', 450, 1)">+ COTIZAR</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <i class="fa-solid fa-spray-can-sparkles"></i>
+                    <h3>RESTAURACIÓN ESTÉTICA</h3>
+                    <p>Blanqueamiento Retrobright, pulido minucioso y detallado de carcasas.</p>
+                    <span class="price">$350.00</span>
+                    <div id="btn-restauracion">
+                        <button class="add-btn" onclick="changeQty('btn-restauracion', 'Restauración Estética', 350, 1)">+ COTIZAR</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <h3>MODS Y UPGRADES</h3>
+                    <p>Instalación de pantallas IPS o chips (Precio base mano de obra).</p>
+                    <span class="price">$600.00</span>
+                    <div id="btn-mods">
+                        <button class="add-btn" onclick="changeQty('btn-mods', 'Mods / Upgrades', 600, 1)">+ COTIZAR</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <h3>LÁSER Y MECANISMOS</h3>
+                    <p>Calibración, reemplazo de lentes y engranajes para lectoras de disco.</p>
+                    <span class="price">$500.00</span>
+                    <div id="btn-laser">
+                        <button class="add-btn" onclick="changeQty('btn-laser', 'Reparación de Láser', 500, 1)">+ COTIZAR</button>
+                    </div>
                 </div>
             </div>
-            
-            <div class="card">
-                <i class="fa-solid fa-spray-can-sparkles"></i>
-                <h3>RESTAURACIÓN ESTÉTICA</h3>
-                <p>Blanqueamiento Retrobright, pulido minucioso y detallado de carcasas.</p>
-                <span class="price">$350.00</span>
-                <div id="btn-restauracion">
-                    <button class="add-btn" onclick="changeQty('btn-restauracion', 'Restauración Estética', 350, 1)">+ COTIZAR</button>
-                </div>
-            </div>
-            
-            <div class="card">
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-                <h3>MODS Y UPGRADES</h3>
-                <p>Instalación de pantallas IPS o chips (Precio base mano de obra).</p>
-                <span class="price">$600.00</span>
-                <div id="btn-mods">
-                    <button class="add-btn" onclick="changeQty('btn-mods', 'Mods / Upgrades', 600, 1)">+ COTIZAR</button>
-                </div>
-            </div>
-            
-            <div class="card">
-                <i class="fa-solid fa-compact-disc"></i>
-                <h3>LÁSER Y MECANISMOS</h3>
-                <p>Calibración, reemplazo de lentes y engranajes para lectoras de disco.</p>
-                <span class="price">$500.00</span>
-                <div id="btn-laser">
-                    <button class="add-btn" onclick="changeQty('btn-laser', 'Reparación de Láser', 500, 1)">+ COTIZAR</button>
-                </div>
-            </div>
-        </div>
+        </section>
+
     </div>
 
     <!-- MODAL DE CHECKOUT -->
     <div id="checkout-modal" class="modal-overlay">
         <div class="modal-content">
             <h2 style="color: var(--neon-cyan); margin-top: 0; font-size: 1.2rem;">DATOS DE CONTACTO</h2>
+            
             <div class="input-group">
                 <label for="client-name">> TU NOMBRE COMPLETO:</label>
                 <input type="text" id="client-name" placeholder="Ej. Juan Pérez García" required>
             </div>
+            
             <div class="input-group">
                 <label for="client-phone">> TELÉFONO (10 DÍGITOS):</label>
                 <input type="tel" id="client-phone" placeholder="Ej. 6671234567" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
             </div>
+
+            <!-- NOTA ACLARATORIA SOLICITADA -->
+            <div class="modal-info-note">
+                <i class="fa-solid fa-circle-info"></i> Nota: Todos los equipos incluyen limpieza técnica profunda y fotos a detalle del estado estético antes del envío por WhatsApp.
+            </div>
+
             <div class="modal-buttons">
                 <button class="btn-cancel" onclick="closeModal()">CANCELAR</button>
                 <button class="btn-confirm" onclick="processOrder()">ENVIAR PEDIDO</button>
@@ -104,7 +153,7 @@
         <p>&copy; 2026 RetroRevive. Sector Loma de Rodriguera, Culiacán.</p>
     </footer>
 
-    <!-- Barra inferior del carrito -->
+    <!-- BARRA INFERIOR DEL CARRITO (PERSISTENTE) -->
     <div class="cart-bar" id="cart-bar">
         <div class="cart-info">
             TOTAL: $<span id="total-price">0.00</span><br>
