@@ -79,19 +79,20 @@
         </div>
     </div>
 
-    <!-- MODAL DE CHECKOUT (Formulario personalizado) -->
+  <!-- MODAL DE CHECKOUT (Formulario personalizado) -->
     <div id="checkout-modal" class="modal-overlay">
         <div class="modal-content">
             <h2 style="color: var(--neon-cyan); margin-top: 0; font-size: 1.2rem;">DATOS DE CONTACTO</h2>
             
             <div class="input-group">
-                <label for="client-name">> TU NOMBRE O ALIAS:</label>
-                <input type="text" id="client-name" placeholder="Ej. Juan Perez" required>
+                <label for="client-name">> TU NOMBRE COMPLETO:</label>
+                <input type="text" id="client-name" placeholder="Ej. Juan Pérez García" required>
             </div>
             
             <div class="input-group">
-                <label for="client-phone">> TELÉFONO DE CONTACTO:</label>
-                <input type="tel" id="client-phone" placeholder="Ej. 667 123 4567" required>
+                <label for="client-phone">> TELÉFONO (10 DÍGITOS):</label>
+                <!-- maxlength limita a 10, oninput borra letras automáticamente -->
+                <input type="tel" id="client-phone" placeholder="Ej. 6671234567" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
             </div>
 
             <div class="modal-buttons">
@@ -102,7 +103,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 RetroRevive. Sector Loma de Rodriguera, Culiacán.</p>
+        <p>&copy; 2026 RetroRevive. , Culiacán.</p>
     </footer>
 
     <!-- Barra inferior del carrito -->
