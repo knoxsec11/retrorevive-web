@@ -112,7 +112,7 @@ function setRandomSlogan() {
     document.getElementById('dynamic-slogan').innerText = text;
 }
 
-// 2. BASE DE DATOS DE CONSOLAS COMPLETAS
+// 2. BASE DE DATOS DE CONSOLAS COMPLETAS (106 Consolas)
 const consolasDB = [
     { name: "Magnavox Odyssey", year: 1972, price: 12000, img: "img/magnavox_odyssey.jpg", inc: ["Consola Magnavox Odyssey", "2 Mandos integrados", "Cable RF con adaptador para TV moderna", "Baterías (Cargadas)", "Overlays de pantalla"] },
     { name: "Home Pong", year: 1975, price: 3500, img: "img/home_pong.jpg", inc: ["Consola Home Pong", "Cable RF con adaptador coaxial a TV", "Eliminador de corriente AC"] },
@@ -138,15 +138,15 @@ const consolasDB = [
     { name: "Sega SG-1000", year: 1983, price: 3000, img: "img/sg1000.jpg", inc: ["Consola SG-1000", "1 Joystick", "Cable a TV", "Adaptador AC"] },
     { name: "Tomy Tutor", year: 1983, price: 2500, img: "img/tomy_tutor.jpg", inc: ["Consola Tomy", "Cable RF y Adaptador", "Eliminador de corriente"] },
     { name: "Casio PV-2000", year: 1983, price: 3000, img: "img/casio_pv2000.jpg", inc: ["Consola Casio", "1 Gamepad", "Cable AV", "Fuente de poder"] },
-    { name: "Nintendo NES", year: 1985, price: 1800, img: "img/nes.jpg", inc: ["Consola NES", "1 Control original", "Cable de video RCA (Amarillo/Rojo)", "Eliminador de corriente"] },
+    { name: "Nintendo NES", year: 1985, price: 1800, img: "img/nes.jpg", inc: ["Consola NES", "1 Control original", "Cable de video RCA", "Eliminador de corriente"] },
     { name: "Sega Mark III", year: 1985, price: 3500, img: "img/mark3.jpg", inc: ["Consola Mark III", "1 Pad de control", "Cables AV y Fuente AC"] },
     { name: "Sega Master System", year: 1985, price: 2500, img: "img/master_system.jpg", inc: ["Consola SMS", "1 Control Pad", "Cable AV RCA", "Eliminador de corriente"] },
     { name: "Atari 7800", year: 1984, price: 2000, img: "img/atari_7800.jpg", inc: ["Consola 7800", "1 Joystick", "Cable RF + Switch a Coaxial", "Adaptador de corriente"] },
     { name: "Amstrad GX4000", year: 1990, price: 4500, img: "img/amstrad.jpg", inc: ["Consola GX4000", "1 Control Pad", "Cable AV y Fuente de poder"] },
     { name: "Atari Lynx", year: 1989, price: 3500, img: "img/lynx.jpg", inc: ["Portátil Lynx", "Baterías AA nuevas", "Cargador de pared AC"] },
-    { name: "Game Boy", year: 1989, price: 1500, img: "img/gameboy.jpg", inc: ["Portátil Game Boy", "4 Baterías AA instaladas", "Tapa de baterías"] },
+    { name: "Game Boy Clásico", year: 1989, price: 1500, img: "img/gameboy.jpg", inc: ["Portátil Game Boy", "4 Baterías AA instaladas", "Tapa de baterías"] },
     { name: "TurboGrafx-16", year: 1987, price: 3000, img: "img/turbografx.jpg", inc: ["Consola TurboGrafx", "1 TurboPad", "Cable RF y Eliminador AC"] },
-    { name: "Sega Genesis", year: 1988, price: 1500, img: "img/genesis.jpg", inc: ["Consola Genesis", "1 Control 3 botones", "Cable AV", "Eliminador de corriente de pared"] },
+    { name: "Sega Genesis", year: 1988, price: 1500, img: "img/genesis.jpg", inc: ["Consola Genesis", "1 Control 3 botones", "Cable AV", "Eliminador de pared"] },
     { name: "Neo Geo AES", year: 1990, price: 18000, img: "img/neogeo.jpg", inc: ["Consola AES", "1 Arcade Stick", "Cable estéreo AV", "Fuente de poder original"] },
     { name: "Super Nintendo (SNES)", year: 1990, price: 2200, img: "img/snes.jpg", inc: ["Consola SNES", "1 Control original", "Cable de video RCA", "Eliminador de corriente AC"] },
     { name: "Commodore CDTV", year: 1991, price: 8000, img: "img/cdtv.jpg", inc: ["Consola CDTV", "Mando a distancia", "Cable de video", "Cable de corriente"] },
@@ -172,7 +172,7 @@ const consolasDB = [
     { name: "Neo Geo Pocket", year: 1998, price: 2500, img: "img/ngp.jpg", inc: ["Portátil NGP", "Pilas principales y de respaldo"] },
     { name: "WonderSwan", year: 1999, price: 2000, img: "img/wonderswan.jpg", inc: ["Portátil WonderSwan", "Batería instalada"] },
     { name: "Neo Geo Pocket Color", year: 1999, price: 3000, img: "img/ngpc.jpg", inc: ["Portátil NGPC", "Pilas instaladas", "Tapa original"] },
-    { name: "PlayStation 2", year: 2000, price: 1500, img: "img/ps2.jpg", inc: ["Consola PS2", "1 Control DualShock 2", "Cable AV RCA", "Cable de poder o Eliminador"] },
+    { name: "PlayStation 2", year: 2000, price: 1500, img: "img/ps2.jpg", inc: ["Consola PS2", "1 Control DualShock 2", "Cable AV RCA", "Cable de poder"] },
     { name: "Nintendo GameCube", year: 2001, price: 2800, img: "img/gamecube.jpg", inc: ["Consola GameCube", "1 Control original", "Cable AV Nintendo", "Fuente de poder externa"] },
     { name: "Microsoft Xbox", year: 2001, price: 2000, img: "img/xbox.jpg", inc: ["Consola Xbox", "1 Control", "Cable AV", "Cable de poder de pared"] },
     { name: "Game Boy Advance", year: 2001, price: 1500, img: "img/gba.jpg", inc: ["Consola GBA", "Baterías", "Tapa de pilas"] },
@@ -185,7 +185,7 @@ const consolasDB = [
     { name: "Gizmondo", year: 2005, price: 5000, img: "img/gizmondo.jpg", inc: ["Consola Gizmondo", "Batería", "Cargador de pared"] },
     { name: "Xbox 360", year: 2005, price: 1800, img: "img/xbox360.jpg", inc: ["Consola 360", "1 Control inalámbrico", "Cable HD/HDMI", "Fuente de poder original"] },
     { name: "PlayStation 3", year: 2006, price: 2200, img: "img/ps3.jpg", inc: ["Consola PS3", "1 Control DualShock 3", "Cable de carga, HDMI y Corriente"] },
-    { name: "Nintendo Wii", year: 2006, price: 1200, img: "img/wii.jpg", inc: ["Consola Wii", "Wiimote + Nunchuk", "Barra de sensores", "Cable AV y Fuente de poder Wii"] },
+    { name: "Nintendo Wii", year: 2006, price: 1200, img: "img/wii.jpg", inc: ["Consola Wii", "Wiimote + Nunchuk", "Barra de sensores", "Cable AV y Fuente de poder"] },
     { name: "Nintendo DSi", year: 2008, price: 1200, img: "img/dsi.jpg", inc: ["Consola DSi", "Stylus", "Cargador de pared"] },
     { name: "PSP Go", year: 2009, price: 2500, img: "img/pspgo.jpg", inc: ["Consola PSP Go", "Cable USB/Carga propietario"] },
     { name: "Nintendo DSi XL", year: 2009, price: 1500, img: "img/dsixl.jpg", inc: ["Consola DSi XL", "Stylus", "Cargador de pared"] },
@@ -222,28 +222,203 @@ const consolasDB = [
     { name: "Nintendo Switch 2", year: 2025, price: 9500, img: "img/switch2.jpg", inc: ["Consola Switch 2", "Joy-Cons magnéticos", "Dock", "Cargador y HDMI"] }
 ];
 
-// 3. JUEGOS REALES POR CONSOLA (SIN PARÉNTESIS)
-const juegosBaseReales = {
-    "Nintendo Switch": [{n:"The Legend of Zelda: Breath of the Wild",p:900},{n:"Super Mario Odyssey",p:900},{n:"Mario Kart 8 Deluxe",p:1000},{n:"Super Smash Bros. Ultimate",p:1100},{n:"Animal Crossing: New Horizons",p:900},{n:"Pokémon Legends: Arceus",p:800},{n:"Metroid Dread",p:750},{n:"Splatoon 3",p:900},{n:"Xenoblade Chronicles 3",p:800},{n:"Fire Emblem: Three Houses",p:850},{n:"Luigi's Mansion 3",p:800},{n:"Super Mario Bros. Wonder",p:1000},{n:"Monster Hunter Rise",p:600},{n:"Persona 5 Royal",p:700},{n:"The Legend of Zelda: Tears of the Kingdom",p:1100}],
-    "PlayStation 4": [{n:"God of War",p:350},{n:"The Last of Us Part II",p:500},{n:"Marvel's Spider-Man",p:400},{n:"Red Dead Redemption 2",p:450},{n:"Bloodborne",p:350},{n:"Uncharted 4: A Thief's End",p:300},{n:"Horizon Zero Dawn",p:300},{n:"Persona 5",p:350},{n:"The Witcher 3: Wild Hunt",p:400},{n:"Ghost of Tsushima",p:500},{n:"Grand Theft Auto V",p:350},{n:"Final Fantasy VII Remake",p:450},{n:"God of War Ragnarök",p:800},{n:"Sekiro: Shadows Die Twice",p:600},{n:"Resident Evil 2 Remake",p:450}],
-    "Xbox One": [{n:"Halo: The Master Chief Collection",p:400},{n:"Forza Horizon 4",p:500},{n:"Gears 5",p:350},{n:"Sea of Thieves",p:400},{n:"Ori and the Will of the Wisps",p:300},{n:"Sunset Overdrive",p:250},{n:"Halo 5: Guardians",p:250},{n:"Quantum Break",p:300},{n:"Forza Motorsport 7",p:450},{n:"Gears of War 4",p:300},{n:"Ryse: Son of Rome",p:250},{n:"State of Decay 2",p:300},{n:"Killer Instinct",p:250},{n:"Rare Replay",p:300},{n:"Cuphead",p:350}],
-    "Nintendo 64": [{n:"Super Mario 64",p:600},{n:"The Legend of Zelda: Ocarina of Time",p:800},{n:"GoldenEye 007",p:500},{n:"The Legend of Zelda: Majora's Mask",p:900},{n:"Mario Kart 64",p:700},{n:"Super Smash Bros.",p:800},{n:"Banjo-Kazooie",p:600},{n:"Paper Mario",p:1500},{n:"Star Fox 64",p:450},{n:"Donkey Kong 64",p:550},{n:"Perfect Dark",p:400},{n:"Diddy Kong Racing",p:450},{n:"Pokemon Stadium",p:500},{n:"Conker's Bad Fur Day",p:2500},{n:"Wave Race 64",p:300}],
-    "Super Nintendo (SNES)": [{n:"Super Mario World",p:400},{n:"The Legend of Zelda: A Link to the Past",p:700},{n:"Super Metroid",p:1200},{n:"Chrono Trigger",p:3500},{n:"Donkey Kong Country",p:500},{n:"Street Fighter II",p:350},{n:"Final Fantasy III (VI)",p:1200},{n:"Super Mario Kart",p:600},{n:"EarthBound",p:5000},{n:"Secret of Mana",p:900},{n:"Mega Man X",p:600},{n:"Super Mario RPG",p:1500},{n:"Super Mario World 2: Yoshi's Island",p:600},{n:"Super Castlevania IV",p:1000},{n:"Star Fox",p:350}],
-    "Nintendo NES": [{n:"Super Mario Bros.",p:300},{n:"Super Mario Bros. 3",p:450},{n:"The Legend of Zelda",p:600},{n:"Metroid",p:500},{n:"Mega Man 2",p:600},{n:"Castlevania",p:550},{n:"Contra",p:700},{n:"DuckTales",p:400},{n:"Mike Tyson's Punch-Out!!",p:500},{n:"Final Fantasy",p:600},{n:"Zelda II: The Adventure of Link",p:450},{n:"Excitebike",p:250},{n:"Double Dragon",p:350},{n:"Kid Icarus",p:450},{n:"Tetris",p:200}],
-    "PlayStation (PS1)": [{n:"Metal Gear Solid",p:600},{n:"Final Fantasy VII",p:700},{n:"Castlevania: Symphony of the Night",p:2000},{n:"Resident Evil 2",p:650},{n:"Crash Bandicoot",p:500},{n:"Tekken 3",p:400},{n:"Silent Hill",p:2500},{n:"Gran Turismo 2",p:300},{n:"Spyro the Dragon",p:450},{n:"Tomb Raider",p:350},{n:"Tony Hawk's Pro Skater 2",p:300},{n:"Chrono Cross",p:600},{n:"Street Fighter Alpha 3",p:700},{n:"Suikoden II",p:3000},{n:"Twisted Metal 2",p:400}],
-    "PlayStation 2 (PS2)": [{n:"Grand Theft Auto: San Andreas",p:300},{n:"Metal Gear Solid 3: Snake Eater",p:400},{n:"Shadow of the Colossus",p:450},{n:"Silent Hill 2",p:2000},{n:"Resident Evil 4",p:350},{n:"God of War II",p:300},{n:"Final Fantasy X",p:250},{n:"Kingdom Hearts",p:300},{n:"Gran Turismo 4",p:200},{n:"Devil May Cry 3",p:300},{n:"Bully",p:350},{n:"Okami",p:400},{n:"Ratchet & Clank: Up Your Arsenal",p:350},{n:"Sly 2: Band of Thieves",p:350},{n:"Jak II",p:300}],
-    "Sega Genesis": [{n:"Sonic the Hedgehog 2",p:250},{n:"Streets of Rage 2",p:700},{n:"Gunstar Heroes",p:1500},{n:"Phantasy Star IV",p:1800},{n:"Shinobi III",p:600},{n:"Castlevania: Bloodlines",p:2000},{n:"Contra: Hard Corps",p:2200},{n:"Mortal Kombat II",p:350},{n:"Earthworm Jim",p:450},{n:"Comix Zone",p:600},{n:"Aladdin",p:300},{n:"Golden Axe",p:400},{n:"Vectorman",p:300},{n:"Beyond Oasis",p:800},{n:"Ristar",p:1000}],
-    "Xbox 360": [{n:"Halo 3",p:200},{n:"Gears of War 2",p:200},{n:"Mass Effect 2",p:250},{n:"Red Dead Redemption",p:300},{n:"The Elder Scrolls V: Skyrim",p:250},{n:"Bioshock",p:250},{n:"Grand Theft Auto IV",p:300},{n:"Fallout 3",p:250},{n:"Call of Duty: Modern Warfare 2",p:200},{n:"Left 4 Dead 2",p:350},{n:"Batman: Arkham City",p:250},{n:"Forza Horizon",p:350},{n:"Alan Wake",p:300},{n:"Dead Space",p:250},{n:"Fable II",p:200}],
-    "PlayStation 3 (PS3)": [{n:"The Last of Us",p:300},{n:"Uncharted 2: Among Thieves",p:250},{n:"Metal Gear Solid 4: Guns of the Patriots",p:250},{n:"God of War III",p:250},{n:"Demon's Souls",p:400},{n:"Infamous 2",p:250},{n:"LittleBigPlanet 2",p:250},{n:"Killzone 2",p:200},{n:"Resistance 3",p:250},{n:"Heavy Rain",p:250},{n:"Journey",p:400},{n:"Persona 5",p:450},{n:"Ratchet & Clank Future: A Crack in Time",p:350},{n:"Gran Turismo 5",p:200},{n:"MotorStorm",p:200}]
+// 3. ENRUTADOR INTELIGENTE DE BIBLIOTECAS 100% REALES
+const libreriasReales = {
+    ps5: [
+        {n:"Marvel's Spider-Man 2",p:1200},{n:"Final Fantasy XVI",p:1100},{n:"Demon's Souls",p:900},{n:"Ratchet & Clank: Rift Apart",p:800},{n:"Stellar Blade",p:1300},
+        {n:"Astro Bot",p:1200},{n:"Helldivers 2",p:800},{n:"Rise of the Ronin",p:1200},{n:"Horizon Forbidden West",p:900},{n:"God of War Ragnarök",p:1000},
+        {n:"Gran Turismo 7",p:900},{n:"The Last of Us Part I",p:1000},{n:"Ghost of Tsushima Director's Cut",p:800},{n:"Returnal",p:700},{n:"Death Stranding 2",p:1400}
+    ],
+    ps4: [
+        {n:"God of War",p:350},{n:"The Last of Us Part II",p:500},{n:"Marvel's Spider-Man",p:400},{n:"Red Dead Redemption 2",p:450},{n:"Bloodborne",p:350},
+        {n:"Uncharted 4: A Thief's End",p:300},{n:"Horizon Zero Dawn",p:300},{n:"Persona 5",p:350},{n:"The Witcher 3: Wild Hunt",p:400},{n:"Ghost of Tsushima",p:500},
+        {n:"Grand Theft Auto V",p:350},{n:"Final Fantasy VII Remake",p:450},{n:"God of War Ragnarök (PS4)",p:800},{n:"Sekiro: Shadows Die Twice",p:600},{n:"Resident Evil 2 Remake",p:450}
+    ],
+    ps3: [
+        {n:"The Last of Us",p:300},{n:"Uncharted 2: Among Thieves",p:250},{n:"Metal Gear Solid 4",p:250},{n:"God of War III",p:250},{n:"Demon's Souls",p:400},
+        {n:"Infamous 2",p:250},{n:"LittleBigPlanet 2",p:250},{n:"Killzone 2",p:200},{n:"Resistance 3",p:250},{n:"Heavy Rain",p:250},
+        {n:"Journey",p:400},{n:"Persona 5 (PS3)",p:450},{n:"Ratchet & Clank Future",p:350},{n:"Gran Turismo 5",p:200},{n:"MotorStorm",p:200}
+    ],
+    ps2: [
+        {n:"GTA: San Andreas",p:300},{n:"Metal Gear Solid 3",p:400},{n:"Shadow of the Colossus",p:450},{n:"Silent Hill 2",p:2000},{n:"Resident Evil 4",p:350},
+        {n:"God of War II",p:300},{n:"Final Fantasy X",p:250},{n:"Kingdom Hearts",p:300},{n:"Gran Turismo 4",p:200},{n:"Devil May Cry 3",p:300},
+        {n:"Bully",p:350},{n:"Okami",p:400},{n:"Ratchet & Clank: Up Your Arsenal",p:350},{n:"Sly 2: Band of Thieves",p:350},{n:"Jak II",p:300}
+    ],
+    ps1: [
+        {n:"Metal Gear Solid",p:600},{n:"Final Fantasy VII",p:700},{n:"Castlevania: Symphony of the Night",p:2000},{n:"Resident Evil 2",p:650},{n:"Crash Bandicoot",p:500},
+        {n:"Tekken 3",p:400},{n:"Silent Hill",p:2500},{n:"Gran Turismo 2",p:300},{n:"Spyro the Dragon",p:450},{n:"Tomb Raider",p:350},
+        {n:"Tony Hawk's Pro Skater 2",p:300},{n:"Chrono Cross",p:600},{n:"Street Fighter Alpha 3",p:700},{n:"Suikoden II",p:3000},{n:"Twisted Metal 2",p:400}
+    ],
+    psp: [
+        {n:"God of War: Ghost of Sparta",p:600},{n:"Metal Gear Solid: Peace Walker",p:500},{n:"GTA: Vice City Stories",p:400},{n:"Crisis Core: Final Fantasy VII",p:500},{n:"Persona 3 Portable",p:1200},
+        {n:"Kingdom Hearts: Birth by Sleep",p:400},{n:"Monster Hunter Freedom Unite",p:300},{n:"Daxter",p:250},{n:"Patapon",p:300},{n:"LocoRoco",p:250},
+        {n:"Dissidia 012 Final Fantasy",p:400},{n:"Tekken 6",p:350},{n:"Silent Hill: Origins",p:600},{n:"Castlevania: Dracula X Chronicles",p:800},{n:"Lumines",p:200}
+    ],
+    psvita: [
+        {n:"Persona 4 Golden",p:800},{n:"Uncharted: Golden Abyss",p:600},{n:"Gravity Rush",p:700},{n:"Killzone: Mercenary",p:600},{n:"Tearaway",p:500},
+        {n:"Danganronpa: Trigger Happy Havoc",p:600},{n:"Final Fantasy X/X-2 HD Remaster",p:500},{n:"Soul Sacrifice Delta",p:700},{n:"Freedom Wars",p:400},{n:"Muramasa Rebirth",p:900},
+        {n:"Ys VIII: Lacrimosa of DANA",p:1000},{n:"Dragon's Crown",p:600},{n:"LittleBigPlanet PS Vita",p:400},{n:"Wipeout 2048",p:500},{n:"Spelunky",p:400}
+    ],
+    xbox_series: [
+        {n:"Halo Infinite",p:800},{n:"Forza Horizon 5",p:900},{n:"Starfield",p:1000},{n:"Microsoft Flight Simulator",p:900},{n:"Senua's Saga: Hellblade II",p:900},
+        {n:"Sea of Thieves",p:600},{n:"Gears 5",p:400},{n:"Hi-Fi Rush",p:500},{n:"Grounded",p:600},{n:"Diablo IV",p:1200},
+        {n:"DOOM Eternal",p:500},{n:"Cyberpunk 2077 (Next Gen)",p:800},{n:"Resident Evil 4 Remake",p:1000},{n:"Hogwarts Legacy",p:1100},{n:"Ori and the Will of the Wisps",p:400}
+    ],
+    xbox_one: [
+        {n:"Halo: The Master Chief Collection",p:400},{n:"Forza Horizon 4",p:500},{n:"Gears of War 4",p:300},{n:"Quantum Break",p:300},{n:"Sunset Overdrive",p:250},
+        {n:"Halo 5: Guardians",p:250},{n:"Forza Motorsport 7",p:450},{n:"Ryse: Son of Rome",p:250},{n:"State of Decay 2",p:300},{n:"Killer Instinct",p:250},
+        {n:"Rare Replay",p:300},{n:"Cuphead",p:350},{n:"Titanfall 2",p:250},{n:"Dead Rising 3",p:300},{n:"Ori and the Blind Forest",p:300}
+    ],
+    xbox_360: [
+        {n:"Halo 3",p:200},{n:"Gears of War 2",p:200},{n:"Mass Effect 2",p:250},{n:"Red Dead Redemption",p:300},{n:"The Elder Scrolls V: Skyrim",p:250},
+        {n:"Bioshock",p:250},{n:"Grand Theft Auto IV",p:300},{n:"Fallout 3",p:250},{n:"Call of Duty: Modern Warfare 2",p:200},{n:"Left 4 Dead 2",p:350},
+        {n:"Batman: Arkham City",p:250},{n:"Forza Horizon",p:350},{n:"Alan Wake",p:300},{n:"Dead Space",p:250},{n:"Fable II",p:200}
+    ],
+    xbox_orig: [
+        {n:"Halo: Combat Evolved",p:300},{n:"Halo 2",p:350},{n:"Fable",p:250},{n:"Star Wars: Knights of the Old Republic",p:400},{n:"Ninja Gaiden Black",p:350},
+        {n:"Tom Clancy's Splinter Cell",p:200},{n:"Forza Motorsport",p:250},{n:"Project Gotham Racing 2",p:200},{n:"Jade Empire",p:300},{n:"Crimson Skies",p:250},
+        {n:"The Chronicles of Riddick",p:300},{n:"Doom 3",p:250},{n:"Jet Set Radio Future",p:600},{n:"Shenmue II",p:400},{n:"Burnout 3: Takedown",p:300}
+    ],
+    switch: [
+        {n:"Zelda: Breath of the Wild",p:900},{n:"Super Mario Odyssey",p:900},{n:"Mario Kart 8 Deluxe",p:1000},{n:"Super Smash Bros. Ultimate",p:1100},{n:"Animal Crossing: New Horizons",p:900},
+        {n:"Pokémon Legends: Arceus",p:800},{n:"Metroid Dread",p:750},{n:"Splatoon 3",p:900},{n:"Xenoblade Chronicles 3",p:800},{n:"Fire Emblem: Three Houses",p:850},
+        {n:"Luigi's Mansion 3",p:800},{n:"Super Mario Bros. Wonder",p:1000},{n:"Monster Hunter Rise",p:600},{n:"Zelda: Tears of the Kingdom",p:1100},{n:"Mario Kart 9 (Switch 2)",p:1500}
+    ],
+    wiiu: [
+        {n:"Zelda: Breath of the Wild (Wii U)",p:800},{n:"Mario Kart 8",p:500},{n:"Super Mario 3D World",p:400},{n:"Super Smash Bros. for Wii U",p:500},{n:"Splatoon",p:300},
+        {n:"Bayonetta 2",p:600},{n:"Donkey Kong Country: Tropical Freeze",p:400},{n:"Pikmin 3",p:400},{n:"Xenoblade Chronicles X",p:800},{n:"Zelda: The Wind Waker HD",p:700},
+        {n:"Super Mario Maker",p:400},{n:"Captain Toad: Treasure Tracker",p:300},{n:"Yoshi's Woolly World",p:400},{n:"Paper Mario: Color Splash",p:600},{n:"Star Fox Zero",p:300}
+    ],
+    wii: [
+        {n:"Super Mario Galaxy",p:500},{n:"Super Smash Bros. Brawl",p:400},{n:"Mario Kart Wii",p:600},{n:"Zelda: Twilight Princess",p:500},{n:"Wii Sports Resort",p:400},
+        {n:"Metroid Prime Trilogy",p:1500},{n:"Super Mario Galaxy 2",p:600},{n:"Donkey Kong Country Returns",p:400},{n:"Zelda: Skyward Sword",p:600},{n:"Xenoblade Chronicles",p:700},
+        {n:"Resident Evil 4: Wii Edition",p:300},{n:"Punch-Out!!",p:500},{n:"Fire Emblem: Radiant Dawn",p:1800},{n:"Kirby's Return to Dream Land",p:500},{n:"Super Paper Mario",p:400}
+    ],
+    gamecube: [
+        {n:"Super Smash Bros. Melee",p:1200},{n:"Zelda: The Wind Waker",p:1000},{n:"Super Mario Sunshine",p:900},{n:"Mario Kart: Double Dash!!",p:1100},{n:"Luigi's Mansion",p:900},
+        {n:"Metroid Prime",p:800},{n:"Resident Evil 4",p:500},{n:"Paper Mario: The Thousand-Year Door",p:1500},{n:"Pikmin 2",p:1200},{n:"F-Zero GX",p:1000},
+        {n:"Star Fox Adventures",p:600},{n:"Animal Crossing",p:900},{n:"Fire Emblem: Path of Radiance",p:3500},{n:"Eternal Darkness",p:1200},{n:"Metal Gear Solid: The Twin Snakes",p:1500}
+    ],
+    n64: [
+        {n:"Super Mario 64",p:600},{n:"Zelda: Ocarina of Time",p:800},{n:"GoldenEye 007",p:500},{n:"Zelda: Majora's Mask",p:900},{n:"Mario Kart 64",p:700},
+        {n:"Super Smash Bros.",p:800},{n:"Banjo-Kazooie",p:600},{n:"Paper Mario",p:1500},{n:"Star Fox 64",p:450},{n:"Donkey Kong 64",p:550},
+        {n:"Perfect Dark",p:400},{n:"Diddy Kong Racing",p:450},{n:"Pokemon Stadium",p:500},{n:"Conker's Bad Fur Day",p:2500},{n:"Wave Race 64",p:300}
+    ],
+    snes: [
+        {n:"Super Mario World",p:400},{n:"Zelda: A Link to the Past",p:700},{n:"Super Metroid",p:1200},{n:"Chrono Trigger",p:3500},{n:"Donkey Kong Country",p:500},
+        {n:"Street Fighter II",p:350},{n:"Final Fantasy III (VI)",p:1200},{n:"Super Mario Kart",p:600},{n:"EarthBound",p:5000},{n:"Secret of Mana",p:900},
+        {n:"Mega Man X",p:600},{n:"Super Mario RPG",p:1500},{n:"Super Mario World 2: Yoshi's Island",p:600},{n:"Super Castlevania IV",p:1000},{n:"Star Fox",p:350}
+    ],
+    nes: [
+        {n:"Super Mario Bros.",p:300},{n:"Super Mario Bros. 3",p:450},{n:"The Legend of Zelda",p:600},{n:"Metroid",p:500},{n:"Mega Man 2",p:600},
+        {n:"Castlevania",p:550},{n:"Contra",p:700},{n:"DuckTales",p:400},{n:"Mike Tyson's Punch-Out!!",p:500},{n:"Final Fantasy",p:600},
+        {n:"Zelda II: The Adventure of Link",p:450},{n:"Excitebike",p:250},{n:"Double Dragon",p:350},{n:"Kid Icarus",p:450},{n:"Tetris",p:200}
+    ],
+    n3ds: [
+        {n:"Pokémon Omega Rubí/Alfa Zafiro",p:800},{n:"Zelda: Ocarina of Time 3D",p:600},{n:"Super Mario 3D Land",p:400},{n:"Fire Emblem Awakening",p:800},{n:"Animal Crossing: New Leaf",p:500},
+        {n:"Mario Kart 7",p:400},{n:"Zelda: A Link Between Worlds",p:600},{n:"Pokémon Sol/Luna",p:500},{n:"Super Smash Bros. for 3DS",p:500},{n:"Luigi's Mansion: Dark Moon",p:400},
+        {n:"Bravely Default",p:700},{n:"Kid Icarus: Uprising",p:900},{n:"Monster Hunter 4 Ultimate",p:500},{n:"Xenoblade Chronicles 3D",p:600},{n:"Metroid: Samus Returns",p:700}
+    ],
+    nds: [
+        {n:"Pokémon HeartGold/SoulSilver",p:2500},{n:"Mario Kart DS",p:500},{n:"New Super Mario Bros.",p:400},{n:"Zelda: Phantom Hourglass",p:600},{n:"Chrono Trigger DS",p:1500},
+        {n:"Animal Crossing: Wild World",p:500},{n:"Castlevania: Dawn of Sorrow",p:1000},{n:"Pokémon Blanco/Negro",p:1500},{n:"Mario & Luigi: Bowser's Inside Story",p:600},{n:"Dragon Quest IX",p:800},
+        {n:"Phoenix Wright: Ace Attorney",p:500},{n:"Professor Layton",p:500},{n:"GTA: Chinatown Wars",p:600},{n:"Metroid Prime Hunters",p:500},{n:"Advance Wars: Dual Strike",p:800}
+    ],
+    gba: [
+        {n:"Pokémon Esmeralda",p:1500},{n:"Zelda: The Minish Cap",p:1200},{n:"Metroid Fusion",p:1000},{n:"Castlevania: Aria of Sorrow",p:1800},{n:"Advance Wars",p:800},
+        {n:"Fire Emblem",p:1200},{n:"Golden Sun",p:800},{n:"Mario & Luigi: Superstar Saga",p:700},{n:"Super Mario Advance 4",p:600},{n:"Final Fantasy Tactics Advance",p:800},
+        {n:"WarioWare, Inc.",p:500},{n:"Mega Man Zero",p:600},{n:"Sonic Advance",p:400},{n:"Mother 3",p:1000},{n:"Kingdom Hearts: Chain of Memories",p:500}
+    ],
+    gb: [
+        {n:"Pokémon Rojo/Azul",p:800},{n:"Tetris",p:200},{n:"Zelda: Link's Awakening",p:600},{n:"Super Mario Land 2",p:400},{n:"Pokémon Amarillo",p:900},
+        {n:"Donkey Kong",p:350},{n:"Wario Land",p:400},{n:"Metroid II",p:500},{n:"Kirby's Dream Land",p:300},{n:"Pokémon Oro/Plata",p:800},
+        {n:"Super Mario Land",p:300},{n:"Castlevania II: Belmont's Revenge",p:800},{n:"Mega Man V",p:1500},{n:"Gargoyle's Quest",p:500},{n:"Final Fantasy Adventure",p:600}
+    ],
+    pc: [
+        {n:"Cyberpunk 2077",p:800},{n:"Elden Ring",p:900},{n:"Baldur's Gate 3",p:1000},{n:"The Witcher 3: Wild Hunt",p:400},{n:"Red Dead Redemption 2",p:600},
+        {n:"Grand Theft Auto V",p:400},{n:"Stardew Valley",p:250},{n:"Hades",p:300},{n:"Vampire Survivors",p:100},{n:"Hollow Knight",p:250},
+        {n:"Dave the Diver",p:300},{n:"Palworld",p:450},{n:"Persona 3 Reload",p:1000},{n:"Fallout 4",p:300},{n:"Left 4 Dead 2",p:150}
+    ],
+    dreamcast: [
+        {n:"Shenmue",p:700},{n:"Sonic Adventure",p:500},{n:"Crazy Taxi",p:400},{n:"Jet Set Radio",p:600},{n:"Soulcalibur",p:500},
+        {n:"Phantasy Star Online",p:600},{n:"Resident Evil Code: Veronica",p:550},{n:"Skies of Arcadia",p:1200},{n:"Marvel vs. Capcom 2",p:1500},{n:"Power Stone 2",p:1000},
+        {n:"Ikaruga",p:800},{n:"Virtua Tennis",p:300},{n:"Space Channel 5",p:400},{n:"Sonic Adventure 2",p:600},{n:"ChuChu Rocket!",p:250}
+    ],
+    saturn: [
+        {n:"Panzer Dragoon Saga",p:5000},{n:"NiGHTS into Dreams",p:600},{n:"Virtua Fighter 2",p:300},{n:"Sega Rally Championship",p:300},{n:"Shining Force III",p:1500},
+        {n:"Guardian Heroes",p:1200},{n:"Radiant Silvergun",p:2500},{n:"Burning Rangers",p:1500},{n:"Daytona USA",p:300},{n:"X-Men vs. Street Fighter",p:800},
+        {n:"Sonic Jam",p:700},{n:"Albert Odyssey",p:1000},{n:"Dragon Force",p:1200},{n:"Saturn Bomberman",p:1000},{n:"Astal",p:800}
+    ],
+    genesis: [
+        {n:"Sonic the Hedgehog 2",p:250},{n:"Streets of Rage 2",p:700},{n:"Gunstar Heroes",p:1500},{n:"Phantasy Star IV",p:1800},{n:"Shinobi III",p:600},
+        {n:"Castlevania: Bloodlines",p:2000},{n:"Contra: Hard Corps",p:2200},{n:"Mortal Kombat II",p:350},{n:"Earthworm Jim",p:450},{n:"Comix Zone",p:600},
+        {n:"Aladdin",p:300},{n:"Golden Axe",p:400},{n:"Vectorman",p:300},{n:"Beyond Oasis",p:800},{n:"Ristar",p:1000}
+    ],
+    mastersystem: [
+        {n:"Alex Kidd in Miracle World",p:300},{n:"Phantasy Star",p:800},{n:"Wonder Boy III: The Dragon's Trap",p:600},{n:"Sonic the Hedgehog",p:400},{n:"Fantasy Zone",p:350},
+        {n:"OutRun",p:300},{n:"Space Harrier",p:300},{n:"Golden Axe Warrior",p:1500},{n:"Asterix",p:250},{n:"Castle of Illusion",p:400},
+        {n:"Ninja Gaiden",p:500},{n:"R-Type",p:400},{n:"Shinobi",p:350},{n:"Psycho Fox",p:400},{n:"Mickey Mouse",p:300}
+    ],
+    neogeo: [
+        {n:"Metal Slug 3",p:3500},{n:"The King of Fighters '98",p:2000},{n:"Garou: Mark of the Wolves",p:4000},{n:"Samurai Shodown II",p:1500},{n:"Fatal Fury Special",p:1200},
+        {n:"Sengoku 3",p:3000},{n:"The Last Blade 2",p:3500},{n:"Blazing Star",p:4000},{n:"Pulstar",p:4500},{n:"Neo Turf Masters",p:2500},
+        {n:"Windjammers",p:3000},{n:"Real Bout Fatal Fury 2",p:2000},{n:"Shock Troopers",p:2500},{n:"Art of Fighting 3",p:1800},{n:"Twinkle Star Sprites",p:5000}
+    ],
+    retro_arcade: [
+        {n:"Pac-Man",p:200},{n:"Pitfall!",p:250},{n:"Space Invaders",p:200},{n:"Asteroids",p:150},{n:"Missile Command",p:150},
+        {n:"Defender",p:150},{n:"Yars' Revenge",p:200},{n:"Frogger",p:200},{n:"Centipede",p:150},{n:"Adventure",p:300},
+        {n:"River Raid",p:250},{n:"Kaboom!",p:200},{n:"Breakout",p:150},{n:"Combat",p:100},{n:"Pong",p:500}
+    ]
 };
 
+// LÓGICA DE DETECCIÓN INTELIGENTE DE FAMILIA DE CONSOLA
 function getTop15Games(consoleName) {
-    if (juegosBaseReales[consoleName]) return juegosBaseReales[consoleName];
+    let n = consoleName.toLowerCase();
     
-    const preciosBase = [450, 350, 600, 250, 800, 500, 300, 700, 900, 400, 200, 1000, 350, 550, 650];
-    const titulosFalsos = ["Greatest Hits Vol. 1", "Adventure Quest", "Racing Championship", "Combat Zone", "RPG Chronicles", "Arcade Classics", "Extreme Sports", "Mystery Legends", "Super Heroes", "Galactic Warfare", "Final Showdown", "Tactics Master", "World Cup", "Retro Remix", "Ultimate Collection"];
+    // PlayStation
+    if (n.includes("playstation 5") || n.includes("ps5")) return libreriasReales.ps5;
+    if (n.includes("playstation 4") || n.includes("ps4")) return libreriasReales.ps4;
+    if (n.includes("playstation 3") || n.includes("ps3")) return libreriasReales.ps3;
+    if (n.includes("playstation 2") || n.includes("ps2")) return libreriasReales.ps2;
+    if (n.includes("playstation") || n.includes("ps1")) return libreriasReales.ps1;
+    if (n.includes("vita") || n.includes("pstv")) return libreriasReales.psvita;
+    if (n.includes("psp")) return libreriasReales.psp;
 
-    return titulosFalsos.map((titulo, i) => ({ n: titulo, p: preciosBase[i] }));
+    // Xbox
+    if (n.includes("series x") || n.includes("series s")) return libreriasReales.xbox_series;
+    if (n.includes("xbox one")) return libreriasReales.xbox_one;
+    if (n.includes("xbox 360")) return libreriasReales.xbox_360;
+    if (n.includes("xbox")) return libreriasReales.xbox_orig;
+
+    // Nintendo Sobremesa
+    if (n.includes("switch")) return libreriasReales.switch;
+    if (n.includes("wii u")) return libreriasReales.wiiu;
+    if (n.includes("wii")) return libreriasReales.wii;
+    if (n.includes("gamecube")) return libreriasReales.gamecube;
+    if (n.includes("nintendo 64") || n.includes("n64")) return libreriasReales.n64;
+    if (n.includes("snes") || n.includes("super nintendo")) return libreriasReales.snes;
+    if (n.includes("nes") || n.includes("famicom")) return libreriasReales.nes;
+
+    // Nintendo Portátil
+    if (n.includes("3ds") || n.includes("2ds")) return libreriasReales.n3ds;
+    if (n.includes("ds")) return libreriasReales.nds;
+    if (n.includes("advance") || n.includes("gba") || n.includes("micro")) return libreriasReales.gba;
+    if (n.includes("game boy") || n.includes("color") || n.includes("light")) return libreriasReales.gb;
+
+    // PC Gaming Portátil
+    if (n.includes("steam") || n.includes("rog ally") || n.includes("legion") || n.includes("claw")) return libreriasReales.pc;
+
+    // Sega
+    if (n.includes("dreamcast")) return libreriasReales.dreamcast;
+    if (n.includes("saturn")) return libreriasReales.saturn;
+    if (n.includes("genesis") || n.includes("sega cd") || n.includes("32x") || n.includes("mega drive")) return libreriasReales.genesis;
+    if (n.includes("master system") || n.includes("mark iii") || n.includes("sg-1000")) return libreriasReales.mastersystem;
+
+    // Neo Geo
+    if (n.includes("neo geo")) return libreriasReales.neogeo;
+    
+    // Por Defecto: Clásicos Arcade de los 70s y 80s (Atari, Coleco, Magnavox)
+    return libreriasReales.retro_arcade;
 }
 
 // 4. INYECCIÓN DEL DOM
