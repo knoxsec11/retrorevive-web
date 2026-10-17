@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RetroRevive - Restauración, mantenimiento y mods de consolas de videojuegos retro.">
+    <meta name="description" content="RetroRevive - Restauración, mantenimiento y mods de consolas retro.">
     <title>RetroRevive | Restauración de Consolas</title>
     
     <!-- Fuentes de Google e Íconos -->
@@ -12,11 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- CONEXIÓN AL DISEÑO CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="scanline"></div>
+    
+    <!-- Notificación flotante -->
     <div id="toast" class="toast"></div>
     
     <header>
@@ -36,7 +39,6 @@
                 <h3>MANTENIMIENTO PROFUNDO</h3>
                 <p>Limpieza de placa, cambio de pasta térmica, y revisión de soldaduras.</p>
                 <span class="price">$450.00</span>
-                <!-- CONTENEDOR CON ID UNICO -->
                 <div id="btn-mantenimiento">
                     <button class="add-btn" onclick="changeQty('btn-mantenimiento', 'Mantenimiento Profundo', 450, 1)">+ COTIZAR</button>
                 </div>
@@ -77,20 +79,45 @@
         </div>
     </div>
 
+    <!-- MODAL DE CHECKOUT (Formulario personalizado) -->
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 style="color: var(--neon-cyan); margin-top: 0; font-size: 1.2rem;">DATOS DE CONTACTO</h2>
+            
+            <div class="input-group">
+                <label for="client-name">> TU NOMBRE O ALIAS:</label>
+                <input type="text" id="client-name" placeholder="Ej. Juan Perez" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="client-phone">> TELÉFONO DE CONTACTO:</label>
+                <input type="tel" id="client-phone" placeholder="Ej. 667 123 4567" required>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeModal()">CANCELAR</button>
+                <button class="btn-confirm" onclick="processOrder()">ENVIAR PEDIDO</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 RetroRevive. Sector Loma de Rodriguera, Culiacán.</p>
     </footer>
 
+    <!-- Barra inferior del carrito -->
     <div class="cart-bar" id="cart-bar">
         <div class="cart-info">
             TOTAL: $<span id="total-price">0.00</span><br>
             <small id="items-count">0 SERVICIOS</small>
         </div>
-        <button class="checkout-btn" onclick="sendOrder()">
+        <button class="checkout-btn" onclick="openModal()">
             <i class="fa-brands fa-whatsapp"></i> ENVIAR
         </button>
     </div>
 
+    <!-- CONEXIÓN A LA LÓGICA JS -->
     <script src="script.js"></script>
+
 </body>
 </html>
