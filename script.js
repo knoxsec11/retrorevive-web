@@ -2,6 +2,8 @@ let cart = JSON.parse(localStorage.getItem('retrorevive_cart')) || [];
 let total = 0;
 const BUSINESS_PHONE = "526675912648"; 
 let viewHistory = ['consolas'];
+let isAscending = true; // true = Más antiguo a más nuevo (▲), false = Más nuevo a más antiguo (▼)
+let searchQuery = "";
 
 // 1. LAS 100 FRASES ÉPICAS EN ESPAÑOL
 const slogans = [
@@ -222,7 +224,7 @@ const consolasDB = [
     { name: "Nintendo Switch 2", year: 2025, price: 9500, img: "img/switch2.jpg", inc: ["Consola Switch 2", "Joy-Cons magnéticos", "Dock", "Cargador y HDMI"] }
 ];
 
-// 3. ENRUTADOR INTELIGENTE DE BIBLIOTECAS 100% REALES
+// 3. LIBRERÍAS DE JUEGOS REALES POR FAMILIA
 const libreriasReales = {
     ps5: [
         {n:"Marvel's Spider-Man 2",p:1200},{n:"Final Fantasy XVI",p:1100},{n:"Demon's Souls",p:900},{n:"Ratchet & Clank: Rift Apart",p:800},{n:"Stellar Blade",p:1300},
@@ -371,11 +373,9 @@ const libreriasReales = {
     ]
 };
 
-// LÓGICA DE DETECCIÓN INTELIGENTE DE FAMILIA DE CONSOLA
 function getTop15Games(consoleName) {
     let n = consoleName.toLowerCase();
     
-    // PlayStation
     if (n.includes("playstation 5") || n.includes("ps5")) return libreriasReales.ps5;
     if (n.includes("playstation 4") || n.includes("ps4")) return libreriasReales.ps4;
     if (n.includes("playstation 3") || n.includes("ps3")) return libreriasReales.ps3;
@@ -384,13 +384,11 @@ function getTop15Games(consoleName) {
     if (n.includes("vita") || n.includes("pstv")) return libreriasReales.psvita;
     if (n.includes("psp")) return libreriasReales.psp;
 
-    // Xbox
     if (n.includes("series x") || n.includes("series s")) return libreriasReales.xbox_series;
     if (n.includes("xbox one")) return libreriasReales.xbox_one;
     if (n.includes("xbox 360")) return libreriasReales.xbox_360;
     if (n.includes("xbox")) return libreriasReales.xbox_orig;
 
-    // Nintendo Sobremesa
     if (n.includes("switch")) return libreriasReales.switch;
     if (n.includes("wii u")) return libreriasReales.wiiu;
     if (n.includes("wii")) return libreriasReales.wii;
@@ -399,29 +397,49 @@ function getTop15Games(consoleName) {
     if (n.includes("snes") || n.includes("super nintendo")) return libreriasReales.snes;
     if (n.includes("nes") || n.includes("famicom")) return libreriasReales.nes;
 
-    // Nintendo Portátil
     if (n.includes("3ds") || n.includes("2ds")) return libreriasReales.n3ds;
     if (n.includes("ds")) return libreriasReales.nds;
     if (n.includes("advance") || n.includes("gba") || n.includes("micro")) return libreriasReales.gba;
     if (n.includes("game boy") || n.includes("color") || n.includes("light")) return libreriasReales.gb;
 
-    // PC Gaming Portátil
     if (n.includes("steam") || n.includes("rog ally") || n.includes("legion") || n.includes("claw")) return libreriasReales.pc;
 
-    // Sega
     if (n.includes("dreamcast")) return libreriasReales.dreamcast;
     if (n.includes("saturn")) return libreriasReales.saturn;
     if (n.includes("genesis") || n.includes("sega cd") || n.includes("32x") || n.includes("mega drive")) return libreriasReales.genesis;
     if (n.includes("master system") || n.includes("mark iii") || n.includes("sg-1000")) return libreriasReales.mastersystem;
 
-    // Neo Geo
     if (n.includes("neo geo")) return libreriasReales.neogeo;
     
-    // Por Defecto: Clásicos Arcade de los 70s y 80s (Atari, Coleco, Magnavox)
     return libreriasReales.retro_arcade;
 }
 
-// 4. INYECCIÓN DEL DOM
+// 4. LÓGICA DE ORDENAMIENTO Y BÚSQUEDA
+function toggleSortOrder() {
+    isAscending = !isAscending;
+    document.getElementById('sort-arrow').innerText = isAscending ? "▲" : "▼";
+    renderCurrentView();
+}
+
+function handleSearchInput() {
+    searchQuery = document.getElementById('catalog-search').value.toLowerCase().trim();
+    renderCurrentView();
+}
+
+function renderCurrentView() {
+    const activeTab = viewHistory[viewHistory.length - 1];
+    if (activeTab === 'consolas' || activeTab === 'consolas-view') {
+        renderConsolas();
+    } else if (activeTab === 'juegos') {
+        renderJuegosConsolas();
+    } else if (activeTab === 'juegos-detalle') {
+        let titleText = document.getElementById('juegos-consola-titulo').innerText;
+        let consoleName = titleText.replace("TOP 15 JUEGOS: ", "");
+        renderTopJuegosFiltered(consoleName);
+    }
+}
+
+// 5. INYECCIÓN Y RENDERIZADO DEL DOM
 document.addEventListener('DOMContentLoaded', () => {
     setRandomSlogan();
     renderConsolas();
@@ -435,9 +453,22 @@ function getImgSrc(imgName) {
 
 function renderConsolas() {
     const container = document.getElementById('catalogo-consolas');
+    
+    // Filtrado por búsqueda
+    let list = consolasDB.filter(c => c.name.toLowerCase().includes(searchQuery) || c.year.toString().includes(searchQuery));
+    
+    // Ordenamiento por año
+    list.sort((a, b) => isAscending ? a.year - b.year : b.year - a.year);
+
+    if (list.length === 0) {
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #a0aec0; padding: 2rem;">No se encontraron consolas con el término "${searchQuery}".</p>`;
+        return;
+    }
+
     let html = '';
-    consolasDB.forEach((c, idx) => {
-        let btnId = `btn-con-${idx}`;
+    list.forEach((c) => {
+        let origIdx = consolasDB.findIndex(x => x.name === c.name);
+        let btnId = `btn-con-${origIdx}`;
         let incItems = c.inc.map(item => `<li>${item}</li>`).join('');
 
         html += `
@@ -460,10 +491,17 @@ function renderConsolas() {
 
 function renderJuegosConsolas() {
     const container = document.getElementById('catalogo-juegos-consolas');
-    let sorted = [...consolasDB].sort((a, b) => b.year - a.year);
-    let html = '';
+    
+    let list = consolasDB.filter(c => c.name.toLowerCase().includes(searchQuery) || c.year.toString().includes(searchQuery));
+    list.sort((a, b) => isAscending ? a.year - b.year : b.year - a.year);
 
-    sorted.forEach((c) => {
+    if (list.length === 0) {
+        container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #a0aec0; padding: 2rem;">No se encontraron categorías de juegos con el término "${searchQuery}".</p>`;
+        return;
+    }
+
+    let html = '';
+    list.forEach((c) => {
         html += `
         <div class="card" style="cursor:pointer; padding-bottom: 25px;" onclick="openTopJuegos('${c.name.replace(/'/g, "\\'")}')">
             <img ${getImgSrc(c.img)} alt="${c.name}" class="static-image">
@@ -481,12 +519,28 @@ function openTopJuegos(consoleName) {
     document.getElementById('juegos-consola-titulo').innerText = `TOP 15 JUEGOS: ${consoleName.toUpperCase()}`;
     
     document.getElementById('back-bar').style.display = 'block';
-    viewHistory.push('juegos-detalle');
+    if (viewHistory[viewHistory.length - 1] !== 'juegos-detalle') {
+        viewHistory.push('juegos-detalle');
+    }
 
+    renderTopJuegosFiltered(consoleName);
+}
+
+function renderTopJuegosFiltered(consoleName) {
     const listContainer = document.getElementById('lista-top-juegos');
-    const games = getTop15Games(consoleName);
-    let html = '';
+    let games = getTop15Games(consoleName);
 
+    // Filtrar juegos dentro del detalle
+    if (searchQuery) {
+        games = games.filter(g => g.n.toLowerCase().includes(searchQuery));
+    }
+
+    if (games.length === 0) {
+        listContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #a0aec0; padding: 2rem;">No se encontraron títulos con el término "${searchQuery}".</p>`;
+        return;
+    }
+
+    let html = '';
     games.forEach((g, idx) => {
         let btnId = `btn-gme-${consoleName.replace(/[^a-zA-Z0-9]/g, '')}-${idx}`;
         let imgJuego = `https://placehold.co/600x400/2d3748/cbd5e0?text=JUEGO`;
@@ -503,7 +557,7 @@ function openTopJuegos(consoleName) {
     listContainer.innerHTML = html;
 }
 
-// 5. NAVEGACIÓN
+// 6. NAVEGACIÓN
 function showSection(sectionName) {
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(`tab-${sectionName}`).classList.add('active');
@@ -521,6 +575,7 @@ function showSection(sectionName) {
 
     document.getElementById('back-bar').style.display = 'none';
     viewHistory = [sectionName];
+    renderCurrentView();
 }
 
 function goBack() {
@@ -535,13 +590,14 @@ function goBack() {
     } else {
         showSection('consolas');
     }
+    renderCurrentView();
 }
 
 function goHome() {
     showSection('consolas');
 }
 
-// 6. CARRITO Y CANTIDADES
+// 7. CARRITO Y CANTIDADES
 function changeQty(containerId, productName, productPrice, delta) {
     let item = cart.find(i => i.name === productName);
     
@@ -584,9 +640,7 @@ function removeItemCompleto(productName) {
     updateCartUI();
     renderCartModalList();
     showToast("❌ Removido", "var(--accent-pink)");
-    
-    showSection(viewHistory[viewHistory.length - 1]);
-    if(viewHistory[viewHistory.length - 1] === 'consolas') renderConsolas();
+    renderCurrentView();
 }
 
 function updateCartUI() {
@@ -605,7 +659,7 @@ function updateCartUI() {
     }
 }
 
-// 7. MODALES Y CONTACTO
+// 8. MODALES Y CONTACTO
 function showToast(message, bgColor) {
     const toast = document.getElementById('toast');
     toast.innerText = message;
@@ -652,7 +706,7 @@ function backToCartModal() {
     openCartModal();
 }
 
-// 8. ENVÍO DE PEDIDO A WHATSAPP
+// 9. ENVÍO DE PEDIDO A WHATSAPP
 function processOrder() {
     const name = document.getElementById('client-name').value.trim();
     const phone = document.getElementById('client-phone').value.trim();
