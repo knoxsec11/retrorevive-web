@@ -171,7 +171,6 @@ const consolasDB = [
     { id: 10106, name: "Nintendo Switch 2", year: 2025, price: 9500, inc: ["Consola Switch 2", "Joy-Cons magnéticos", "Dock", "Cargador y HDMI"] }
 ];
 
-// 3. LIBRERÍAS DE JUEGOS AMPLIADAS A 20 TÍTULOS ESTANDARTE POR FAMILIA
 const libreriasReales = {
     ps5: [{n:"Marvel's Spider-Man 2",p:1200},{n:"Final Fantasy VII Rebirth",p:1400},{n:"Demon's Souls",p:900},{n:"Ratchet & Clank: Rift Apart",p:800},{n:"Stellar Blade",p:1300},{n:"Astro Bot",p:1200},{n:"Helldivers 2",p:800},{n:"Rise of the Ronin",p:1200},{n:"Horizon Forbidden West",p:900},{n:"God of War Ragnarök",p:1000},{n:"Gran Turismo 7",p:900},{n:"The Last of Us Part I",p:1000},{n:"Ghost of Tsushima Director's Cut",p:800},{n:"Returnal",p:700},{n:"Death Stranding 2",p:1400},{n:"Tekken 8",p:1200},{n:"Final Fantasy XVI",p:1100},{n:"Resident Evil 4 Remake",p:1000},{n:"Dead Space Remake",p:900},{n:"Dragon's Dogma 2",p:1300}],
     ps4: [{n:"God of War",p:350},{n:"The Last of Us Part II",p:500},{n:"Marvel's Spider-Man",p:400},{n:"Red Dead Redemption 2",p:450},{n:"Bloodborne",p:350},{n:"Uncharted 4: A Thief's End",p:300},{n:"Horizon Zero Dawn",p:300},{n:"Persona 5",p:350},{n:"The Witcher 3: Wild Hunt",p:400},{n:"Ghost of Tsushima",p:500},{n:"Grand Theft Auto V",p:350},{n:"Final Fantasy VII Remake",p:450},{n:"Sekiro: Shadows Die Twice",p:600},{n:"Resident Evil 2 Remake",p:450},{n:"NieR: Automata",p:400},{n:"Dark Souls III",p:400},{n:"Fallout 4",p:300},{n:"MGS V: The Phantom Pain",p:350},{n:"Crash Bandicoot N. Sane Trilogy",p:400},{n:"DOOM",p:300}],
@@ -324,8 +323,11 @@ function renderConsolas() {
 
         html += `
         <div class="card">
+            <div class="card-meta-header">
+                <span class="badge-estado">Año ${c.year}</span>
+                <span class="badge-sku">ID: ${c.id}</span>
+            </div>
             <img ${getImgSrc(c.id)} alt="${c.name}" class="static-image">
-            <span class="badge-estado">Año ${c.year}</span>
             <h3>${c.name}</h3>
             <details>
                 <summary>¿Qué incluye?</summary>
@@ -369,8 +371,11 @@ function renderJuegosConsolas() {
     list.forEach((c) => {
         html += `
         <div class="card" style="cursor:pointer; padding-bottom: 25px;" onclick="openTopJuegos('${c.name.replace(/'/g, "\\'")}')">
+            <div class="card-meta-header">
+                <span class="badge-estado">${c.year}</span>
+                <span class="badge-sku">ID: ${c.id}</span>
+            </div>
             <img ${getImgSrc(c.id)} alt="${c.name}" class="static-image">
-            <span class="badge-estado">${c.year}</span>
             <h3>${c.name}</h3>
             <p style="color: var(--accent-cyan); font-size: 0.8rem; margin-top: auto; font-weight: bold;">VER CATÁLOGO DE JUEGOS →</p>
         </div>`;
