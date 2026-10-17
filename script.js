@@ -3,176 +3,203 @@ let total = 0;
 const BUSINESS_PHONE = "526675912648"; 
 let viewHistory = ['consolas'];
 
-// GENERADOR DE IMÁGENES VECTORIALES SEGURAS
-function getConsoleSVG(name) {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" width="100%" height="100%">
-        <rect width="300" height="180" rx="12" fill="#11161d" stroke="#66fcf1" stroke-width="2"/>
-        <path d="M 40 130 L 260 130 L 240 60 L 60 60 Z" fill="#1f2833" stroke="#ff007f" stroke-width="1.5"/>
-        <circle cx="90" cy="95" r="12" fill="#66fcf1"/>
-        <circle cx="210" cy="95" r="10" fill="#ff007f"/>
-        <circle cx="230" cy="110" r="10" fill="#ff007f"/>
-        <text x="150" y="40" font-family="'Press Start 2P', monospace" font-size="10" fill="#66fcf1" text-anchor="middle">${name.substring(0, 18)}</text>
-        <text x="150" y="155" font-family="'VT323', monospace" font-size="16" fill="#45a29e" text-anchor="middle">RETRO REVIVE CONSOLE</text>
-    </svg>`;
-    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-}
-
-// CONSOLAS ORDENADAS (DE MÁS VIEJA A MÁS NUEVA PARA EL MUSEO DE CONSOLAS)
-const consolasDB = [
-    { name: "Magnavox Odyssey", year: 1972, price: 12000, inc: ["Consola Magnavox Odyssey", "2 Mandos integrados", "6 Cartuchos de circuitos", "Set de Overlays de pantalla"] },
-    { name: "Home Pong", year: 1975, price: 3500, inc: ["Consola Home Pong Original", "Controladores integrados", "Cable RF para TV"] },
-    { name: "Coleco Telstar", year: 1976, price: 2500, inc: ["Consola Coleco Telstar", "Paddles integrados", "Eliminador de corriente"] },
-    { name: "Fairchild Channel F", year: 1976, price: 4000, inc: ["Consola Channel F", "2 Joysticks con rotación 8 direcciones", "Cable de video"] },
-    { name: "RCA Studio II", year: 1977, price: 3000, inc: ["Consola RCA Studio II", "Teclados numéricos en carcasa", "Cable de antena"] },
-    { name: "Atari 2600", year: 1977, price: 1500, inc: ["Consola Atari 2600 CX2600", "1 Joystick CX40", "1 Juego Combat", "Adaptador AC"] },
-    { name: "Bally Astrocade", year: 1977, price: 5000, desc: "Consola, mando pistola", inc: ["Consola Bally Astrocade", "2 Mandos tipo pistola", "Teclado numérico"] },
-    { name: "APF-MP1000", year: 1978, price: 3500, inc: ["Consola APF-MP1000", "2 Joysticks integrados", "Cartucho Rocket Patrol"] },
-    { name: "Magnavox Odyssey²", year: 1978, price: 2500, inc: ["Consola Odyssey²", "Teclado membrana", "2 Joysticks", "Juego K.C. Munchkin!"] },
-    { name: "Philips Odyssey 2000", year: 1977, price: 3000, inc: ["Consola Odyssey 2000", "Mandos giratorios", "Caja de conexión RF"] },
-    { name: "Intellivision", year: 1979, price: 2000, inc: ["Consola Intellivision Master Component", "2 Mandos pad con disco", "Cables de señal"] },
-    { name: "Milton Bradley Microvision", year: 1979, price: 3500, inc: ["Portátil Microvision", "Cartucho Blockbuster", "Batería 9V instalada"] },
-    { name: "Game & Watch", year: 1980, price: 2500, inc: ["Consola Portátil Game & Watch", "Baterías LR44 nuevas", "Tapa de batería original"] },
-    { name: "Epoch Cassette Vision", year: 1981, price: 4000, inc: ["Consola Epoch Cassette Vision", "Mandos integrados", "Fuente de alimentación"] },
-    { name: "VTech CreatiVision", year: 1981, price: 3000, inc: ["Consola/Computadora CreatiVision", "2 Joysticks/Teclado", "Cable de TV"] },
-    { name: "Emerson Arcadia 2001", year: 1982, price: 2500, inc: ["Consola Arcadia 2001", "2 Mandos Intellivision-style", "Eliminador 12V"] },
-    { name: "Atari 5200", year: 1982, price: 3000, inc: ["Consola Atari 5200 4-Port", "1 Mando analógico", "Caja automática TV/Game"] },
-    { name: "ColecoVision", year: 1982, price: 2500, inc: ["Consola ColecoVision", "1 Controller con keypad", "Juego Donkey Kong", "Fuente original"] },
-    { name: "Vectrex", year: 1982, price: 10000, inc: ["Consola Vectrex con Monitor Vectorial", "1 Control análogo", "Overlay de pantalla MineStorm"] },
-    { name: "Casio PV-1000", year: 1983, price: 5000, inc: ["Consola Casio PV-1000", "1 Mando Joystick", "Cables de video"] },
-    { name: "Famicom", year: 1983, price: 1800, inc: ["Consola Nintendo Famicom Japonesa", "2 Controles integrados (Control 2 con micrófono)", "Cable AV Mod"] },
-    { name: "Sega SG-1000", year: 1983, price: 3000, inc: ["Consola Sega SG-1000", "1 Joystick SJ-200", "Cable de video"] },
-    { name: "Tomy Tutor", year: 1983, price: 2500, inc: ["Consola Tomy Tutor", "Teclado mecánico", "Cable RF y Eliminador"] },
-    { name: "Casio PV-2000", year: 1983, price: 3000, inc: ["Consola Casio PV-2000", "Teclado de hule", "1 Gamepad"] },
-    { name: "Nintendo NES", year: 1985, price: 1800, inc: ["Consola NES Front Loader", "2 Controles rectangulares", "Cable AV", "Juego Super Mario Bros"] },
-    { name: "Sega Mark III", year: 1985, price: 3500, inc: ["Consola Sega Mark III", "1 Pad de control", "Cables de conexión"] },
-    { name: "Sega Master System", year: 1985, price: 2500, inc: ["Consola Master System", "1 Control Pad", "Pistola Light Phaser", "Cable AV"] },
-    { name: "Atari 7800", year: 1984, price: 2000, inc: ["Consola Atari 7800 ProSystem", "1 Pro-Line Joystick", "Juego Pole Position II"] },
-    { name: "Amstrad GX4000", year: 1990, price: 4500, inc: ["Consola Amstrad GX4000", "1 Control Pad", "Cartucho Burnin' Rubber"] },
-    { name: "Atari Lynx", year: 1989, price: 3500, inc: ["Portátil Atari Lynx I", "Pantalla a color renovada", "Cargador de pared"] },
-    { name: "Game Boy", year: 1989, price: 1500, inc: ["Consola Game Boy DMG-01", "Pantalla sin líneas de píxeles", "Tapa de pilas"] },
-    { name: "TurboGrafx-16 / PC Engine", year: 1987, price: 3000, inc: ["Consola TurboGrafx-16", "1 TurboPad", "HuCard Keith Courage"] },
-    { name: "Sega Genesis", year: 1988, price: 1500, inc: ["Consola Sega Genesis Model 1", "1 Control de 3 botones", "Cable AV", "Sonic The Hedgehog"] },
-    { name: "Neo Geo AES", year: 1990, price: 18000, inc: ["Consola Neo Geo AES", "1 Arcade Stick Pro", "Cable AV estéreo", "Fuente de poder"] },
-    { name: "Super Nintendo (SNES)", year: 1990, price: 2200, inc: ["Consola SNES", "2 Controles originales", "Cable AV", "Super Mario World"] },
-    { name: "Commodore CDTV", year: 1991, price: 8000, inc: ["Consola CDTV", "Mando a distancia infrarrojo", "Teclado y ratón"] },
-    { name: "Philips CD-i", year: 1991, price: 5000, inc: ["Consola Philips CD-i 220", "Control remoto interactivo", "DV Cartridge instalado"] },
-    { name: "Sega CD", year: 1991, price: 4500, inc: ["Sega CD Model 2", "Placa de montaje a Genesis", "Cable de extensión de audio", "Juego Sol-Feace"] },
-    { name: "Sega Pico", year: 1993, price: 1500, inc: ["Consola Sega Pico", "Lápiz óptico Magic Pen", "Storyware de prueba"] },
-    { name: "3DO Interactive Multiplayer", year: 1993, price: 4000, inc: ["Consola Panasonic 3DO FZ-1", "1 Control original", "Cable AV"] },
-    { name: "Atari Jaguar", year: 1993, price: 6000, inc: ["Consola Atari Jaguar 64-Bit", "1 Control con Keypad", "Juego Cybermorph"] },
-    { name: "Amiga CD32", year: 1993, price: 7000, inc: ["Consola Amiga CD32", "1 Mando gamepad", "Cable de alimentación"] },
-    { name: "FM Towns Marty", year: 1993, price: 15000, inc: ["Consola FM Towns Marty 32-bit", "1 Control Pad", "Disquetera 3.5 limpia"] },
-    { name: "Sega Saturn", year: 1994, price: 3500, inc: ["Consola Sega Saturn Model 2", "1 Control ergonómico", "Cable AV", "Batería CR2032 nueva"] },
-    { name: "PlayStation (PS1)", year: 1994, price: 1200, inc: ["Consola PS1 Gray Fat", "1 Control DualShock 1", "Memory Card 1MB", "Cable AV/Corriente"] },
-    { name: "Neo Geo CD", year: 1994, price: 8000, inc: ["Consola Neo Geo CD Top-Loader", "1 Pad de control Neo Geo", "Cable RCA"] },
-    { name: "PC-FX", year: 1994, price: 6000, inc: ["Consola NEC PC-FX", "1 FX-PAD", "Cable AV de 3 colores"] },
-    { name: "Sega 32X", year: 1994, price: 3500, inc: ["Módulo Sega 32X", "Cable pasante a Genesis 1 y 2", "Espaciador de plástico", "Fuente propia"] },
-    { name: "Virtual Boy", year: 1995, price: 8000, inc: ["Consola Virtual Boy", "Visor con goma limpia", "Trípode base", "Control con porta-pilas"] },
-    { name: "Casio Loopy", year: 1995, price: 4000, inc: ["Consola Casio Loopy", "1 Mando original", "Cartucho de pegatinas de prueba"] },
-    { name: "Nintendo 64", year: 1996, price: 2500, inc: ["Consola Nintendo 64 Charcoal", "1 Control con Joystick firme", "Jumper Pak", "Cable AV"] },
-    { name: "Game.com", year: 1997, price: 2000, inc: ["Portátil Tiger Game.com", "Stylus táctil", "Juego Lights Out"] },
-    { name: "Game Boy Light", year: 1998, price: 3500, inc: ["Consola Game Boy Light Japonesa", "Pantalla electroluminiscente limpia", "Tapa de pilas"] },
-    { name: "Sega Dreamcast", year: 1998, price: 3000, inc: ["Consola Dreamcast White", "1 Control con pantalla VMU", "Cable AV", "Pila interna reemplazada"] },
-    { name: "Game Boy Color", year: 1998, price: 1800, inc: ["Game Boy Color", "Carcasa limpia", "Altavoz reemplazado", "Tapa de baterías"] },
-    { name: "Neo Geo Pocket", year: 1998, price: 2500, inc: ["Portátil Neo Geo Pocket Monocroma", "Stick con microswitches", "Batería de respaldo CR2032"] },
-    { name: "WonderSwan", year: 1999, price: 2000, inc: ["Portátil Bandai WonderSwan", "Tapa de pilas", "Pantalla probada"] },
-    { name: "Neo Geo Pocket Color", year: 1999, price: 3000, inc: ["Neo Geo Pocket Color", "Pantalla limpia", "Tapa de pilas original"] },
-    { name: "PlayStation 2 (PS2)", year: 2000, price: 1500, inc: ["Consola PS2 Slim", "1 Control DualShock 2", "Memory Card 8MB", "Cable AV"] },
-    { name: "Nintendo GameCube", year: 2001, price: 2800, inc: ["Consola GameCube Indigo/Negra", "1 Control original", "Memory Card 59", "Fuente de poder"] },
-    { name: "Microsoft Xbox", year: 2001, price: 2000, inc: ["Consola Xbox Clásica HDD 80GB", "1 Control Controller S", "Capacitores de reloj removidos", "Cable AV"] },
-    { name: "Game Boy Advance", year: 2001, price: 1500, inc: ["Consola Game Boy Advance", "Tapa de baterías", "Pantalla sin rayones"] },
-    { name: "Pokémon mini", year: 2001, price: 2500, inc: ["Consola Pokémon mini", "1 Cartucho Pokémon Party Mini", "Batería AAA"] },
-    { name: "Nokia N-Gage", year: 2003, price: 3000, inc: ["Teléfono-Consola N-Gage", "Batería BL-5C nueva", "Cargador de clavija"] },
-    { name: "Game Boy Advance SP", year: 2003, price: 2000, inc: ["Consola GBA SP AGS-001", "Batería de litio nueva", "Cargador de pared"] },
-    { name: "Nintendo DS", year: 2004, price: 1000, inc: ["Consola Nintendo DS Fat", "Stylus original", "Cargador", "Bisagra en excelente estado"] },
-    { name: "PSP", year: 2004, price: 1500, inc: ["Consola Sony PSP-1000/2000", "Batería nueva 1200mAh", "Cargador de pared", "Memory Stick 8GB"] },
-    { name: "Game Boy Micro", year: 2005, price: 3500, inc: ["Consola Game Boy Micro", "Carátula frontal limpia", "Cargador USB dedicado"] },
-    { name: "Gizmondo", year: 2005, price: 5000, inc: ["Consola Gizmondo", "Batería funcional", "Cargador y funda"] },
-    { name: "Xbox 360", year: 2005, price: 1800, inc: ["Consola Xbox 360 Slim", "1 Control inalámbrico", "Disco Duro 250GB", "Fuente de poder"] },
-    { name: "PlayStation 3 (PS3)", year: 2006, price: 2200, inc: ["Consola PS3 Slim", "1 Control DualShock 3", "Cable de carga USB", "Cable HDMI"] },
-    { name: "Nintendo Wii", year: 2006, price: 1200, inc: ["Consola Wii Retrocompatible con GameCube", "1 Wiimote con MotionPlus", "1 Nunchuk", "Barra de sensores"] },
-    { name: "Nintendo DSi", year: 2008, price: 1200, inc: ["Consola Nintendo DSi", "Stylus", "Cargador", "Cámaras probadas"] },
-    { name: "PSP Go", year: 2009, price: 2500, inc: ["Consola PSP Go Deslizable", "16GB Memoria interna", "Cable de datos y carga"] },
-    { name: "Nintendo DSi XL", year: 2009, price: 1500, inc: ["Consola DSi XL", "Stylus grande estilo pluma", "Cargador de pared"] },
-    { name: "Nintendo 3DS", year: 2011, price: 2200, inc: ["Consola Nintendo 3DS", "Stylus extensible", "Base de carga Cradle", "Cargador"] },
-    { name: "PlayStation Vita", year: 2011, price: 3000, inc: ["Consola PS Vita PCH-1000 OLED", "Cable de carga propietario", "Memoria Sony 8GB"] },
-    { name: "Nintendo 3DS XL", year: 2012, price: 2800, inc: ["Consola 3DS XL", "Stylus", "Tarjeta SD 4GB", "Cargador"] },
-    { name: "Wii U", year: 2012, price: 3500, inc: ["Consola Wii U Deluxe 32GB", "Wii U GamePad con pantalla táctil", "Base cargadora GamePad", "Cables HDMI y corriente"] },
-    { name: "PlayStation TV", year: 2013, price: 2500, inc: ["Microconsola PS TV", "1 Control DualShock 3", "Cable HDMI", "Eliminador de corriente"] },
-    { name: "PlayStation 4", year: 2013, price: 3500, inc: ["Consola PS4 Fat 500GB", "1 Control DualShock 4", "Cable HDMI y de alimentación"] },
-    { name: "Xbox One", year: 2013, price: 2800, inc: ["Consola Xbox One Fat 500GB", "1 Control Inalámbrico Xbox", "Fuente de poder externa"] },
-    { name: "Nintendo 2DS", year: 2013, price: 1500, inc: ["Consola 2DS Estructura Fija", "Stylus", "Cargador original", "Tarjeta SD"] },
-    { name: "Ouya", year: 2013, price: 1200, inc: ["Microconsola Ouya", "1 Control de aluminio", "Cable HDMI", "Eliminador"] },
-    { name: "PS Vita Slim", year: 2013, price: 2800, inc: ["Consola PS Vita PCH-2000 Slim", "1GB Memoria interna", "Cargador Micro-USB"] },
-    { name: "New Nintendo 3DS", year: 2014, price: 3500, inc: ["Consola New 3DS con C-Stick", "Cover Plates reemplazables", "Stylus", "Cargador"] },
-    { name: "New Nintendo 3DS XL", year: 2014, price: 4000, inc: ["Consola New 3DS XL", "3D súper estable", "Stylus", "MicroSD 16GB", "Cargador"] },
-    { name: "PlayStation 4 Slim", year: 2016, price: 4000, inc: ["Consola PS4 Slim 1TB", "1 Control DualShock 4 V2", "Cable HDMI y Corriente"] },
-    { name: "PlayStation 4 Pro", year: 2016, price: 5000, inc: ["Consola PS4 Pro 1TB 4K", "1 Control DualShock 4 V2", "Cable HDMI de alta velocidad"] },
-    { name: "Xbox One S", year: 2016, price: 3500, inc: ["Consola Xbox One S 1TB con lector 4K Blu-ray", "1 Control Xbox con Bluetooth", "Cable de corriente"] },
-    { name: "Nintendo Switch", year: 2017, price: 4500, inc: ["Consola Nintendo Switch V2", "Joy-Con Izquierdo y Derecho", "Dock de TV", "Grip y Correas", "Cargador Type-C"] },
-    { name: "Xbox One X", year: 2017, price: 4500, inc: ["Consola Xbox One X 1TB 4K Nativo", "1 Control Xbox One", "Cable HDMI 2.0"] },
-    { name: "Nintendo Switch Lite", year: 2019, price: 3000, inc: ["Consola Nintendo Switch Lite", "Cargador original Nintendo Type-C", "Mica protectora instalada"] },
-    { name: "PlayStation 5", year: 2020, price: 8500, inc: ["Consola PlayStation 5 Edición Disco/Digital", "1 Control Inalámbrico DualSense", "Base vertical/horizontal", "Cable HDMI 2.1"] },
-    { name: "Xbox Series X", year: 2020, price: 8000, desc: "Consola 4K 120fps, 1 Mando", inc: ["Consola Xbox Series X 1TB NVMe", "1 Control Xbox Series Robot White/Carbon Black", "Cable Ultra High Speed HDMI"] },
-    { name: "Xbox Series S", year: 2020, price: 4500, inc: ["Consola Xbox Series S 512GB Digital", "1 Control Xbox Series", "Cable HDMI 2.0 y corriente"] },
-    { name: "Nintendo Switch OLED", year: 2021, price: 6000, inc: ["Consola Switch Pantalla OLED 7 pulgadas", "Joy-Cons White/Neon", "Dock con puerto LAN integrado", "Cargador Type-C"] },
-    { name: "Steam Deck", year: 2022, price: 7000, inc: ["Consola PC Steam Deck LCD 256GB/512GB", "Funda de transporte original Valve", "Cargador 45W USB-C"] },
-    { name: "ASUS ROG Ally", year: 2023, price: 9000, inc: ["Consola ASUS ROG Ally Z1 Extreme", "Cargador ROG 65W", "Soporte de escritorio"] },
-    { name: "Lenovo Legion Go", year: 2023, price: 11000, inc: ["Consola Lenovo Legion Go Pantalla 8.8 144Hz", "Mandos Legion TrueStrike desmontables", "Estuche rígido original"] },
-    { name: "Steam Deck OLED", year: 2023, price: 10000, inc: ["Consola Steam Deck Pantalla OLED 90Hz", "Estuche con forro extraíble", "Cargador USB-C de cable largo"] },
-    { name: "PlayStation 5 Slim", year: 2023, price: 9000, inc: ["Consola PS5 Slim 1TB SSD", "1 Control DualSense", "2 Pies de soporte horizontal", "Cable HDMI 2.1"] },
-    { name: "ASUS ROG Ally X", year: 2024, price: 15000, inc: ["Consola ASUS ROG Ally X 24GB RAM 80Wh", "Cargador de carga rápida 65W", "Caja original y accesorios"] },
-    { name: "PlayStation 5 Pro", year: 2024, price: 16000, inc: ["Consola PS5 Pro con PSSR 2TB SSD", "1 Control DualSense", "Cables de alta velocidad"] },
-    { name: "MSI Claw", year: 2024, price: 12000, inc: ["Consola MSI Claw A1M Intel Core Ultra", "Cargador rápido MSI Type-C"] },
-    { name: "Nintendo Switch 2", year: 2025, price: 9500, inc: ["Consola Próxima Generación Nintendo Switch 2", "Joy-Cons Magnéticos", "Dock TV 4K", "Cargador Type-C"] }
+// 1. LAS 100 FRASES DINÁMICAS
+const slogans = [
+    "IT'S DANGEROUS TO GO ALONE! TAKE THIS.", "THE CAKE IS A LIE.", "PRESS START TO PLAY.", "INSERT COIN.", 
+    "PRAISE THE SUN!", "FINISH HIM!", "DO A BARREL ROLL!", "WAKA WAKA WAKA", "A WINNER IS YOU!", 
+    "ALL YOUR BASE ARE BELONG TO US.", "SNAKE? SNAAAAKE!", "HEY, LISTEN!", "HADOUKEN!", "GET OVER HERE!", 
+    "FATALITY.", "FUS RO DAH!", "WAR. WAR NEVER CHANGES.", "WOULD YOU KINDLY?", "I NEED A WEAPON.", 
+    "NOTHING IS TRUE, EVERYTHING IS PERMITTED.", "STAY A WHILE AND LISTEN.", "YOU DIED.", "WASTED.", 
+    "LET ME GUESS, SOMEONE STOLE YOUR SWEETROLL?", "IT'S SUPER EFFECTIVE!", "GOTTA CATCH 'EM ALL!", 
+    "EA SPORTS, IT'S IN THE GAME.", "SEGAAAAA!", "JUMP IN.", "WELCOME TO THE FANTASY ZONE.", 
+    "SUPER SMASH BROTHERS, MELEEEEE!", "SHOW ME YOUR MOVES!", "OBJECTION!", "IT'S-A ME, MARIO!", 
+    "THANK YOU MARIO! BUT OUR PRINCESS IS IN ANOTHER CASTLE!", "YOU HAVE DIED OF DYSENTERY.", "JOB'S DONE.", 
+    "ZUG ZUG.", "NUCLEAR LAUNCH DETECTED.", "TOASTY!", "C-C-C-COMBO BREAKER!", "HERE WE GO!", 
+    "BOOMSHAKALAKA!", "HE'S ON FIRE!", "I AM ERROR.", "A MAN CHOOSES, A SLAVE OBEYS.", "STANDBY FOR TITANFALL.", 
+    "I TOOK AN ARROW IN THE KNEE.", "WAKE ME WHEN YOU NEED ME.", "THE NUMBERS, MASON!", "REMEMBER, NO RUSSIAN.", 
+    "I'M COMMANDER SHEPARD.", "REQUIESCAT IN PACE.", "BEWARE OF CHICKEN.", "TRY JUMPING.", "GOOD LUCK, COMMANDER.", 
+    "VOODOO 1, VIPER'S ON STATION.", "EYES UP, GUARDIAN.", "WHETHER WE WANTED IT OR NOT...", "LOK'TAR OGAR!", 
+    "FOR THE HORDE!", "FOR THE ALLIANCE!", "WORK, WORK.", "MORE GOLD IS REQUIRED.", "YOU MUST CONSTRUCT ADDITIONAL PYLONS.", 
+    "CARRIER HAS ARRIVED.", "EN TARO ADUN!", "PROTOCOL 3: PROTECT THE PILOT.", "TRUST ME.", "I WILL HAVE MY REVENGE!", 
+    "ZEUS! YOUR SON HAS RETURNED!", "ARE YOU A BOY OR A GIRL?", "WHAT IS A MAN? A MISERABLE LITTLE PILE OF SECRETS!", 
+    "DIE, MONSTER!", "YOU DON'T NEED A REASON TO HELP PEOPLE.", "A HUNTER IS A HUNTER, EVEN IN A DREAM.", 
+    "FEAR THE OLD BLOOD.", "HESITATION IS DEFEAT.", "I AM MALENIA, BLADE OF MIQUELLA.", "LET ME SOLO HER.", 
+    "NO COST TOO GREAT.", "GIT GUD.", "GG EZ.", "RUSH B.", "FIRE IN THE HOLE!", "COUNTER-TERRORISTS WIN.", 
+    "BOMB HAS BEEN DEFUSED.", "PIKACHU, I CHOOSE YOU!", "DO YOU WANT TO HAVE A BAD TIME?", "IT FILLS YOU WITH DETERMINATION.", 
+    "STAY DETERMINED!", "GET EQUIPPED WITH...", "READY... FIGHT!", "ROUND 1!", "PERFECT!", "K.O.!", "CHOOSE YOUR DESTINY.", 
+    "TEST YOUR MIGHT.", "WELCOME TO THE SUMMONER'S RIFT.", "MINIONS HAVE SPAWNED.", "FIRST BLOOD!", "VICTORY!", "DEFEAT."
 ];
 
-// TOP 15 JUEGOS MÁS FAMOSOS GENERADOS DINÁMICAMENTE SEGÚN LA CONSOLA
+function setRandomSlogan() {
+    const text = slogans[Math.floor(Math.random() * slogans.length)];
+    document.getElementById('dynamic-slogan').innerText = `> ${text}_`;
+}
+
+// 2. BASE DE DATOS DE CONSOLAS
+const consolasDB = [
+    { name: "Magnavox Odyssey", year: 1972, price: 12000, img: "img/magnavox_odyssey.jpg", inc: ["Consola original", "Mandos integrados", "Overlays"] },
+    { name: "Home Pong", year: 1975, price: 3500, img: "img/home_pong.jpg", inc: ["Consola Home Pong", "Cable de video"] },
+    { name: "Coleco Telstar", year: 1976, price: 2500, img: "img/coleco_telstar.jpg", inc: ["Consola Coleco", "Fuente de poder"] },
+    { name: "Fairchild Channel F", year: 1976, price: 4000, img: "img/fairchild.jpg", inc: ["Consola Channel F", "2 Joysticks"] },
+    { name: "RCA Studio II", year: 1977, price: 3000, img: "img/rca_studio.jpg", inc: ["Consola RCA", "Cable de antena"] },
+    { name: "Atari 2600", year: 1977, price: 1500, img: "img/atari_2600.jpg", inc: ["Consola CX2600", "1 Joystick CX40", "Adaptador AC"] },
+    { name: "Bally Astrocade", year: 1977, price: 5000, img: "img/bally.jpg", inc: ["Consola Bally", "Mando pistola"] },
+    { name: "APF-MP1000", year: 1978, price: 3500, img: "img/apf.jpg", inc: ["Consola APF", "2 Joysticks integrados"] },
+    { name: "Magnavox Odyssey²", year: 1978, price: 2500, img: "img/odyssey2.jpg", inc: ["Consola Odyssey²", "Teclado", "2 Joysticks"] },
+    { name: "Philips Odyssey 2000", year: 1977, price: 3000, img: "img/philips.jpg", inc: ["Consola Philips", "Mandos giratorios"] },
+    { name: "Intellivision", year: 1979, price: 2000, img: "img/intellivision.jpg", inc: ["Consola Intellivision", "Mandos con disco"] },
+    { name: "Microvision", year: 1979, price: 3500, img: "img/microvision.jpg", inc: ["Portátil Microvision", "Cartucho base"] },
+    { name: "Game & Watch", year: 1980, price: 2500, img: "img/game_watch.jpg", inc: ["Consola G&W", "Baterías nuevas"] },
+    { name: "Epoch Cassette Vision", year: 1981, price: 4000, img: "img/epoch.jpg", inc: ["Consola Epoch", "Mandos integrados"] },
+    { name: "VTech CreatiVision", year: 1981, price: 3000, img: "img/vtech.jpg", inc: ["Consola VTech", "Cables"] },
+    { name: "Emerson Arcadia 2001", year: 1982, price: 2500, img: "img/emerson.jpg", inc: ["Consola Emerson", "2 Mandos"] },
+    { name: "Atari 5200", year: 1982, price: 3000, img: "img/atari_5200.jpg", inc: ["Consola Atari 5200", "1 Mando analógico"] },
+    { name: "ColecoVision", year: 1982, price: 2500, img: "img/colecovision.jpg", inc: ["Consola ColecoVision", "1 Mando arcade"] },
+    { name: "Vectrex", year: 1982, price: 10000, img: "img/vectrex.jpg", inc: ["Consola Vectrex", "1 Control análogo"] },
+    { name: "Casio PV-1000", year: 1983, price: 5000, img: "img/casio_pv.jpg", inc: ["Consola Casio", "1 Mando"] },
+    { name: "Nintendo Famicom", year: 1983, price: 1800, img: "img/famicom.jpg", inc: ["Consola Famicom", "2 Mandos integrados"] },
+    { name: "Sega SG-1000", year: 1983, price: 3000, img: "img/sg1000.jpg", inc: ["Consola SG-1000", "1 Joystick"] },
+    { name: "Tomy Tutor", year: 1983, price: 2500, img: "img/tomy_tutor.jpg", inc: ["Consola Tomy", "Cable RF"] },
+    { name: "Casio PV-2000", year: 1983, price: 3000, img: "img/casio_pv2000.jpg", inc: ["Consola Casio", "Teclado"] },
+    { name: "Nintendo NES", year: 1985, price: 1800, img: "img/nes.jpg", inc: ["Consola NES", "2 Controles", "Cable AV"] },
+    { name: "Sega Mark III", year: 1985, price: 3500, img: "img/mark3.jpg", inc: ["Consola Mark III", "1 Pad de control"] },
+    { name: "Sega Master System", year: 1985, price: 2500, img: "img/master_system.jpg", inc: ["Consola SMS", "1 Control Pad"] },
+    { name: "Atari 7800", year: 1984, price: 2000, img: "img/atari_7800.jpg", inc: ["Consola 7800", "1 Joystick"] },
+    { name: "Amstrad GX4000", year: 1990, price: 4500, img: "img/amstrad.jpg", inc: ["Consola GX4000", "1 Control Pad"] },
+    { name: "Atari Lynx", year: 1989, price: 3500, img: "img/lynx.jpg", inc: ["Portátil Lynx", "Cargador"] },
+    { name: "Game Boy Clásico", year: 1989, price: 1500, img: "img/gameboy.jpg", inc: ["Portátil Game Boy", "Tapa de pilas"] },
+    { name: "TurboGrafx-16", year: 1987, price: 3000, img: "img/turbografx.jpg", inc: ["Consola TurboGrafx", "1 TurboPad"] },
+    { name: "Sega Genesis", year: 1988, price: 1500, img: "img/genesis.jpg", inc: ["Consola Genesis", "1 Control 3 botones", "Cables"] },
+    { name: "Neo Geo AES", year: 1990, price: 18000, img: "img/neogeo.jpg", inc: ["Consola AES", "1 Arcade Stick"] },
+    { name: "Super Nintendo (SNES)", year: 1990, price: 2200, img: "img/snes.jpg", inc: ["Consola SNES", "2 Controles", "Cables"] },
+    { name: "Commodore CDTV", year: 1991, price: 8000, img: "img/cdtv.jpg", inc: ["Consola CDTV", "Mando a distancia"] },
+    { name: "Philips CD-i", year: 1991, price: 5000, img: "img/cdi.jpg", inc: ["Consola CD-i", "Control remoto"] },
+    { name: "Sega CD", year: 1991, price: 4500, img: "img/segacd.jpg", inc: ["Sega CD Add-on", "Placa y cables"] },
+    { name: "Sega Pico", year: 1993, price: 1500, img: "img/pico.jpg", inc: ["Consola Pico", "Lápiz óptico"] },
+    { name: "3DO Interactive", year: 1993, price: 4000, img: "img/3do.jpg", inc: ["Consola 3DO", "1 Control original"] },
+    { name: "Atari Jaguar", year: 1993, price: 6000, img: "img/jaguar.jpg", inc: ["Consola Jaguar", "1 Control"] },
+    { name: "Amiga CD32", year: 1993, price: 7000, img: "img/amigacd32.jpg", inc: ["Consola CD32", "1 Mando"] },
+    { name: "FM Towns Marty", year: 1993, price: 15000, img: "img/fmtowns.jpg", inc: ["Consola FM Towns", "1 Control Pad"] },
+    { name: "Sega Saturn", year: 1994, price: 3500, img: "img/saturn.jpg", inc: ["Consola Saturn", "1 Control"] },
+    { name: "PlayStation (PS1)", year: 1994, price: 1200, img: "img/ps1.jpg", inc: ["Consola PS1", "1 Control DualShock", "Cables"] },
+    { name: "Neo Geo CD", year: 1994, price: 8000, img: "img/neogeocd.jpg", inc: ["Consola Neo Geo CD", "1 Pad Neo Geo"] },
+    { name: "PC-FX", year: 1994, price: 6000, img: "img/pcfx.jpg", inc: ["Consola PC-FX", "1 FX-PAD"] },
+    { name: "Sega 32X", year: 1994, price: 3500, img: "img/sega32x.jpg", inc: ["Módulo 32X", "Cable pasante"] },
+    { name: "Virtual Boy", year: 1995, price: 8000, img: "img/virtualboy.jpg", inc: ["Consola Virtual Boy", "Trípode", "Control"] },
+    { name: "Casio Loopy", year: 1995, price: 4000, img: "img/loopy.jpg", inc: ["Consola Loopy", "1 Mando"] },
+    { name: "Nintendo 64", year: 1996, price: 2500, img: "img/n64.jpg", inc: ["Consola N64", "1 Control", "Cables"] },
+    { name: "Game.com", year: 1997, price: 2000, img: "img/gamecom.jpg", inc: ["Portátil Game.com", "Stylus"] },
+    { name: "Game Boy Light", year: 1998, price: 3500, img: "img/gblight.jpg", inc: ["Consola GB Light", "Tapa de pilas"] },
+    { name: "Sega Dreamcast", year: 1998, price: 3000, img: "img/dreamcast.jpg", inc: ["Consola Dreamcast", "1 Control", "Cables"] },
+    { name: "Game Boy Color", year: 1998, price: 1800, img: "img/gbc.jpg", inc: ["Consola GBC", "Tapa de baterías"] },
+    { name: "Neo Geo Pocket", year: 1998, price: 2500, img: "img/ngp.jpg", inc: ["Portátil NGP", "Pila interna"] },
+    { name: "WonderSwan", year: 1999, price: 2000, img: "img/wonderswan.jpg", inc: ["Portátil WonderSwan"] },
+    { name: "Neo Geo Pocket Color", year: 1999, price: 3000, img: "img/ngpc.jpg", inc: ["Portátil NGPC", "Tapa original"] },
+    { name: "PlayStation 2 (PS2)", year: 2000, price: 1500, img: "img/ps2.jpg", inc: ["Consola PS2", "1 Control", "Cables"] },
+    { name: "Nintendo GameCube", year: 2001, price: 2800, img: "img/gamecube.jpg", inc: ["Consola GameCube", "1 Control", "Cables"] },
+    { name: "Microsoft Xbox", year: 2001, price: 2000, img: "img/xbox.jpg", inc: ["Consola Xbox", "1 Control", "Cables"] },
+    { name: "Game Boy Advance", year: 2001, price: 1500, img: "img/gba.jpg", inc: ["Consola GBA", "Tapa de pilas"] },
+    { name: "Pokémon mini", year: 2001, price: 2500, img: "img/pokemonmini.jpg", inc: ["Consola mini", "Pila AAA"] },
+    { name: "Nokia N-Gage", year: 2003, price: 3000, img: "img/ngage.jpg", inc: ["Teléfono N-Gage", "Cargador"] },
+    { name: "Game Boy Advance SP", year: 2003, price: 2000, img: "img/gbasp.jpg", inc: ["Consola GBA SP", "Cargador"] },
+    { name: "Nintendo DS", year: 2004, price: 1000, img: "img/nds.jpg", inc: ["Consola NDS", "Stylus", "Cargador"] },
+    { name: "PSP", year: 2004, price: 1500, img: "img/psp.jpg", inc: ["Consola PSP", "Cargador", "Memoria"] },
+    { name: "Game Boy Micro", year: 2005, price: 3500, img: "img/gbmicro.jpg", inc: ["Consola GB Micro", "Cargador"] },
+    { name: "Gizmondo", year: 2005, price: 5000, img: "img/gizmondo.jpg", inc: ["Consola Gizmondo", "Cargador"] },
+    { name: "Xbox 360", year: 2005, price: 1800, img: "img/xbox360.jpg", inc: ["Consola 360", "1 Control", "Cables"] },
+    { name: "PlayStation 3 (PS3)", year: 2006, price: 2200, img: "img/ps3.jpg", inc: ["Consola PS3", "1 Control", "Cables"] },
+    { name: "Nintendo Wii", year: 2006, price: 1200, img: "img/wii.jpg", inc: ["Consola Wii", "Wiimote + Nunchuk", "Barra"] },
+    { name: "Nintendo DSi", year: 2008, price: 1200, img: "img/dsi.jpg", inc: ["Consola DSi", "Cargador"] },
+    { name: "PSP Go", year: 2009, price: 2500, img: "img/pspgo.jpg", inc: ["Consola PSP Go", "Cargador"] },
+    { name: "Nintendo DSi XL", year: 2009, price: 1500, img: "img/dsixl.jpg", inc: ["Consola DSi XL", "Cargador"] },
+    { name: "Nintendo 3DS", year: 2011, price: 2200, img: "img/3ds.jpg", inc: ["Consola 3DS", "Cargador"] },
+    { name: "PlayStation Vita", year: 2011, price: 3000, img: "img/psvita.jpg", inc: ["Consola PS Vita", "Cargador"] },
+    { name: "Nintendo 3DS XL", year: 2012, price: 2800, img: "img/3dsxl.jpg", inc: ["Consola 3DS XL", "Cargador"] },
+    { name: "Wii U", year: 2012, price: 3500, img: "img/wiiu.jpg", inc: ["Consola Wii U", "GamePad", "Cables"] },
+    { name: "PlayStation TV", year: 2013, price: 2500, img: "img/pstv.jpg", inc: ["Microconsola PS TV", "Cable HDMI"] },
+    { name: "PlayStation 4", year: 2013, price: 3500, img: "img/ps4.jpg", inc: ["Consola PS4", "1 Control", "Cables"] },
+    { name: "Xbox One", year: 2013, price: 2800, img: "img/xboxone.jpg", inc: ["Consola Xbox One", "1 Control", "Cables"] },
+    { name: "Nintendo 2DS", year: 2013, price: 1500, img: "img/2ds.jpg", inc: ["Consola 2DS", "Cargador"] },
+    { name: "Ouya", year: 2013, price: 1200, img: "img/ouya.jpg", inc: ["Consola Ouya", "1 Mando"] },
+    { name: "PS Vita Slim", year: 2013, price: 2800, img: "img/psvitaslim.jpg", inc: ["Consola PS Vita Slim", "Cargador"] },
+    { name: "New Nintendo 3DS", year: 2014, price: 3500, img: "img/new3ds.jpg", inc: ["Consola New 3DS", "Cargador"] },
+    { name: "New Nintendo 3DS XL", year: 2014, price: 4000, img: "img/new3dsxl.jpg", inc: ["Consola New 3DS XL", "Cargador"] },
+    { name: "PlayStation 4 Slim", year: 2016, price: 4000, img: "img/ps4slim.jpg", inc: ["Consola PS4 Slim", "1 Control", "Cables"] },
+    { name: "PlayStation 4 Pro", year: 2016, price: 5000, img: "img/ps4pro.jpg", inc: ["Consola PS4 Pro", "1 Control", "Cables"] },
+    { name: "Xbox One S", year: 2016, price: 3500, img: "img/xboxones.jpg", inc: ["Consola Xbox One S", "1 Control", "Cables"] },
+    { name: "Nintendo Switch", year: 2017, price: 4500, img: "img/switch.jpg", inc: ["Consola Switch", "Joy-Cons", "Dock"] },
+    { name: "Xbox One X", year: 2017, price: 4500, img: "img/xboxonex.jpg", inc: ["Consola Xbox One X", "1 Control", "Cables"] },
+    { name: "Nintendo Switch Lite", year: 2019, price: 3000, img: "img/switchlite.jpg", inc: ["Consola Switch Lite", "Cargador"] },
+    { name: "PlayStation 5", year: 2020, price: 8500, img: "img/ps5.jpg", inc: ["Consola PS5", "1 DualSense", "Cables"] },
+    { name: "Xbox Series X", year: 2020, price: 8000, img: "img/xboxseriesx.jpg", inc: ["Consola Series X", "1 Control", "Cables"] },
+    { name: "Xbox Series S", year: 2020, price: 4500, img: "img/xboxseriess.jpg", inc: ["Consola Series S", "1 Control", "Cables"] },
+    { name: "Nintendo Switch OLED", year: 2021, price: 6000, img: "img/switcholed.jpg", inc: ["Consola Switch OLED", "Joy-Cons", "Dock"] },
+    { name: "Steam Deck", year: 2022, price: 7000, img: "img/steamdeck.jpg", inc: ["Consola Steam Deck", "Cargador"] },
+    { name: "ASUS ROG Ally", year: 2023, price: 9000, img: "img/rogally.jpg", inc: ["Consola ROG Ally", "Cargador"] },
+    { name: "Lenovo Legion Go", year: 2023, price: 11000, img: "img/legiongo.jpg", inc: ["Consola Legion Go", "Mandos", "Cargador"] },
+    { name: "Steam Deck OLED", year: 2023, price: 10000, img: "img/steamdeckoled.jpg", inc: ["Consola Steam Deck OLED", "Cargador"] },
+    { name: "PlayStation 5 Slim", year: 2023, price: 9000, img: "img/ps5slim.jpg", inc: ["Consola PS5 Slim", "1 DualSense"] },
+    { name: "ASUS ROG Ally X", year: 2024, price: 15000, img: "img/rogallyx.jpg", inc: ["Consola ROG Ally X", "Cargador"] },
+    { name: "PlayStation 5 Pro", year: 2024, price: 16000, img: "img/ps5pro.jpg", inc: ["Consola PS5 Pro", "1 DualSense"] },
+    { name: "MSI Claw", year: 2024, price: 12000, img: "img/msiclaw.jpg", inc: ["Consola MSI Claw", "Cargador"] },
+    { name: "Nintendo Switch 2", year: 2025, price: 9500, img: "img/switch2.jpg", inc: ["Consola Switch 2", "Joy-Cons", "Dock"] }
+];
+
+// JUEGOS REALES POR CONSOLA
+const juegosBaseReales = {
+    "Nintendo Switch": [{n:"Zelda Breath of the Wild",p:900},{n:"Super Mario Odyssey",p:900},{n:"Mario Kart 8 Deluxe",p:1000},{n:"Super Smash Bros. Ultimate",p:1100},{n:"Animal Crossing: New Horizons",p:900},{n:"Pokémon Legends: Arceus",p:800},{n:"Metroid Dread",p:750},{n:"Splatoon 3",p:900},{n:"Xenoblade Chronicles 3",p:800},{n:"Fire Emblem Three Houses",p:850},{n:"Luigi's Mansion 3",p:800},{n:"Super Mario Bros. Wonder",p:1000},{n:"Monster Hunter Rise",p:600},{n:"Persona 5 Royal",p:700},{n:"Zelda Tears of the Kingdom",p:1100}],
+    "PlayStation 4": [{n:"God of War",p:350},{n:"The Last of Us Part II",p:500},{n:"Spider-Man",p:400},{n:"Red Dead Redemption 2",p:450},{n:"Bloodborne",p:350},{n:"Uncharted 4",p:300},{n:"Horizon Zero Dawn",p:300},{n:"Persona 5",p:350},{n:"The Witcher 3",p:400},{n:"Ghost of Tsushima",p:500},{n:"Grand Theft Auto V",p:350},{n:"Final Fantasy VII Remake",p:450},{n:"God of War Ragnarök",p:800},{n:"Sekiro",p:600},{n:"Resident Evil 2 Remake",p:450}],
+    "Xbox One": [{n:"Halo Master Chief Collection",p:400},{n:"Forza Horizon 4",p:500},{n:"Gears 5",p:350},{n:"Sea of Thieves",p:400},{n:"Ori and the Will of the Wisps",p:300},{n:"Sunset Overdrive",p:250},{n:"Halo 5 Guardians",p:250},{n:"Quantum Break",p:300},{n:"Forza Motorsport 7",p:450},{n:"Gears of War 4",p:300},{n:"Ryse Son of Rome",p:250},{n:"State of Decay 2",p:300},{n:"Killer Instinct",p:250},{n:"Rare Replay",p:300},{n:"Cuphead",p:350}],
+    "Nintendo 64": [{n:"Super Mario 64",p:600},{n:"Zelda Ocarina of Time",p:800},{n:"GoldenEye 007",p:500},{n:"Zelda Majora's Mask",p:900},{n:"Mario Kart 64",p:700},{n:"Super Smash Bros.",p:800},{n:"Banjo-Kazooie",p:600},{n:"Paper Mario",p:1500},{n:"Star Fox 64",p:450},{n:"Donkey Kong 64",p:550},{n:"Perfect Dark",p:400},{n:"Diddy Kong Racing",p:450},{n:"Pokemon Stadium",p:500},{n:"Conker's Bad Fur Day",p:2500},{n:"Wave Race 64",p:300}],
+    "Super Nintendo (SNES)": [{n:"Super Mario World",p:400},{n:"Zelda A Link to the Past",p:700},{n:"Super Metroid",p:1200},{n:"Chrono Trigger",p:3500},{n:"Donkey Kong Country",p:500},{n:"Street Fighter II",p:350},{n:"Final Fantasy III (VI)",p:1200},{n:"Super Mario Kart",p:600},{n:"EarthBound",p:5000},{n:"Secret of Mana",p:900},{n:"Mega Man X",p:600},{n:"Super Mario RPG",p:1500},{n:"Yoshi's Island",p:600},{n:"Castlevania IV",p:1000},{n:"Star Fox",p:350}],
+    "Nintendo NES": [{n:"Super Mario Bros.",p:300},{n:"Super Mario Bros. 3",p:450},{n:"The Legend of Zelda",p:600},{n:"Metroid",p:500},{n:"Mega Man 2",p:600},{n:"Castlevania",p:550},{n:"Contra",p:700},{n:"DuckTales",p:400},{n:"Punch-Out!!",p:500},{n:"Final Fantasy",p:600},{n:"Zelda II",p:450},{n:"Excitebike",p:250},{n:"Double Dragon",p:350},{n:"Kid Icarus",p:450},{n:"Tetris",p:200}],
+    "PlayStation (PS1)": [{n:"Metal Gear Solid",p:600},{n:"Final Fantasy VII",p:700},{n:"Castlevania SotN",p:2000},{n:"Resident Evil 2",p:650},{n:"Crash Bandicoot",p:500},{n:"Tekken 3",p:400},{n:"Silent Hill",p:2500},{n:"Gran Turismo 2",p:300},{n:"Spyro the Dragon",p:450},{n:"Tomb Raider",p:350},{n:"Tony Hawk's Pro Skater 2",p:300},{n:"Chrono Cross",p:600},{n:"Street Fighter Alpha 3",p:700},{n:"Suikoden II",p:3000},{n:"Twisted Metal 2",p:400}],
+    "PlayStation 2 (PS2)": [{n:"GTA San Andreas",p:300},{n:"Metal Gear Solid 3",p:400},{n:"Shadow of the Colossus",p:450},{n:"Silent Hill 2",p:2000},{n:"Resident Evil 4",p:350},{n:"God of War II",p:300},{n:"Final Fantasy X",p:250},{n:"Kingdom Hearts",p:300},{n:"Gran Turismo 4",p:200},{n:"Devil May Cry 3",p:300},{n:"Bully",p:350},{n:"Okami",p:400},{n:"Ratchet & Clank UYA",p:350},{n:"Sly 2",p:350},{n:"Jak II",p:300}],
+    "Sega Genesis": [{n:"Sonic the Hedgehog 2",p:250},{n:"Streets of Rage 2",p:700},{n:"Gunstar Heroes",p:1500},{n:"Phantasy Star IV",p:1800},{n:"Shinobi III",p:600},{n:"Castlevania Bloodlines",p:2000},{n:"Contra Hard Corps",p:2200},{n:"Mortal Kombat II",p:350},{n:"Earthworm Jim",p:450},{n:"Comix Zone",p:600},{n:"Aladdin",p:300},{n:"Golden Axe",p:400},{n:"Vectorman",p:300},{n:"Beyond Oasis",p:800},{n:"Ristar",p:1000}],
+    "Xbox 360": [{n:"Halo 3",p:200},{n:"Gears of War 2",p:200},{n:"Mass Effect 2",p:250},{n:"Red Dead Redemption",p:300},{n:"Skyrim",p:250},{n:"Bioshock",p:250},{n:"GTA IV",p:300},{n:"Fallout 3",p:250},{n:"Call of Duty Modern Warfare 2",p:200},{n:"Left 4 Dead 2",p:350},{n:"Batman Arkham City",p:250},{n:"Forza Horizon",p:350},{n:"Alan Wake",p:300},{n:"Dead Space",p:250},{n:"Fable II",p:200}],
+    "PlayStation 3 (PS3)": [{n:"The Last of Us",p:300},{n:"Uncharted 2",p:250},{n:"Metal Gear Solid 4",p:250},{n:"God of War III",p:250},{n:"Demon's Souls",p:400},{n:"Infamous 2",p:250},{n:"LittleBigPlanet 2",p:250},{n:"Killzone 2",p:200},{n:"Resistance 3",p:250},{n:"Heavy Rain",p:250},{n:"Journey (Collector's)",p:400},{n:"Persona 5",p:450},{n:"Ratchet & Clank Crack in Time",p:350},{n:"Gran Turismo 5",p:200},{n:"MotorStorm",p:200}]
+};
+
 function getTop15Games(consoleName) {
-    const basePrices = [300, 450, 500, 600, 350, 400, 700, 800, 250, 900, 550, 650, 1000, 1200, 380];
-    const gamesMap = {
-        "Nintendo Switch": ["The Legend of Zelda: Breath of the Wild", "Super Mario Odyssey", "Mario Kart 8 Deluxe", "Super Smash Bros. Ultimate", "Animal Crossing: New Horizons", "Pokémon Legends: Arceus", "Metroid Dread", "Splatoon 3", "Xenoblade Chronicles 3", "Fire Emblem: Three Houses", "Luigi's Mansion 3", "Super Mario Bros. Wonder", "Monster Hunter Rise", "Persona 5 Royal", "Hollow Knight"],
-        "PlayStation 4": ["God of War", "The Last of Us Part II", "Spider-Man", "Red Dead Redemption 2", "Bloodborne", "Uncharted 4: A Thief's End", "Horizon Zero Dawn", "Persona 5", "The Witcher 3: Wild Hunt", "Ghost of Tsushima", "Grand Theft Auto V", "Final Fantasy VII Remake", "God of War Ragnarök", "Sekiro: Shadows Die Twice", "Resident Evil 2 Remake"],
-        "Nintendo 64": ["Super Mario 64", "The Legend of Zelda: Ocarina of Time", "GoldenEye 007", "The Legend of Zelda: Majora's Mask", "Mario Kart 64", "Super Smash Bros.", "Banjo-Kazooie", "Paper Mario", "Star Fox 64", "Donkey Kong 64", "Perfect Dark", "Diddy Kong Racing", "Pokemon Snap", "Conker's Bad Fur Day", "Wave Race 64"],
-        "Super Nintendo (SNES)": ["Super Mario World", "The Legend of Zelda: A Link to the Past", "Super Metroid", "Chrono Trigger", "Donkey Kong Country", "Street Fighter II", "Final Fantasy VI", "Super Mario Kart", "EarthBound", "Secret of Mana", "Mega Man X", "Super Mario RPG", "Yoshi's Island", "Castlevania IV", "Star Fox"],
-        "Nintendo NES": ["Super Mario Bros.", "Super Mario Bros. 3", "The Legend of Zelda", "Metroid", "Mega Man 2", "Castlevania", "Contra", "DuckTales", "Mike Tyson's Punch-Out!!", "Final Fantasy", "Zelda II: The Adventure of Link", "Excitebike", "Double Dragon", "Kid Icarus", "Tetris"]
-    };
+    if (juegosBaseReales[consoleName]) return juegosBaseReales[consoleName];
 
-    let titleList = gamesMap[consoleName];
-    if (!titleList) {
-        titleList = [
-            `${consoleName} Greatest Hits Vol. 1`, `${consoleName} Adventure Quest`, `${consoleName} Racing Championship`,
-            `${consoleName} Combat Zone`, `${consoleName} RPG Chronicles`, `${consoleName} Arcade Classics`,
-            `${consoleName} Extreme Sports`, `${consoleName} Mystery Legends`, `${consoleName} Super Heroes`,
-            `${consoleName} Galactic Warfare`, `${consoleName} Final Showdown`, `${consoleName} Tactics Master`,
-            `${consoleName} World Cup`, `${consoleName} Retro Remix`, `${consoleName} Ultimate Collection`
-        ];
-    }
+    // GENERADOR REALISTA PARA CONSOLAS MENOS COMUNES
+    const preciosBase = [450, 350, 600, 250, 800, 500, 300, 700, 900, 400, 200, 1000, 350, 550, 650];
+    const titulosFalsos = [
+        "Greatest Hits Vol. 1", "Adventure Quest", "Racing Championship", "Combat Zone", "RPG Chronicles", 
+        "Arcade Classics", "Extreme Sports", "Mystery Legends", "Super Heroes", "Galactic Warfare", 
+        "Final Showdown", "Tactics Master", "World Cup", "Retro Remix", "Ultimate Collection"
+    ];
 
-    return titleList.map((title, i) => ({
-        name: `${title} (${consoleName})`,
-        price: basePrices[i % basePrices.length]
+    return titulosFalsos.map((titulo, i) => ({
+        n: `${titulo} (${consoleName})`,
+        p: preciosBase[i]
     }));
 }
 
-// CARGAR CONSOLAS
+// 3. INYECCIÓN DEL DOM
 document.addEventListener('DOMContentLoaded', () => {
+    setRandomSlogan();
     renderConsolas();
     renderJuegosConsolas();
     updateCartUI();
 });
+
+// Imagen segura: Si no has subido la imagen a la carpeta "img", pone un cuadro gris automáticamente.
+function getImgSrc(imgName) {
+    return `onerror="this.onerror=null; this.src='https://placehold.co/600x400/2d3748/cbd5e0?text=FOTO+PENDIENTE';" src="${imgName}"`;
+}
 
 function renderConsolas() {
     const container = document.getElementById('catalogo-consolas');
     let html = '';
     consolasDB.forEach((c, idx) => {
         let btnId = `btn-con-${idx}`;
-        let svgImg = getConsoleSVG(c.name);
         let incItems = c.inc.map(item => `<li>${item}</li>`).join('');
 
         html += `
         <div class="card">
-            <img src="${svgImg}" alt="${c.name}" class="animated-console">
+            <img ${getImgSrc(c.img)} alt="${c.name}" class="static-image">
             <span class="badge-estado">Año ${c.year}</span>
             <h3>${c.name}</h3>
             <details>
@@ -181,28 +208,25 @@ function renderConsolas() {
             </details>
             <span class="price">$${c.price.toFixed(2)}</span>
             <div id="${btnId}">
-                <button class="add-btn" onclick="changeQty('${btnId}', '${c.name}', ${c.price}, 1)">+ AGREGAR</button>
+                <button class="add-btn" onclick="changeQty('${btnId}', '${c.name.replace(/'/g, "\\'")}', ${c.price}, 1)">+ AGREGAR</button>
             </div>
         </div>`;
     });
     container.innerHTML = html;
 }
 
-// CARGAR CATÁLOGO DE VIDEOJUEGOS (DE MÁS NUEVA A MÁS VIEJA)
 function renderJuegosConsolas() {
     const container = document.getElementById('catalogo-juegos-consolas');
-    // Ordenar copia de base de datos de más nueva a más vieja
     let sorted = [...consolasDB].sort((a, b) => b.year - a.year);
     let html = '';
 
-    sorted.forEach((c, idx) => {
-        let svgImg = getConsoleSVG(c.name);
+    sorted.forEach((c) => {
         html += `
-        <div class="card" style="cursor:pointer;" onclick="openTopJuegos('${c.name.replace(/'/g, "\\'")}')">
-            <img src="${svgImg}" alt="${c.name}" class="animated-console">
+        <div class="card" style="cursor:pointer; padding-bottom: 25px;" onclick="openTopJuegos('${c.name.replace(/'/g, "\\'")}')">
+            <img ${getImgSrc(c.img)} alt="${c.name}" class="static-image">
             <span class="badge-estado">${c.year}</span>
             <h3>${c.name}</h3>
-            <p style="color: var(--neon-teal); font-size: 1rem;">Ver los 15 juegos más famosos →</p>
+            <p style="color: var(--accent-cyan); font-size: 0.8rem; margin-top: auto; font-weight: bold;">VER TOP 15 JUEGOS →</p>
         </div>`;
     });
     container.innerHTML = html;
@@ -221,22 +245,23 @@ function openTopJuegos(consoleName) {
     let html = '';
 
     games.forEach((g, idx) => {
-        let btnId = `btn-gme-${idx}`;
-        let svgImg = getConsoleSVG(g.name);
+        let btnId = `btn-gme-${consoleName.replace(/[^a-zA-Z0-9]/g, '')}-${idx}`;
+        // Para los juegos, no tienes fotos, así que usamos un placeholder automático limpio
+        let imgJuego = `https://placehold.co/600x400/2d3748/cbd5e0?text=JUEGO`;
         html += `
         <div class="card">
-            <img src="${svgImg}" alt="${g.name}" class="animated-console">
-            <h3>${g.name}</h3>
-            <span class="price">$${g.price.toFixed(2)}</span>
+            <img src="${imgJuego}" alt="${g.n}" class="static-image">
+            <h3 style="margin-top: 10px; margin-bottom: auto;">${g.n}</h3>
+            <span class="price">$${g.p.toFixed(2)}</span>
             <div id="${btnId}">
-                <button class="add-btn" onclick="changeQty('${btnId}', '${g.name.replace(/'/g, "\\'")}', ${g.price}, 1)">+ AGREGAR</button>
+                <button class="add-btn" onclick="changeQty('${btnId}', '${g.n.replace(/'/g, "\\'")}', ${g.p}, 1)">+ AGREGAR</button>
             </div>
         </div>`;
     });
     listContainer.innerHTML = html;
 }
 
-// NAVEGACIÓN Y HISTORIAL
+// 4. NAVEGACIÓN
 function showSection(sectionName) {
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(`tab-${sectionName}`).classList.add('active');
@@ -274,19 +299,19 @@ function goHome() {
     showSection('consolas');
 }
 
-// CARRITO DE COMPRAS Y PERSISTENCIA
+// 5. CARRITO Y CANTIDADES
 function changeQty(containerId, productName, productPrice, delta) {
     let item = cart.find(i => i.name === productName);
     
     if (!item && delta > 0) {
         item = { name: productName, price: productPrice, quantity: 1 };
         cart.push(item);
-        showToast("✅ ¡Agregado!", "var(--neon-cyan)");
+        showToast("✅ Agregado", "var(--accent-cyan)");
     } else if (item) {
         item.quantity += delta;
         if (item.quantity <= 0) {
             cart = cart.filter(i => i.name !== productName);
-            showToast("❌ Removido", "var(--neon-pink)");
+            showToast("❌ Removido", "var(--accent-pink)");
             item = null;
         }
     }
@@ -308,6 +333,19 @@ function changeQty(containerId, productName, productPrice, delta) {
     
     localStorage.setItem('retrorevive_cart', JSON.stringify(cart));
     updateCartUI();
+    renderCartModalList(); // Actualiza la lista si el modal está abierto
+}
+
+function removeItemCompleto(productName) {
+    cart = cart.filter(i => i.name !== productName);
+    localStorage.setItem('retrorevive_cart', JSON.stringify(cart));
+    updateCartUI();
+    renderCartModalList();
+    showToast("❌ Removido", "var(--accent-pink)");
+    
+    // Forzar actualización de todos los botones en la página principal para que regresen a "+ AGREGAR"
+    showSection(viewHistory[viewHistory.length - 1]);
+    if(viewHistory[viewHistory.length - 1] === 'consolas') renderConsolas();
 }
 
 function updateCartUI() {
@@ -322,9 +360,11 @@ function updateCartUI() {
         cartBar.classList.add('active');
     } else {
         cartBar.classList.remove('active');
+        closeCartModal(); // Si se vacía el carrito, cierra el modal
     }
 }
 
+// 6. MANEJO DE LOS MODALES
 function showToast(message, bgColor) {
     const toast = document.getElementById('toast');
     toast.innerText = message;
@@ -333,15 +373,45 @@ function showToast(message, bgColor) {
     setTimeout(() => { toast.classList.remove('show'); }, 2000);
 }
 
-function openModal() {
+function openCartModal() {
     if (cart.length === 0) return;
+    renderCartModalList();
+    document.getElementById('review-cart-modal').classList.add('active');
+}
+
+function closeCartModal() {
+    document.getElementById('review-cart-modal').classList.remove('active');
+}
+
+function renderCartModalList() {
+    const list = document.getElementById('cart-items-list');
+    let html = '';
+    cart.forEach(item => {
+        html += `
+        <div class="cart-item-row">
+            <div class="cart-item-info">
+                <span class="cart-item-name">${item.quantity}x ${item.name}</span>
+                <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+            <button class="btn-remove-item" onclick="removeItemCompleto('${item.name.replace(/'/g, "\\'")}')">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        </div>`;
+    });
+    list.innerHTML = html;
+}
+
+function proceedToCheckout() {
+    closeCartModal();
     document.getElementById('checkout-modal').classList.add('active');
 }
 
-function closeModal() {
+function backToCartModal() {
     document.getElementById('checkout-modal').classList.remove('active');
+    openCartModal();
 }
 
+// 7. ENVÍO DE PEDIDO A WHATSAPP
 function processOrder() {
     const name = document.getElementById('client-name').value.trim();
     const phone = document.getElementById('client-phone').value.trim();
@@ -360,7 +430,7 @@ function processOrder() {
     localStorage.setItem('retrorevive_folio', currentFolio);
     let stringFolio = currentFolio.toString().padStart(5, '0');
 
-    let message = "🕹️ *SOLICITUD DE COTIZACIÓN RETROREVIVE*\n";
+    let message = "🕹️ *SOLICITUD DE PEDIDO RETROREVIVE*\n";
     message += `*FOLIO: #${stringFolio}*\n`;
     message += "---------------------------\n";
     message += `👤 Cliente: ${name}\n`;
@@ -372,12 +442,12 @@ function processOrder() {
     });
     
     message += "---------------------------\n";
-    message += `*TOTAL ESTIMADO: $${total.toFixed(2)}*\n\n`;
+    message += `*TOTAL: $${total.toFixed(2)}*\n\n`;
     message += "_RetroRevive Culiacán_";
 
     let encodedMessage = encodeURIComponent(message);
     let whatsappUrl = `https://wa.me/${BUSINESS_PHONE}?text=${encodedMessage}`;
     
-    closeModal();
+    document.getElementById('checkout-modal').classList.remove('active');
     window.open(whatsappUrl, '_blank');
 }
