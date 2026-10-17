@@ -6,25 +6,23 @@
     <meta name="description" content="RetroRevive - Venta de consolas reacondicionadas, videojuegos clásicos y servicio técnico.">
     <title>RetroRevive | Consolas, Juegos y Servicio</title>
     
-    <!-- Fuentes de Google e Íconos -->
+    <!-- Fuentes de Google: Press Start para títulos, Roboto para lectura cómoda -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="scanline"></div>
     <div id="toast" class="toast"></div>
     
     <header>
-        <!-- Al hacer clic en RETRO REVIVE regresa al inicio -->
         <h1 id="brand-title" onclick="goHome()" title="Regresar al Inicio">RETRO REVIVE</h1>
-        <div class="subtitle">> IT'S DANGEROUS TO GO ALONE! TAKE THIS_</div>
+        <!-- Aquí se inyectarán las 100 frases dinámicas -->
+        <div class="subtitle" id="dynamic-slogan">> CARGANDO..._</div>
 
-        <!-- BARRA DE NAVEGACIÓN -->
         <nav class="main-nav">
             <button class="nav-btn active" id="tab-consolas" onclick="showSection('consolas')">
                 <i class="fa-solid fa-tv"></i> CONSOLAS
@@ -37,7 +35,6 @@
             </button>
         </nav>
 
-        <!-- BOTÓN VOLVER ATRÁS -->
         <div class="back-bar" id="back-bar" style="display: none;">
             <button class="btn-back" onclick="goBack()">
                 <i class="fa-solid fa-arrow-left"></i> VOLVER ATRÁS
@@ -50,36 +47,30 @@
         <!-- VISTA 1: CONSOLAS -->
         <section id="view-consolas" class="active-view">
             <h2 class="section-title"><i class="fa-solid fa-tv"></i> MUSEO Y VENTA DE CONSOLAS</h2>
-            <p class="hero-text-sub">Catálogo histórico completo. Selecciona los equipos que desees cotizar.</p>
-            <div class="grid-productos grid-6-cols" id="catalogo-consolas">
-                <!-- Inyección JS -->
-            </div>
+            <p class="hero-text-sub">Catálogo histórico completo. Equipos reacondicionados.</p>
+            <div class="grid-productos grid-6-cols" id="catalogo-consolas"></div>
         </section>
 
-        <!-- VISTA 2: VIDEOJUEGOS (De más nueva a más vieja) -->
+        <!-- VISTA 2: VIDEOJUEGOS -->
         <section id="view-juegos" class="hidden-view">
             <div id="juegos-consolas-list">
-                <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> CATÁLOGOS DE VIDEOJUEGOS</h2>
-                <p class="hero-text-sub">Ordenadas desde la más reciente a la más antigua. Selecciona una consola para explorar sus 15 títulos más famosos.</p>
-                <div class="grid-productos grid-6-cols" id="catalogo-juegos-consolas">
-                    <!-- Inyección JS -->
-                </div>
+                <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> CATÁLOGO DE VIDEOJUEGOS</h2>
+                <p class="hero-text-sub">Ordenadas desde la más reciente a la más antigua.</p>
+                <div class="grid-productos grid-6-cols" id="catalogo-juegos-consolas"></div>
             </div>
 
             <div id="juegos-detalles-view" style="display: none;">
                 <h2 class="section-title" id="juegos-consola-titulo">JUEGOS DE CONSOLA</h2>
-                <div class="grid-productos grid-6-cols" id="lista-top-juegos">
-                    <!-- Inyección JS -->
-                </div>
+                <div class="grid-productos grid-6-cols" id="lista-top-juegos"></div>
             </div>
         </section>
 
-        <!-- VISTA 3: OTROS SERVICIOS -->
+        <!-- VISTA 3: SERVICIOS -->
         <section id="view-servicios" class="hidden-view">
             <h2 class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> SERVICIOS TÉCNICOS Y REPARACIÓN</h2>
             <div class="grid-servicios">
                 <div class="card">
-                    <i class="fa-solid fa-microchip"></i>
+                    <i class="fa-solid fa-microchip icon-soft"></i>
                     <h3>MANTENIMIENTO PROFUNDO</h3>
                     <p>Limpieza de placa, cambio de pasta térmica, y revisión de soldaduras.</p>
                     <span class="price">$450.00</span>
@@ -89,7 +80,7 @@
                 </div>
                 
                 <div class="card">
-                    <i class="fa-solid fa-spray-can-sparkles"></i>
+                    <i class="fa-solid fa-spray-can-sparkles icon-soft"></i>
                     <h3>RESTAURACIÓN ESTÉTICA</h3>
                     <p>Blanqueamiento Retrobright, pulido minucioso y detallado de carcasas.</p>
                     <span class="price">$350.00</span>
@@ -99,7 +90,7 @@
                 </div>
                 
                 <div class="card">
-                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <i class="fa-solid fa-screwdriver-wrench icon-soft"></i>
                     <h3>MODS Y UPGRADES</h3>
                     <p>Instalación de pantallas IPS o chips (Precio base mano de obra).</p>
                     <span class="price">$600.00</span>
@@ -109,7 +100,7 @@
                 </div>
                 
                 <div class="card">
-                    <i class="fa-solid fa-compact-disc"></i>
+                    <i class="fa-solid fa-compact-disc icon-soft"></i>
                     <h3>LÁSER Y MECANISMOS</h3>
                     <p>Calibración, reemplazo de lentes y engranajes para lectoras de disco.</p>
                     <span class="price">$500.00</span>
@@ -122,14 +113,28 @@
 
     </div>
 
-    <!-- MODAL DE CHECKOUT -->
+    <!-- MODAL 1: REVISAR CARRITO (NUEVO) -->
+    <div id="review-cart-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="modal-title">TU CARRITO</h2>
+            <div id="cart-items-list" class="cart-items-container">
+                <!-- Se inyectan los items del carrito aquí -->
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="closeCartModal()">SEGUIR COMPRANDO</button>
+                <button class="btn-confirm" onclick="proceedToCheckout()">IR A PAGAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: CHECKOUT (DATOS) -->
     <div id="checkout-modal" class="modal-overlay">
         <div class="modal-content">
-            <h2 style="color: var(--neon-cyan); margin-top: 0; font-size: 1.2rem;">DATOS DE CONTACTO</h2>
+            <h2 class="modal-title">DATOS DE CONTACTO</h2>
             
             <div class="input-group">
                 <label for="client-name">> TU NOMBRE COMPLETO:</label>
-                <input type="text" id="client-name" placeholder="Ej. Juan Pérez García" required>
+                <input type="text" id="client-name" placeholder="Ej. Juan Pérez" required>
             </div>
             
             <div class="input-group">
@@ -137,13 +142,12 @@
                 <input type="tel" id="client-phone" placeholder="Ej. 6671234567" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
             </div>
 
-            <!-- NOTA ACLARATORIA SOLICITADA -->
             <div class="modal-info-note">
-                <i class="fa-solid fa-circle-info"></i> Nota: Todos los equipos incluyen limpieza técnica profunda y fotos a detalle del estado estético antes del envío por WhatsApp.
+                <i class="fa-solid fa-circle-info"></i> Nota: Todos los equipos incluyen limpieza técnica profunda y fotos a detalle del estado estético por WhatsApp.
             </div>
 
             <div class="modal-buttons">
-                <button class="btn-cancel" onclick="closeModal()">CANCELAR</button>
+                <button class="btn-cancel" onclick="backToCartModal()">VOLVER</button>
                 <button class="btn-confirm" onclick="processOrder()">ENVIAR PEDIDO</button>
             </div>
         </div>
@@ -153,14 +157,14 @@
         <p>&copy; 2026 RetroRevive. Sector Loma de Rodriguera, Culiacán.</p>
     </footer>
 
-    <!-- BARRA INFERIOR DEL CARRITO (PERSISTENTE) -->
+    <!-- Barra inferior -->
     <div class="cart-bar" id="cart-bar">
         <div class="cart-info">
             TOTAL: $<span id="total-price">0.00</span><br>
             <small id="items-count">0 ARTÍCULOS</small>
         </div>
-        <button class="checkout-btn" onclick="openModal()">
-            <i class="fa-brands fa-whatsapp"></i> ENVIAR
+        <button class="checkout-btn" onclick="openCartModal()">
+            <i class="fa-solid fa-cart-shopping"></i> VER CARRITO
         </button>
     </div>
 
