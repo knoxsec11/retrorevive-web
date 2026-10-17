@@ -17,7 +17,7 @@
 
     <div id="toast" class="toast"></div>
     
-    <!-- MODO ARCADE: INSERT COIN (Oculto por defecto) -->
+    <!-- MODO ARCADE: INSERT COIN -->
     <div id="insert-coin-overlay" class="arcade-overlay">
         <div class="arcade-content">
             <h1 class="blink-text">INSERT COIN TO CONTINUE</h1>
@@ -50,7 +50,6 @@
             </button>
         </nav>
 
-        <!-- BUSCADOR CENTRAL Y ORDENAMIENTO -->
         <div class="toolbar-container">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -61,7 +60,6 @@
             </button>
         </div>
 
-        <!-- FILTROS RÁPIDOS POR MARCA (NUEVO) -->
         <div class="brand-filters" id="brand-filters-container">
             <button class="brand-badge active" onclick="setBrandFilter('todas', this)">TODAS</button>
             <button class="brand-badge" onclick="setBrandFilter('nintendo', this)">NINTENDO</button>
@@ -90,12 +88,12 @@
         <section id="view-juegos" class="hidden-view">
             <div id="juegos-consolas-list">
                 <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> CATÁLOGO DE VIDEOJUEGOS</h2>
-                <p class="hero-text-sub">Selecciona una consola para explorar sus 15 títulos estandarte.</p>
+                <p class="hero-text-sub">Selecciona una consola para explorar su biblioteca.</p>
                 <div class="grid-productos grid-6-cols" id="catalogo-juegos-consolas"></div>
             </div>
 
             <div id="juegos-detalles-view" style="display: none;">
-                <h2 class="section-title" id="juegos-consola-titulo">JUEGOS DE CONSOLA</h2>
+                <h2 class="section-title" id="juegos-consola-titulo">MEJORES JUEGOS DE CONSOLA</h2>
                 <div class="grid-productos grid-6-cols" id="lista-top-juegos"></div>
             </div>
         </section>
@@ -148,7 +146,7 @@
 
     </div>
 
-    <!-- MODAL 1: REVISAR CARRITO -->
+    <!-- MODALES -->
     <div id="review-cart-modal" class="modal-overlay">
         <div class="modal-content">
             <h2 class="modal-title">TU CARRITO</h2>
@@ -160,7 +158,6 @@
         </div>
     </div>
 
-    <!-- MODAL 2: CHECKOUT (DATOS) -->
     <div id="checkout-modal" class="modal-overlay">
         <div class="modal-content">
             <h2 class="modal-title">DATOS DE CONTACTO</h2>
@@ -186,7 +183,6 @@
         <p>&copy; 2026 RetroRevive. Sector Loma de Rodriguera, Culiacán.</p>
     </footer>
 
-    <!-- Barra inferior -->
     <div class="cart-bar" id="cart-bar">
         <div class="cart-info">
             TOTAL: $<span id="total-price">0.00</span><br>
