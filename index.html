@@ -12,13 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CONEXIÓN AL DISEÑO CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="scanline"></div>
-    <!-- La notificación flotante -->
     <div id="toast" class="toast"></div>
     
     <header>
@@ -38,7 +36,10 @@
                 <h3>MANTENIMIENTO PROFUNDO</h3>
                 <p>Limpieza de placa, cambio de pasta térmica, y revisión de soldaduras.</p>
                 <span class="price">$450.00</span>
-                <button class="add-btn" onclick="toggleService(this, 'Mantenimiento Profundo', 450)">+ COTIZAR</button>
+                <!-- CONTENEDOR CON ID UNICO -->
+                <div id="btn-mantenimiento">
+                    <button class="add-btn" onclick="changeQty('btn-mantenimiento', 'Mantenimiento Profundo', 450, 1)">+ COTIZAR</button>
+                </div>
             </div>
             
             <!-- Servicio 2 -->
@@ -47,7 +48,9 @@
                 <h3>RESTAURACIÓN ESTÉTICA</h3>
                 <p>Blanqueamiento Retrobright, pulido minucioso y detallado de carcasas.</p>
                 <span class="price">$350.00</span>
-                <button class="add-btn" onclick="toggleService(this, 'Restauración Estética', 350)">+ COTIZAR</button>
+                <div id="btn-restauracion">
+                    <button class="add-btn" onclick="changeQty('btn-restauracion', 'Restauración Estética', 350, 1)">+ COTIZAR</button>
+                </div>
             </div>
             
             <!-- Servicio 3 -->
@@ -56,7 +59,9 @@
                 <h3>MODS Y UPGRADES</h3>
                 <p>Instalación de pantallas IPS o chips (Precio base mano de obra).</p>
                 <span class="price">$600.00</span>
-                <button class="add-btn" onclick="toggleService(this, 'Mods / Upgrades (Mano de obra)', 600)">+ COTIZAR</button>
+                <div id="btn-mods">
+                    <button class="add-btn" onclick="changeQty('btn-mods', 'Mods / Upgrades', 600, 1)">+ COTIZAR</button>
+                </div>
             </div>
             
             <!-- Servicio 4 -->
@@ -65,7 +70,9 @@
                 <h3>LÁSER Y MECANISMOS</h3>
                 <p>Calibración, reemplazo de lentes y engranajes para lectoras de disco.</p>
                 <span class="price">$500.00</span>
-                <button class="add-btn" onclick="toggleService(this, 'Reparación de Láser', 500)">+ COTIZAR</button>
+                <div id="btn-laser">
+                    <button class="add-btn" onclick="changeQty('btn-laser', 'Reparación de Láser', 500, 1)">+ COTIZAR</button>
+                </div>
             </div>
         </div>
     </div>
@@ -74,7 +81,6 @@
         <p>&copy; 2026 RetroRevive. Sector Loma de Rodriguera, Culiacán.</p>
     </footer>
 
-    <!-- Barra inferior del carrito -->
     <div class="cart-bar" id="cart-bar">
         <div class="cart-info">
             TOTAL: $<span id="total-price">0.00</span><br>
@@ -85,8 +91,6 @@
         </button>
     </div>
 
-    <!-- CONEXIÓN A LA LÓGICA JS -->
     <script src="script.js"></script>
-
 </body>
 </html>
