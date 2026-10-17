@@ -6,7 +6,6 @@
     <meta name="description" content="RetroRevive - Venta de consolas reacondicionadas, videojuegos clásicos y servicio técnico.">
     <title>RetroRevive | Consolas, Juegos y Servicio</title>
     
-    <!-- Fuentes de Google: Press Start para títulos, Roboto para lectura cómoda -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -20,7 +19,6 @@
     
     <header>
         <h1 id="brand-title" onclick="goHome()" title="Regresar al Inicio">RETRO REVIVE</h1>
-        <!-- Aquí se inyectarán las 100 frases dinámicas -->
         <div class="subtitle" id="dynamic-slogan">> CARGANDO..._</div>
 
         <nav class="main-nav">
@@ -47,7 +45,7 @@
         <!-- VISTA 1: CONSOLAS -->
         <section id="view-consolas" class="active-view">
             <h2 class="section-title"><i class="fa-solid fa-tv"></i> MUSEO Y VENTA DE CONSOLAS</h2>
-            <p class="hero-text-sub">Catálogo histórico completo. Equipos reacondicionados.</p>
+            <p class="hero-text-sub">Catálogo histórico completo. Equipos reacondicionados y listos para jugar.</p>
             <div class="grid-productos grid-6-cols" id="catalogo-consolas"></div>
         </section>
 
@@ -113,13 +111,11 @@
 
     </div>
 
-    <!-- MODAL 1: REVISAR CARRITO (NUEVO) -->
+    <!-- MODAL 1: REVISAR CARRITO -->
     <div id="review-cart-modal" class="modal-overlay">
         <div class="modal-content">
             <h2 class="modal-title">TU CARRITO</h2>
-            <div id="cart-items-list" class="cart-items-container">
-                <!-- Se inyectan los items del carrito aquí -->
-            </div>
+            <div id="cart-items-list" class="cart-items-container"></div>
             <div class="modal-buttons">
                 <button class="btn-cancel" onclick="closeCartModal()">SEGUIR COMPRANDO</button>
                 <button class="btn-confirm" onclick="proceedToCheckout()">IR A PAGAR</button>
@@ -131,21 +127,17 @@
     <div id="checkout-modal" class="modal-overlay">
         <div class="modal-content">
             <h2 class="modal-title">DATOS DE CONTACTO</h2>
-            
             <div class="input-group">
                 <label for="client-name">> TU NOMBRE COMPLETO:</label>
                 <input type="text" id="client-name" placeholder="Ej. Juan Pérez" required>
             </div>
-            
             <div class="input-group">
                 <label for="client-phone">> TELÉFONO (10 DÍGITOS):</label>
                 <input type="tel" id="client-phone" placeholder="Ej. 6671234567" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
             </div>
-
             <div class="modal-info-note">
-                <i class="fa-solid fa-circle-info"></i> Nota: Todos los equipos incluyen limpieza técnica profunda y fotos a detalle del estado estético por WhatsApp.
+                <i class="fa-solid fa-circle-info"></i> Nota: Todos los equipos incluyen limpieza técnica profunda y fotos a detalle del estado estético por WhatsApp antes de su envío.
             </div>
-
             <div class="modal-buttons">
                 <button class="btn-cancel" onclick="backToCartModal()">VOLVER</button>
                 <button class="btn-confirm" onclick="processOrder()">ENVIAR PEDIDO</button>
@@ -169,6 +161,5 @@
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
