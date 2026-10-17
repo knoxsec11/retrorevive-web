@@ -116,6 +116,15 @@ header h1 {
 .card h3 { font-size: 0.75rem; color: #fff; margin-bottom: 0.8rem; line-height: 1.5; }
 .card p { margin: 0 0 10px; color: #cbd5e0; font-size: 0.9rem; }
 
+/* CONTENEDOR DE BADGES (Año e ID Único) */
+.card-meta-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0.8rem;
+}
+
 /* AJUSTE PERFECTO PARA LAS IMÁGENES */
 .static-image { 
     width: 100%; 
@@ -129,7 +138,8 @@ header h1 {
     border: 1px solid #2d3748;
 }
 
-.badge-estado { background: #2d3748; color: #cbd5e0; padding: 4px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; align-self: center; margin-bottom: 0.8rem; }
+.badge-estado { background: #2d3748; color: #cbd5e0; padding: 4px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; }
+.badge-sku { background: #1a365d; color: #90cdf4; padding: 4px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 4px; border: 1px solid #2b6cb0; }
 
 details { text-align: left; margin: 0.8rem 0; background: #2d3748; padding: 8px; border-radius: 5px; }
 summary { cursor: pointer; color: var(--accent-cyan); font-weight: bold; font-size: 0.9rem; outline: none; }
@@ -138,7 +148,7 @@ details li { margin-bottom: 4px; }
 
 .price { display: block; font-size: 1.1rem; color: var(--accent-cyan); margin-bottom: 12px; margin-top: auto; }
 
-/* AJUSTE PARA LOS BOTONES (Evita que el texto se encime) */
+/* AJUSTE PARA LOS BOTONES */
 .buy-options { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: auto; }
 .buy-options .add-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 10px 5px; line-height: 1.2; }
 .add-btn { background: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); font-size: 0.6rem; cursor: pointer; width: 100%; border-radius: 5px; transition: all 0.2s; }
