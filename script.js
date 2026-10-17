@@ -81,8 +81,15 @@ function processOrder() {
     const name = document.getElementById('client-name').value.trim();
     const phone = document.getElementById('client-phone').value.trim();
 
+    // Revisa que no estén vacíos
     if (!name || !phone) {
         showToast("⚠️ Llena todos los campos", "orange");
+        return;
+    }
+
+    // Revisa que el teléfono tenga exactamente 10 dígitos
+    if (phone.length < 10) {
+        showToast("⚠️ El teléfono debe tener 10 dígitos", "orange");
         return;
     }
 
