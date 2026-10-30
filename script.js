@@ -591,6 +591,13 @@ function backToCartModal() {
 
 // 9. ENVÍO DE PEDIDOS Y TRADE-IN A WHATSAPP
 function processOrder() {
+    // Validación de Cloudflare Turnstile
+    const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]');
+    if (!turnstileResponse || !turnstileResponse.value) {
+        showToast("⚠️ Completa la verificación de Cloudflare", "orange");
+        return;
+    }
+
     const name = document.getElementById('client-name').value.trim();
     const phone = document.getElementById('client-phone').value.trim();
 
