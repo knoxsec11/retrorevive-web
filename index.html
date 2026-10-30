@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Script de Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -170,6 +173,10 @@
             <div class="modal-info-note">
                 <i class="fa-solid fa-circle-info"></i> Nota: Todos los equipos incluyen limpieza técnica profunda y fotos a detalle del estado estético por WhatsApp.
             </div>
+            
+            <!-- WIDGET CLOUDFLARE TURNSTILE -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAFsLJ-NghovoBU5n" style="margin-top: 15px; margin-bottom: 15px; display: flex; justify-content: center;"></div>
+
             <div class="modal-buttons">
                 <button class="btn-cancel" onclick="backToCartModal()">VOLVER</button>
                 <button class="btn-confirm" onclick="processOrder()">ENVIAR PEDIDO</button>
